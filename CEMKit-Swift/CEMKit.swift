@@ -12,6 +12,14 @@ import UIKit
 
 extension UIView {
     
+    // MARK: Custom Initilizer
+
+    convenience init (x: CGFloat, y: CGFloat, w: CGFloat, h: CGFloat) {
+        self.init (frame: CGRect (x: x, y: y, width: w, height: h))
+    }
+    
+    
+
     // MARK: Frame Extensions
     
     var x: CGFloat {
