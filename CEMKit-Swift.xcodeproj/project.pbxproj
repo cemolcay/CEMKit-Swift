@@ -13,6 +13,7 @@
 		B25037FB1A0A7BDC00CDAB1C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B25037FA1A0A7BDC00CDAB1C /* Images.xcassets */; };
 		B25037FE1A0A7BDC00CDAB1C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B25037FC1A0A7BDC00CDAB1C /* LaunchScreen.xib */; };
 		B250380A1A0A7BDC00CDAB1C /* CEMKit_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25038091A0A7BDC00CDAB1C /* CEMKit_SwiftTests.swift */; };
+		B2D4AD951A1DDE6100B071E8 /* CEMKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D4AD941A1DDE6100B071E8 /* CEMKit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		B25038031A0A7BDC00CDAB1C /* CEMKit-SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CEMKit-SwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B25038081A0A7BDC00CDAB1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B25038091A0A7BDC00CDAB1C /* CEMKit_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEMKit_SwiftTests.swift; sourceTree = "<group>"; };
+		B2D4AD941A1DDE6100B071E8 /* CEMKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CEMKit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				B25037F31A0A7BDC00CDAB1C /* AppDelegate.swift */,
 				B25037F51A0A7BDC00CDAB1C /* ViewController.swift */,
+				B2D4AD941A1DDE6100B071E8 /* CEMKit.swift */,
 				B25037F71A0A7BDC00CDAB1C /* Main.storyboard */,
 				B25037FA1A0A7BDC00CDAB1C /* Images.xcassets */,
 				B25037FC1A0A7BDC00CDAB1C /* LaunchScreen.xib */,
@@ -213,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B25037F61A0A7BDC00CDAB1C /* ViewController.swift in Sources */,
+				B2D4AD951A1DDE6100B071E8 /* CEMKit.swift in Sources */,
 				B25037F41A0A7BDC00CDAB1C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,6 +409,7 @@
 				B250380F1A0A7BDC00CDAB1C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B25038101A0A7BDC00CDAB1C /* Build configuration list for PBXNativeTarget "CEMKit-SwiftTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +418,7 @@
 				B25038121A0A7BDC00CDAB1C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
