@@ -23,19 +23,35 @@ extension UIView {
     // MARK: Frame Extensions
     
     var x: CGFloat {
-        return self.frame.origin.x
+        get {
+            return self.frame.origin.x
+        } set {
+            self.frame = CGRect (x: x, y: self.y, width: self.w, height: self.h)
+        }
     }
     
     var y: CGFloat {
-        return self.frame.origin.y
+        get {
+            return self.frame.origin.y
+        } set {
+            self.frame = CGRect (x: self.x, y: y, width: self.w, height: self.h)
+        }
     }
     
     var w: CGFloat {
-        return self.frame.size.width
+        get {
+            return self.frame.size.width
+        } set {
+            self.frame = CGRect (x: self.x, y: self.y, width: w, height: self.h)
+        }
     }
     
     var h: CGFloat {
-        return self.frame.size.height
+        get {
+            return self.frame.size.height
+        } set {
+            self.frame = CGRect (x: self.x, y: self.y, width: self.w, height: h)
+        }
     }
     
     
@@ -56,29 +72,21 @@ extension UIView {
     }
     
     
-    func setX (x: CGFloat) {
-        self.frame = CGRect (x: x, y: self.y, width: self.w, height: self.h)
+    func setX (x: CGFloat, y: CGFloat) {
+        setPosition(CGPoint (x: x, y: y))
     }
     
-    func setY (y: CGFloat) {
-        self.frame = CGRect (x: self.x, y: y, width: self.w, height: self.h)
+    func setW (w: CGFloat, h: CGFloat) {
+        setSize(CGSize (width: w, height: h))
     }
     
-    func setW (w: CGFloat) {
-        self.frame = CGRect (x: self.x, y: self.y, width: w, height: self.h)
-    }
-    
-    func setH (h: CGFloat) {
-        self.frame = CGRect (x: self.x, y: self.y, width: self.w, height: h)
-    }
-    
-    
-    func setSize (size: CGSize) {
-        self.frame = CGRect (x: self.x, y: self.y, width: size.width, height: size.height)
-    }
     
     func setPosition (position: CGPoint) {
         self.frame = CGRect (x: position.x, y: position.y, width: self.w, height: self.h)
+    }
+    
+    func setSize (size: CGSize) {
+        self.frame = CGRect (x: self.x, y: self.y, width: size.width, height: size.height)
     }
     
     
@@ -278,7 +286,7 @@ func degreesToRadians (angle: CGFloat) -> CGFloat {
 
 
 func setHeightOfLabel (label: UILabel) {
-    label.setH(heightForLabel(label.text!, label.font, label.w))
+    label.h = heightForLabel(label.text!, label.font, label.w)
 }
 
 func heightForLabel (text: String, font: UIFont, width: CGFloat) -> CGFloat {
