@@ -12,6 +12,17 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let v = UIView (x: 100, y: 100, w: 100, h: 100)
+        v.backgroundColor = randomColor()
+        v.setAnchorPosition(AnchorPosition.MidLeft)
+        view.addSubview(v)
+        
+        UIView.animateWithDuration(1, delay: 0, options: (.Autoreverse | .Repeat), animations: { () -> Void in
+            v.setRotationY(45)
+        }, completion: nil)
+        
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 

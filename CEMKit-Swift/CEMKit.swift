@@ -9,12 +9,18 @@
 import Foundation
 import UIKit
 
+let UIViewAnimationDuration: NSTimeInterval = 1
+let UIViewAnimationSpringDamping: CGFloat = 0.5
+let UIViewAnimationSpringVelocity: CGFloat = 0.5
 
 extension UIView {
     
     // MARK: Custom Initilizer
     
-    convenience init (x: CGFloat, y: CGFloat, w: CGFloat, h: CGFloat) {
+    convenience init (x: CGFloat,
+        y: CGFloat,
+        w: CGFloat,
+        h: CGFloat) {
         self.init (frame: CGRect (x: x, y: y, width: w, height: h))
     }
     
@@ -149,7 +155,9 @@ extension UIView {
         self.layer.transform = transform
     }
     
-    func setRotation (x: CGFloat, y: CGFloat, z: CGFloat) {
+    func setRotation (x: CGFloat,
+        y: CGFloat,
+        z: CGFloat) {
         var transform = CATransform3DIdentity
         transform.m34 = 1.0 / -1000.0
         transform = CATransform3DRotate(transform, degreesToRadians(x), 1.0, 0.0, 0.0)
@@ -160,7 +168,9 @@ extension UIView {
     }
     
     
-    func setScale (x: CGFloat, y: CGFloat, z: CGFloat) {
+    func setScale (x: CGFloat,
+        y: CGFloat,
+        z: CGFloat) {
         var transform = CATransform3DIdentity
         transform.m34 = 1.0 / -1000.0
         transform = CATransform3DScale(transform, x, y, z)
@@ -172,6 +182,7 @@ extension UIView {
     // MARK: Anchor Extensions
     
     func setAnchorPosition (anchorPosition: AnchorPosition) {
+        println(anchorPosition.rawValue)
         self.layer.anchorPoint = anchorPosition.rawValue
     }
     
@@ -179,14 +190,18 @@ extension UIView {
     
     // MARK: Layer Extensions
     
-    func addShadow (offset: CGSize, radius: CGFloat, color: UIColor) {
+    func addShadow (offset: CGSize,
+        radius: CGFloat,
+        color: UIColor,
+        opacity: Float) {
         self.layer.shadowOffset = offset
         self.layer.shadowRadius = radius
+        self.layer.shadowOpacity = opacity
         self.layer.shadowColor = color.CGColor
-        self.layer.masksToBounds = true
     }
     
-    func addBorder (width: CGFloat, color: UIColor) {
+    func addBorder (width: CGFloat,
+        color: UIColor) {
         self.layer.borderWidth = width
         self.layer.borderColor = color.CGColor
         self.layer.masksToBounds = true
@@ -199,7 +214,9 @@ extension UIView {
     }
     
     
-    func drawCircle (fillColor: UIColor, strokeColor: UIColor, strokeWidth: CGFloat) {
+    func drawCircle (fillColor: UIColor,
+        strokeColor: UIColor,
+        strokeWidth: CGFloat) {
         let path = UIBezierPath (roundedRect: CGRect (x: 0, y: 0, width: self.w, height: self.w), cornerRadius: self.w/2)
         
         let shapeLayer = CAShapeLayer ()
@@ -211,7 +228,8 @@ extension UIView {
         self.layer.addSublayer(shapeLayer)
     }
     
-    func drawStroke (width: CGFloat, color: UIColor) {
+    func drawStroke (width: CGFloat,
+        color: UIColor) {
         let path = UIBezierPath (roundedRect: CGRect (x: 0, y: 0, width: self.w, height: self.w), cornerRadius: self.w/2)
         
         let shapeLayer = CAShapeLayer ()
@@ -223,7 +241,13 @@ extension UIView {
         self.layer.addSublayer(shapeLayer)
     }
     
-    func drawArc (from: CGFloat, to: CGFloat, clockwise: Bool, width: CGFloat, fillColor: UIColor, strokeColor: UIColor, lineCap: String) {
+    func drawArc (from: CGFloat,
+        to: CGFloat,
+        clockwise: Bool,
+        width: CGFloat,
+        fillColor: UIColor,
+        strokeColor: UIColor,
+        lineCap: String) {
         let path = UIBezierPath (arcCenter: self.center, radius: self.w/2, startAngle: degreesToRadians(from), endAngle: degreesToRadians(to), clockwise: clockwise)
         
         let shapeLayer = CAShapeLayer ()
@@ -235,24 +259,44 @@ extension UIView {
         self.layer.addSublayer(shapeLayer)
     }
     
+
+
+    // MARK: Animation Extensions
     
+    func spring (animations: (()->Void),
+        completion: ((Bool)->Void)?) {
+        UIView.animateWithDuration(UIViewAnimationDuration,
+            delay: 0,
+            usingSpringWithDamping: UIViewAnimationSpringDamping,
+            initialSpringVelocity: UIViewAnimationSpringVelocity,
+            options: UIViewAnimationOptions.AllowAnimatedContent,
+            animations: animations,
+            completion: completion)
+    }
+    
+
     
     // MARK: Gesture Extensions
     
-    func addTapGesture (tapNumber: NSInteger, target: AnyObject, action: Selector) {
+    func addTapGesture (tapNumber: NSInteger,
+        target: AnyObject, action: Selector) {
         let tap = UITapGestureRecognizer (target: target, action: action)
         tap.numberOfTapsRequired = tapNumber
         self.addGestureRecognizer(tap)
     }
     
-    func addSwipeGesture (direction: UISwipeGestureRecognizerDirection, numberOfTouches: Int, target: AnyObject, action: Selector) {
+    func addSwipeGesture (direction: UISwipeGestureRecognizerDirection,
+        numberOfTouches: Int,
+        target: AnyObject,
+        action: Selector) {
         let swipe = UISwipeGestureRecognizer (target: target, action: action)
         swipe.direction = direction
         swipe.numberOfTouchesRequired = numberOfTouches
         self.addGestureRecognizer(swipe)
     }
     
-    func addPanGesture (target: AnyObject, action: Selector) {
+    func addPanGesture (target: AnyObject,
+        action: Selector) {
         let pan = UIPanGestureRecognizer (target: target, action: action)
         self.addGestureRecognizer(pan)
     }
@@ -261,17 +305,17 @@ extension UIView {
 
 
 enum AnchorPosition: CGPoint {
-    case TopLeft        = "0 ,0"
-    case TopCenter      = "0, 0.5"
-    case TopRight       = "0, 1"
+    case TopLeft        = "{0 ,0}"
+    case TopCenter      = "{0.5, 0}"
+    case TopRight       = "{1, 0}"
     
-    case MidLeft        = "0.5, 0"
-    case MidCenter      = "0.5, 0.5"
-    case MidRight       = "0.5, 1"
+    case MidLeft        = "{0, 0.5}"
+    case MidCenter      = "{0.5, 0.5}"
+    case MidRight       = "{1, 0.5}"
     
-    case BottomLeft     = "1, 0"
-    case BottomCenter   = "1, 0.5"
-    case BottomRight    = "1, 1"
+    case BottomLeft     = "{0, 1}"
+    case BottomCenter   = "{0.5, 1}"
+    case BottomRight    = "{1, 1}"
 }
 
 extension CGPoint: StringLiteralConvertible {
