@@ -13,80 +13,95 @@ import UIKit
 extension UIView {
     
     // MARK: Custom Initilizer
-
+    
     convenience init (x: CGFloat, y: CGFloat, w: CGFloat, h: CGFloat) {
         self.init (frame: CGRect (x: x, y: y, width: w, height: h))
     }
     
     
-
+    
     // MARK: Frame Extensions
     
     var x: CGFloat {
         get {
             return self.frame.origin.x
-        } set {
-            self.frame = CGRect (x: x, y: self.y, width: self.w, height: self.h)
+        } set (value) {
+            self.frame = CGRect (x: value, y: self.y, width: self.w, height: self.h)
         }
     }
     
     var y: CGFloat {
         get {
             return self.frame.origin.y
-        } set {
-            self.frame = CGRect (x: self.x, y: y, width: self.w, height: self.h)
+        } set (value) {
+            self.frame = CGRect (x: self.x, y: value, width: self.w, height: self.h)
         }
     }
     
     var w: CGFloat {
         get {
             return self.frame.size.width
-        } set {
-            self.frame = CGRect (x: self.x, y: self.y, width: w, height: self.h)
+        } set (value) {
+            self.frame = CGRect (x: self.x, y: self.y, width: value, height: self.h)
         }
     }
     
     var h: CGFloat {
         get {
             return self.frame.size.height
-        } set {
-            self.frame = CGRect (x: self.x, y: self.y, width: self.w, height: h)
+        } set (value) {
+            self.frame = CGRect (x: self.x, y: self.y, width: self.w, height: value)
+        }
+    }
+    
+    
+    var position: CGPoint {
+        get {
+            return self.frame.origin
+        } set (value) {
+            self.frame = CGRect (origin: value, size: self.frame.size)
+        }
+    }
+    
+    var size: CGSize {
+        get {
+            return self.frame.size
+        } set (value) {
+            self.frame = CGRect (origin: self.frame.origin, size: size)
         }
     }
     
     
     var left: CGFloat {
-        return self.x
+        get {
+            return self.x
+        } set (value) {
+            self.x = value
+        }
     }
     
     var right: CGFloat {
-        return self.x + self.w
+        get {
+            return self.x + self.w
+        } set (value) {
+            self.x = value - self.w
+        }
     }
     
     var top: CGFloat {
-        return self.y
+        get {
+            return self.y
+        } set (value) {
+            self.y = value
+        }
     }
     
     var bottom: CGFloat {
-        return self.y + self.h
-    }
-    
-    
-    func setX (x: CGFloat, y: CGFloat) {
-        setPosition(CGPoint (x: x, y: y))
-    }
-    
-    func setW (w: CGFloat, h: CGFloat) {
-        setSize(CGSize (width: w, height: h))
-    }
-    
-    
-    func setPosition (position: CGPoint) {
-        self.frame = CGRect (x: position.x, y: position.y, width: self.w, height: self.h)
-    }
-    
-    func setSize (size: CGSize) {
-        self.frame = CGRect (x: self.x, y: self.y, width: size.width, height: size.height)
+        get {
+            return self.y + self.h
+        } set (value) {
+            self.y = value - self.h
+        }
     }
     
     
@@ -154,25 +169,10 @@ extension UIView {
     }
     
     
+    // MARK: Anchor Extensions
     
-    // MARK: Gesture Extensions
-    
-    func addTapGesture (tapNumber: NSInteger, target: AnyObject, action: Selector) {
-        let tap = UITapGestureRecognizer (target: target, action: action)
-        tap.numberOfTapsRequired = tapNumber
-        self.addGestureRecognizer(tap)
-    }
-    
-    func addSwipeGesture (direction: UISwipeGestureRecognizerDirection, numberOfTouches: Int, target: AnyObject, action: Selector) {
-        let swipe = UISwipeGestureRecognizer (target: target, action: action)
-        swipe.direction = direction
-        swipe.numberOfTouchesRequired = numberOfTouches
-        self.addGestureRecognizer(swipe)
-    }
-    
-    func addPanGesture (target: AnyObject, action: Selector) {
-        let pan = UIPanGestureRecognizer (target: target, action: action)
-        self.addGestureRecognizer(pan)
+    func setAnchorPosition (anchorPosition: AnchorPosition) {
+        self.layer.anchorPoint = anchorPosition.rawValue
     }
     
     
@@ -201,7 +201,7 @@ extension UIView {
     
     func drawCircle (fillColor: UIColor, strokeColor: UIColor, strokeWidth: CGFloat) {
         let path = UIBezierPath (roundedRect: CGRect (x: 0, y: 0, width: self.w, height: self.w), cornerRadius: self.w/2)
-
+        
         let shapeLayer = CAShapeLayer ()
         shapeLayer.path = path.CGPath
         shapeLayer.fillColor = fillColor.CGColor
@@ -234,7 +234,61 @@ extension UIView {
         
         self.layer.addSublayer(shapeLayer)
     }
+    
+    
+    
+    // MARK: Gesture Extensions
+    
+    func addTapGesture (tapNumber: NSInteger, target: AnyObject, action: Selector) {
+        let tap = UITapGestureRecognizer (target: target, action: action)
+        tap.numberOfTapsRequired = tapNumber
+        self.addGestureRecognizer(tap)
+    }
+    
+    func addSwipeGesture (direction: UISwipeGestureRecognizerDirection, numberOfTouches: Int, target: AnyObject, action: Selector) {
+        let swipe = UISwipeGestureRecognizer (target: target, action: action)
+        swipe.direction = direction
+        swipe.numberOfTouchesRequired = numberOfTouches
+        self.addGestureRecognizer(swipe)
+    }
+    
+    func addPanGesture (target: AnyObject, action: Selector) {
+        let pan = UIPanGestureRecognizer (target: target, action: action)
+        self.addGestureRecognizer(pan)
+    }
 }
+
+
+
+enum AnchorPosition: CGPoint {
+    case TopLeft        = "0 ,0"
+    case TopCenter      = "0, 0.5"
+    case TopRight       = "0, 1"
+    
+    case MidLeft        = "0.5, 0"
+    case MidCenter      = "0.5, 0.5"
+    case MidRight       = "0.5, 1"
+    
+    case BottomLeft     = "1, 0"
+    case BottomCenter   = "1, 0.5"
+    case BottomRight    = "1, 1"
+}
+
+extension CGPoint: StringLiteralConvertible {
+    
+    public init(stringLiteral value: StringLiteralType) {
+        self = CGPointFromString(value)
+    }
+    
+    public init(extendedGraphemeClusterLiteral value: StringLiteralType) {
+        self = CGPointFromString(value)
+    }
+    
+    public init(unicodeScalarLiteral value: StringLiteralType) {
+        self = CGPointFromString(value)
+    }
+}
+
 
 
 extension UIFont {
