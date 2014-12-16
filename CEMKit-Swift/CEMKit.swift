@@ -344,6 +344,13 @@ extension UIFont {
         case UltraLight = "UltraLight"
         case Italic = "Italic"
         case Thin = "Thin"
+        case Book = "Book"
+        case Medium = "Medium"
+        case MediumItalic = "MediumItalic"
+        case CondensedMedium = "CondensedMedium"
+        case CondensedExtraBold = "CondensedExtraBold"
+        case SemiBold = "SemiBold"
+        case BoldItalic = "BoldItalic"
     }
     
     enum FontName: String {
@@ -351,6 +358,22 @@ extension UIFont {
         case Helvetica = "Helvetica"
         case Futura = "Futura"
         case Menlo = "Menlo"
+        case Avenir = "Avenir"
+        case AvenirNext = "AvenirNext"
+        case Didot = "Didot"
+        case AmericanTypewriter = "AmericanTypewriter"
+        case Baskerville = "Baskerville"
+        case Geneva = "Geneva"
+        case GillSans = "GillSans"
+        case SanFranciscoDisplay = "SanFranciscoDisplay"
+        case Seravek = "Seravek"
+    }
+    
+    class func PrintFontFamily (font: FontName) {
+        let arr = UIFont.fontNamesForFamilyName(font.rawValue)
+        for name in arr {
+            println(name)
+        }
     }
     
     class func Font (name: FontName, type: FontType, size: CGFloat) -> UIFont {
@@ -376,11 +399,9 @@ var ScreenHeight : CGFloat {
 }
 
 
-
 func degreesToRadians (angle: CGFloat) -> CGFloat {
     return (CGFloat (M_PI) * angle) / 180.0
 }
-
 
 
 func setHeightOfLabel (label: UILabel) {
@@ -392,7 +413,6 @@ func heightForLabel (text: String, font: UIFont, width: CGFloat) -> CGFloat {
     let rect = att.boundingRectWithSize(CGSize (width: width, height: CGFloat.max), options: NSStringDrawingOptions.UsesLineFragmentOrigin, context: nil)
     return rect.height
 }
-
 
 
 func randomColor () -> UIColor {

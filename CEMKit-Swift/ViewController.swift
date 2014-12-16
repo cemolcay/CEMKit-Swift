@@ -14,16 +14,23 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let v = UIView (x: 100, y: 100, w: 100, h: 100)
-        v.backgroundColor = randomColor()
-        v.setAnchorPosition(AnchorPosition.MidLeft)
+        v.backgroundColor = randomColor ()
+        v.setAnchorPosition(AnchorPosition.MidCenter)
         view.addSubview(v)
         
-        UIView.animateWithDuration(1, delay: 0, options: (.Autoreverse | .Repeat), animations: { () -> Void in
-            v.setRotationY(45)
-        }, completion: nil)
-        
-        
-        // Do any additional setup after loading the view, typically from a nib.
+//        UIView.animateWithDuration(1, delay: 0, options: (.Autoreverse | .Repeat), animations: { () -> Void in
+//            v.setRotationY(45)
+//        }, completion: nil)
+
+//        let anim = CABasicAnimation (keyPath: "transform.rotation.x")
+//        anim.fromValue = degreesToRadians(0)
+//        anim.toValue = degreesToRadians(45)
+//        anim.autoreverses = true
+//        anim.duration = 0.5
+//        anim.repeatCount = Float.infinity
+//        
+//        v.layer.addAnimation(anim, forKey: "rotanim")
+    
     }
 
     override func didReceiveMemoryWarning() {
