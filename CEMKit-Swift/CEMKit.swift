@@ -441,6 +441,22 @@ func RGBAColor (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) -> UIColor {
 }
 
 
+
+func alert (title: String, message: String, cancelAction: ((UIAlertAction!)->Void)? = nil, okAction: ((UIAlertAction!)->Void)? = nil) -> UIAlertController {
+    let a = UIAlertController (title: title, message: message, preferredStyle: .Alert)
+    
+    if let ok = okAction {
+        a.addAction(UIAlertAction(title: "OK", style: .Default, handler: ok))
+        a.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelAction))
+    } else {
+        a.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: cancelAction))
+    }
+    
+    return a
+}
+
+
+
 func barButtonItem (imageName: String, action: (AnyObject)->()) -> UIBarButtonItem {
     let button = BlockButton (frame: CGRect(x: 0, y: 0, width: 20, height: 20))
     button.setImage(UIImage(named: imageName), forState: .Normal)
