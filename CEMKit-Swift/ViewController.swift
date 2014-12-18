@@ -18,6 +18,10 @@ class ViewController: UIViewController {
         v.setAnchorPosition(AnchorPosition.MidCenter)
         view.addSubview(v)
         
+        UIView.animateWithDuration(1, delay: 0, options: (.Autoreverse | .Repeat), animations: { () -> Void in
+            v.setScale(0.8, y: 0.8)
+        }, completion: nil)
+        
 //        UIView.animateWithDuration(1, delay: 0, options: (.Autoreverse | .Repeat), animations: { () -> Void in
 //            v.setRotationY(45)
 //        }, completion: nil)

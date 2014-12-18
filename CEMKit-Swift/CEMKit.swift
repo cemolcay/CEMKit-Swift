@@ -168,12 +168,10 @@ extension UIView {
     }
     
     
-    func setScale (x: CGFloat,
-        y: CGFloat,
-        z: CGFloat) {
+    func setScale (x: CGFloat, y: CGFloat) {
         var transform = CATransform3DIdentity
         transform.m34 = 1.0 / -1000.0
-        transform = CATransform3DScale(transform, x, y, z)
+        transform = CATransform3DScale(transform, x, y, 1)
         
         self.layer.transform = transform
     }
@@ -345,12 +343,14 @@ extension UIFont {
         case Italic = "Italic"
         case Thin = "Thin"
         case Book = "Book"
+        case Roman = "Roman"
         case Medium = "Medium"
         case MediumItalic = "MediumItalic"
         case CondensedMedium = "CondensedMedium"
         case CondensedExtraBold = "CondensedExtraBold"
         case SemiBold = "SemiBold"
         case BoldItalic = "BoldItalic"
+        case Heavy = "Heavy"
     }
     
     enum FontName: String {
@@ -415,6 +415,12 @@ func heightForLabel (text: String, font: UIFont, width: CGFloat) -> CGFloat {
 }
 
 
+func getAspectHeightForImage (image: UIImage, aspectWidth: CGFloat) -> CGFloat {
+    let aspectHeight = (aspectWidth * image.size.height) / image.size.width
+    return aspectHeight
+}
+
+
 func randomColor () -> UIColor {
     var randomRed:CGFloat = CGFloat(drand48())
     
@@ -434,6 +440,49 @@ func RGBAColor (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) -> UIColor {
     return UIColor (red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a)
 }
 
+
+func barButtonItem (imageName: String, action: (AnyObject)->()) -> UIBarButtonItem {
+    let button = BlockButton (frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+    button.setImage(UIImage(named: imageName), forState: .Normal)
+    button.actionBlock = action
+    
+    return UIBarButtonItem (customView: button)
+}
+
+func barButtonItem (title: String, color: UIColor, action: (AnyObject)->()) -> UIBarButtonItem {
+    let button = BlockButton (frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+    button.setTitle(title, forState: .Normal)
+    button.setTitleColor(color, forState: .Normal)
+    button.actionBlock = action
+    button.sizeToFit()
+    
+    return UIBarButtonItem (customView: button)
+}
+
+
+
+// MARK: - Button
+
+class BlockButton: UIButton {
+    
+    override init (frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    var actionBlock: ((sender: BlockButton) -> ())? {
+        didSet {
+            self.addTarget(self, action: "action:", forControlEvents: UIControlEvents.TouchUpInside)
+        }
+    }
+    
+    func action (sender: BlockButton) {
+        actionBlock! (sender: sender)
+    }
+}
 
 
 
