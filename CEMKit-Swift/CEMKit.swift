@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+
+// MARK: UIView
+
 let UIViewAnimationDuration: NSTimeInterval = 1
 let UIViewAnimationSpringDamping: CGFloat = 0.5
 let UIViewAnimationSpringVelocity: CGFloat = 0.5
@@ -309,6 +312,17 @@ extension UIView {
 
 
 
+// MARK: CGPoint
+
+func + (left: CGPoint, right: CGPoint) -> CGPoint {
+    return CGPoint (x: left.x + right.x, y: left.y + right.y)
+}
+
+func - (left: CGPoint, right: CGPoint) -> CGPoint {
+    return CGPoint (x: left.x - right.x, y: left.y - right.y)
+}
+
+
 enum AnchorPosition: CGPoint {
     case TopLeft        = "{0 ,0}"
     case TopCenter      = "{0.5, 0}"
@@ -339,6 +353,20 @@ extension CGPoint: StringLiteralConvertible {
 }
 
 
+
+// MARK: CGSize
+
+func + (left: CGSize, right: CGSize) -> CGSize {
+    return CGSize (width: left.width + right.width, height: left.height + right.height)
+}
+
+func - (left: CGSize, right: CGSize) -> CGSize {
+    return CGSize (width: left.width - right.width, height: left.width - right.width)
+}
+
+
+
+// MARK: UIFont
 
 extension UIFont {
     
@@ -392,6 +420,9 @@ extension UIFont {
     }
 }
 
+
+
+// MARK: CEMKit
 
 var ScreenWidth : CGFloat {
     get {
@@ -484,7 +515,7 @@ func barButtonItem (title: String, color: UIColor, action: (AnyObject)->()) -> U
 
 
 
-// MARK: - Button
+// MARK: - UIButton
 
 class BlockButton: UIButton {
     
