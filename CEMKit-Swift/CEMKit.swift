@@ -261,8 +261,8 @@ extension UIView {
 
     // MARK: Animation Extensions
     
-    func spring (animations: (()->Void),
-        completion: ((Bool)->Void)?) {
+    func spring (animations: (()->Void)!,
+        completion: ((Bool)->Void)? = nil) {
         UIView.animateWithDuration(UIViewAnimationDuration,
             delay: 0,
             usingSpringWithDamping: UIViewAnimationSpringDamping,
@@ -271,8 +271,15 @@ extension UIView {
             animations: animations,
             completion: completion)
     }
-    
 
+    func animate (animations: (()->Void)!,
+        completion: ((Bool)->Void)? = nil) {
+        UIView.animateWithDuration(UIViewAnimationDuration,
+            animations: animations,
+            completion: completion)
+    }
+
+    
     
     // MARK: Gesture Extensions
     
