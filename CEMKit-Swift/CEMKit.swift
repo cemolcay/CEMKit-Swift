@@ -597,7 +597,11 @@ extension UIViewController {
     var top: CGFloat {
         get {
             if let nav = self.navigationController {
-                return nav.navigationBar.bottom
+                if nav.navigationBarHidden {
+                    return view.top
+                } else {
+                    return nav.navigationBar.bottom
+                }
             } else {
                 return view.top
             }
@@ -607,7 +611,11 @@ extension UIViewController {
     var bottom: CGFloat {
         get {
             if let tab = tabBarController {
-                return tab.tabBar.top
+                if tab.tabBar.hidden {
+                    return view.bottom
+                } else {
+                    return tab.tabBar.top
+                }
             } else {
                 return view.bottom
             }
@@ -618,9 +626,9 @@ extension UIViewController {
         get {
             if let nav = self.navigationController {
                 return nav.navigationBar.h
-            } else {
-                return 0
             }
+            
+            return 0
         }
     }
     
