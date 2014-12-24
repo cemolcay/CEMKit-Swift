@@ -9,8 +9,13 @@
 import Foundation
 import UIKit
 
+// MARK: - AppDelegate
 
-// MARK: UIView
+let APPDELEGATE: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+
+
+
+// MARK: - UIView
 
 let UIViewAnimationDuration: NSTimeInterval = 1
 let UIViewAnimationSpringDamping: CGFloat = 0.5
@@ -312,61 +317,58 @@ extension UIView {
 
 
 
-// MARK: CGPoint
+// MARK: - UIViewController
 
-func + (left: CGPoint, right: CGPoint) -> CGPoint {
-    return CGPoint (x: left.x + right.x, y: left.y + right.y)
-}
-
-func - (left: CGPoint, right: CGPoint) -> CGPoint {
-    return CGPoint (x: left.x - right.x, y: left.y - right.y)
-}
-
-
-enum AnchorPosition: CGPoint {
-    case TopLeft        = "{0 ,0}"
-    case TopCenter      = "{0.5, 0}"
-    case TopRight       = "{1, 0}"
+extension UIViewController {
     
-    case MidLeft        = "{0, 0.5}"
-    case MidCenter      = "{0.5, 0.5}"
-    case MidRight       = "{1, 0.5}"
-    
-    case BottomLeft     = "{0, 1}"
-    case BottomCenter   = "{0.5, 1}"
-    case BottomRight    = "{1, 1}"
-}
-
-extension CGPoint: StringLiteralConvertible {
-    
-    public init(stringLiteral value: StringLiteralType) {
-        self = CGPointFromString(value)
+    var top: CGFloat {
+        get {
+            if let nav = self.navigationController {
+                if nav.navigationBarHidden {
+                    return view.top
+                } else {
+                    return nav.navigationBar.bottom
+                }
+            } else {
+                return view.top
+            }
+        }
     }
     
-    public init(extendedGraphemeClusterLiteral value: StringLiteralType) {
-        self = CGPointFromString(value)
+    var bottom: CGFloat {
+        get {
+            if let tab = tabBarController {
+                if tab.tabBar.hidden {
+                    return view.bottom
+                } else {
+                    return tab.tabBar.top
+                }
+            } else {
+                return view.bottom
+            }
+        }
     }
     
-    public init(unicodeScalarLiteral value: StringLiteralType) {
-        self = CGPointFromString(value)
+    var navigationBarHeight: CGFloat {
+        get {
+            if let nav = self.navigationController {
+                return nav.navigationBar.h
+            }
+            
+            return 0
+        }
+    }
+    
+    var applicationFrame: CGRect {
+        get {
+            return CGRect (x: view.x, y: top, width: view.w, height: bottom - top)
+        }
     }
 }
 
 
 
-// MARK: CGSize
-
-func + (left: CGSize, right: CGSize) -> CGSize {
-    return CGSize (width: left.width + right.width, height: left.height + right.height)
-}
-
-func - (left: CGSize, right: CGSize) -> CGSize {
-    return CGSize (width: left.width - right.width, height: left.width - right.width)
-}
-
-
-
-// MARK: UIFont
+// MARK: - UIFont
 
 extension UIFont {
     
@@ -422,7 +424,61 @@ extension UIFont {
 
 
 
-// MARK: CEMKit
+// MARK: - CGPoint
+
+func + (left: CGPoint, right: CGPoint) -> CGPoint {
+    return CGPoint (x: left.x + right.x, y: left.y + right.y)
+}
+
+func - (left: CGPoint, right: CGPoint) -> CGPoint {
+    return CGPoint (x: left.x - right.x, y: left.y - right.y)
+}
+
+
+enum AnchorPosition: CGPoint {
+    case TopLeft        = "{0, 0}"
+    case TopCenter      = "{0.5, 0}"
+    case TopRight       = "{1, 0}"
+    
+    case MidLeft        = "{0, 0.5}"
+    case MidCenter      = "{0.5, 0.5}"
+    case MidRight       = "{1, 0.5}"
+    
+    case BottomLeft     = "{0, 1}"
+    case BottomCenter   = "{0.5, 1}"
+    case BottomRight    = "{1, 1}"
+}
+
+extension CGPoint: StringLiteralConvertible {
+    
+    public init(stringLiteral value: StringLiteralType) {
+        self = CGPointFromString(value)
+    }
+    
+    public init(extendedGraphemeClusterLiteral value: StringLiteralType) {
+        self = CGPointFromString(value)
+    }
+    
+    public init(unicodeScalarLiteral value: StringLiteralType) {
+        self = CGPointFromString(value)
+    }
+}
+
+
+
+// MARK: - CGSize
+
+func + (left: CGSize, right: CGSize) -> CGSize {
+    return CGSize (width: left.width + right.width, height: left.height + right.height)
+}
+
+func - (left: CGSize, right: CGSize) -> CGSize {
+    return CGSize (width: left.width - right.width, height: left.width - right.width)
+}
+
+
+
+// MARK: - CGFloat
 
 var ScreenWidth: CGFloat {
     get {
@@ -448,22 +504,32 @@ func degreesToRadians (angle: CGFloat) -> CGFloat {
 }
 
 
+
+// MARK: - UILabel
+
 func setHeightOfLabel (label: UILabel) {
     label.h = heightForLabel(label.text!, label.font, label.w)
 }
 
-func heightForLabel (text: String, font: UIFont, width: CGFloat) -> CGFloat {
+
+func heightForLabel (text: String,
+    font: UIFont,
+    width: CGFloat) -> CGFloat {
     let att = NSAttributedString (string: text, attributes: NSDictionary (object: font, forKey: NSFontAttributeName))
     let rect = att.boundingRectWithSize(CGSize (width: width, height: CGFloat.max), options: NSStringDrawingOptions.UsesLineFragmentOrigin, context: nil)
     return rect.height
 }
 
 
-func getAspectHeightForImage (image: UIImage, aspectWidth: CGFloat) -> CGFloat {
+func getAspectHeightForImage (image: UIImage,
+    aspectWidth: CGFloat) -> CGFloat {
     let aspectHeight = (aspectWidth * image.size.height) / image.size.width
     return aspectHeight
 }
 
+
+
+// MARK: - UIColor
 
 func randomColor () -> UIColor {
     var randomRed:CGFloat = CGFloat(drand48())
@@ -476,17 +542,28 @@ func randomColor () -> UIColor {
 }
 
 
-func RGBColor (r: CGFloat, g: CGFloat, b: CGFloat) -> UIColor {
+func RGBColor (r: CGFloat,
+    g: CGFloat,
+    b: CGFloat) -> UIColor {
     return UIColor (red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: 1)
 }
 
-func RGBAColor (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) -> UIColor {
+
+func RGBAColor (r: CGFloat,
+    g: CGFloat,
+    b: CGFloat,
+    a: CGFloat) -> UIColor {
     return UIColor (red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a)
 }
 
 
 
-func alert (title: String, message: String, cancelAction: ((UIAlertAction!)->Void)? = nil, okAction: ((UIAlertAction!)->Void)? = nil) -> UIAlertController {
+// MARK: - UIAlertController
+
+func alert (title: String,
+    message: String,
+    cancelAction: ((UIAlertAction!)->Void)? = nil,
+    okAction: ((UIAlertAction!)->Void)? = nil) -> UIAlertController {
     let a = UIAlertController (title: title, message: message, preferredStyle: .Alert)
     
     if let ok = okAction {
@@ -501,7 +578,10 @@ func alert (title: String, message: String, cancelAction: ((UIAlertAction!)->Voi
 
 
 
-func barButtonItem (imageName: String, action: (AnyObject)->()) -> UIBarButtonItem {
+// MARK: - UIBarButtonItem
+
+func barButtonItem (imageName: String,
+    action: (AnyObject)->()) -> UIBarButtonItem {
     let button = BlockButton (frame: CGRect(x: 0, y: 0, width: 20, height: 20))
     button.setImage(UIImage(named: imageName), forState: .Normal)
     button.actionBlock = action
@@ -509,7 +589,9 @@ func barButtonItem (imageName: String, action: (AnyObject)->()) -> UIBarButtonIt
     return UIBarButtonItem (customView: button)
 }
 
-func barButtonItem (title: String, color: UIColor, action: (AnyObject)->()) -> UIBarButtonItem {
+func barButtonItem (title: String,
+    color: UIColor,
+    action: (AnyObject)->()) -> UIBarButtonItem {
     let button = BlockButton (frame: CGRect(x: 0, y: 0, width: 20, height: 20))
     button.setTitle(title, forState: .Normal)
     button.setTitleColor(color, forState: .Normal)
@@ -521,7 +603,7 @@ func barButtonItem (title: String, color: UIColor, action: (AnyObject)->()) -> U
 
 
 
-// MARK: - UIButton
+// MARK: - BlockButton
 
 class BlockButton: UIButton {
     
@@ -546,7 +628,7 @@ class BlockButton: UIButton {
 
 
 
-// MARK: - UIWebView
+// MARK: - BlockWebView
 
 class BlockWebView: UIWebView, UIWebViewDelegate {
     
@@ -586,55 +668,4 @@ class BlockWebView: UIWebView, UIWebViewDelegate {
         }
     }
     
-}
-
-
-
-// MARK: - UIViewController
-
-extension UIViewController {
-    
-    var top: CGFloat {
-        get {
-            if let nav = self.navigationController {
-                if nav.navigationBarHidden {
-                    return view.top
-                } else {
-                    return nav.navigationBar.bottom
-                }
-            } else {
-                return view.top
-            }
-        }
-    }
-    
-    var bottom: CGFloat {
-        get {
-            if let tab = tabBarController {
-                if tab.tabBar.hidden {
-                    return view.bottom
-                } else {
-                    return tab.tabBar.top
-                }
-            } else {
-                return view.bottom
-            }
-        }
-    }
-    
-    var navigationBarHeight: CGFloat {
-        get {
-            if let nav = self.navigationController {
-                return nav.navigationBar.h
-            }
-            
-            return 0
-        }
-    }
-    
-    var applicationFrame: CGRect {
-        get {
-            return CGRect (x: view.x, y: top, width: view.w, height: bottom - top)
-        }
-    }
 }
