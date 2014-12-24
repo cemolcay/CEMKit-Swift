@@ -424,15 +424,21 @@ extension UIFont {
 
 // MARK: CEMKit
 
-var ScreenWidth : CGFloat {
+var ScreenWidth: CGFloat {
     get {
         return UIScreen.mainScreen().bounds.size.width
     }
 }
 
-var ScreenHeight : CGFloat {
+var ScreenHeight: CGFloat {
     get {
         return UIScreen.mainScreen().bounds.size.height
+    }
+}
+
+var StatusBarHeight: CGFloat {
+    get {
+        return UIApplication.sharedApplication().statusBarFrame.height
     }
 }
 
@@ -582,3 +588,45 @@ class BlockWebView: UIWebView, UIWebViewDelegate {
     
 }
 
+
+
+// MARK: - UIViewController
+
+extension UIViewController {
+    
+    var top: CGFloat {
+        get {
+            if let nav = self.navigationController {
+                return nav.navigationBar.bottom
+            } else {
+                return view.top
+            }
+        }
+    }
+    
+    var bottom: CGFloat {
+        get {
+            if let tab = tabBarController {
+                return tab.tabBar.top
+            } else {
+                return view.bottom
+            }
+        }
+    }
+    
+    var navigationBarHeight: CGFloat {
+        get {
+            if let nav = self.navigationController {
+                return nav.navigationBar.h
+            } else {
+                return 0
+            }
+        }
+    }
+    
+    var appRect: CGRect {
+        get {
+            return CGRect (x: view.x, y: top, width: view.w, height: bottom - top)
+        }
+    }
+}
