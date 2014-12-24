@@ -624,7 +624,7 @@ extension UIViewController {
         }
     }
     
-    var appRect: CGRect {
+    var applicationFrame: CGRect {
         get {
             return CGRect (x: view.x, y: top, width: view.w, height: bottom - top)
         }
