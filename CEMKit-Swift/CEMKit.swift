@@ -504,6 +504,20 @@ func degreesToRadians (angle: CGFloat) -> CGFloat {
 }
 
 
+func normalizeValue (value: CGFloat,
+    min: CGFloat,
+    max: CGFloat) -> CGFloat {
+    return (max - min) / value
+}
+
+
+func convertNormalizedValue (value: CGFloat,
+    min: CGFloat,
+    max: CGFloat) -> CGFloat {
+    return (max - min) * value
+}
+
+
 
 // MARK: - UILabel
 
