@@ -514,7 +514,7 @@ func normalizeValue (value: CGFloat,
 func convertNormalizedValue (value: CGFloat,
     min: CGFloat,
     max: CGFloat) -> CGFloat {
-    return (max - min) * value
+    return ((max - min) * value) + min
 }
 
 
