@@ -360,6 +360,15 @@ extension UIViewController {
         }
     }
     
+    var navigationBarColor: UIColor? {
+        get {
+            return navigationController?.navigationBar.tintColor
+        } set (value) {
+            navigationController?.navigationBar.barTintColor = value
+        }
+    }
+
+    
     var applicationFrame: CGRect {
         get {
             return CGRect (x: view.x, y: top, width: view.w, height: bottom - top)
