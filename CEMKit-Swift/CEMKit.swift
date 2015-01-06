@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+
 // MARK: - AppDelegate
 
 let APPDELEGATE: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -368,6 +369,42 @@ extension UIViewController {
 
 
 
+// MARK: - UILabel
+
+extension UILabel {
+    
+    func addAttributedString (text: String, color: UIColor, font: UIFont) {
+        var string = self.text == nil ? "" : self.text!
+        let newString = string + text
+        let range = NSRange(location: countElements(string), length: countElements(text))
+        var att: NSMutableAttributedString?
+        
+        if let a = self.attributedText {
+            att = NSMutableAttributedString (attributedString: a)
+            att?.appendAttributedString(NSAttributedString (string: text))
+        } else {
+            att = NSMutableAttributedString (string: newString)
+        }
+        
+        att!.addAttribute(NSFontAttributeName, value: font, range: range)
+        att!.addAttribute(NSForegroundColorAttributeName, value: color, range: range)
+        
+        self.attributedText = NSAttributedString (attributedString: att!)
+    }
+    
+    func getEstimatedHeight () -> CGFloat {
+        let att = NSAttributedString (string: self.text!, attributes: NSDictionary (object: font, forKey: NSFontAttributeName))
+        let rect = att.boundingRectWithSize(CGSize (width: w, height: CGFloat.max), options: NSStringDrawingOptions.UsesLineFragmentOrigin, context: nil)
+        return rect.height
+    }
+    
+    func fitHeight () {
+        self.h = getEstimatedHeight()
+    }
+}
+
+
+
 // MARK: - UIFont
 
 extension UIFont {
@@ -419,6 +456,34 @@ extension UIFont {
     
     class func HelveticaNeue (type: FontType, size: CGFloat) -> UIFont {
         return Font(.HelveticaNeue, type: type, size: size)
+    }
+}
+
+
+
+// MARK: - UIColor
+
+extension UIColor {
+    
+    class func randomColor () -> UIColor {
+        var randomRed:CGFloat = CGFloat(drand48())
+        var randomGreen:CGFloat = CGFloat(drand48())
+        var randomBlue:CGFloat = CGFloat(drand48())
+        
+        return UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
+    }
+    
+    class func RGBColor (r: CGFloat,
+        g: CGFloat,
+        b: CGFloat) -> UIColor {
+            return UIColor (red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: 1)
+    }
+    
+    class func RGBAColor (r: CGFloat,
+        g: CGFloat,
+        b: CGFloat,
+        a: CGFloat) -> UIColor {
+            return UIColor (red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a)
     }
 }
 
@@ -519,77 +584,12 @@ func convertNormalizedValue (value: CGFloat,
 
 
 
-// MARK: - UILabel
-
-extension UILabel {
-    
-    func addAttributedString (text: String, color: UIColor, font: UIFont) {
-        var string = self.text == nil ? "" : self.text!
-        let newString = string + text
-        let range = NSRange(location: countElements(string), length: countElements(text))
-        var att: NSMutableAttributedString?
-        
-        if let a = self.attributedText {
-            att = NSMutableAttributedString (attributedString: a)
-            att?.appendAttributedString(NSAttributedString (string: text))
-        } else {
-            att = NSMutableAttributedString (string: newString)
-        }
-        
-        att!.addAttribute(NSFontAttributeName, value: font, range: range)
-        att!.addAttribute(NSForegroundColorAttributeName, value: color, range: range)
-        
-        self.attributedText = NSAttributedString (attributedString: att!)
-    }
-    
-    func getEstimatedHeight () -> CGFloat {
-        let att = NSAttributedString (string: self.text!, attributes: NSDictionary (object: font, forKey: NSFontAttributeName))
-        let rect = att.boundingRectWithSize(CGSize (width: w, height: CGFloat.max), options: NSStringDrawingOptions.UsesLineFragmentOrigin, context: nil)
-        return rect.height
-    }
-    
-    func fitHeight () {
-        self.h = getEstimatedHeight()
-    }
-}
-
-
-
 // MARK: - UIImage
 
 func getAspectHeightForImage (image: UIImage,
     aspectWidth: CGFloat) -> CGFloat {
     let aspectHeight = (aspectWidth * image.size.height) / image.size.width
     return aspectHeight
-}
-
-
-
-// MARK: - UIColor
-
-func randomColor () -> UIColor {
-    var randomRed:CGFloat = CGFloat(drand48())
-    
-    var randomGreen:CGFloat = CGFloat(drand48())
-    
-    var randomBlue:CGFloat = CGFloat(drand48())
-    
-    return UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
-}
-
-
-func RGBColor (r: CGFloat,
-    g: CGFloat,
-    b: CGFloat) -> UIColor {
-    return UIColor (red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: 1)
-}
-
-
-func RGBAColor (r: CGFloat,
-    g: CGFloat,
-    b: CGFloat,
-    a: CGFloat) -> UIColor {
-    return UIColor (red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a)
 }
 
 

@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let v = UIView (x: 100, y: 100, w: 100, h: 100)
-        v.backgroundColor = randomColor ()
+        v.backgroundColor = UIColor.randomColor()
         v.setAnchorPosition(AnchorPosition.MidCenter)
         view.addSubview(v)
         
