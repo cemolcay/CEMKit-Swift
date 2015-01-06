@@ -521,19 +521,41 @@ func convertNormalizedValue (value: CGFloat,
 
 // MARK: - UILabel
 
-func setHeightOfLabel (label: UILabel) {
-    label.h = heightForLabel(label.text!, label.font, label.w)
+extension UILabel {
+    
+    func addAttributedString (text: String, color: UIColor, font: UIFont) {
+        var string = self.text == nil ? "" : self.text!
+        let newString = string + text
+        let range = NSRange(location: countElements(string), length: countElements(text))
+        var att: NSMutableAttributedString?
+        
+        if let a = self.attributedText {
+            att = NSMutableAttributedString (attributedString: a)
+            att?.appendAttributedString(NSAttributedString (string: text))
+        } else {
+            att = NSMutableAttributedString (string: newString)
+        }
+        
+        att!.addAttribute(NSFontAttributeName, value: font, range: range)
+        att!.addAttribute(NSForegroundColorAttributeName, value: color, range: range)
+        
+        self.attributedText = NSAttributedString (attributedString: att!)
+    }
+    
+    func getEstimatedHeight () -> CGFloat {
+        let att = NSAttributedString (string: self.text!, attributes: NSDictionary (object: font, forKey: NSFontAttributeName))
+        let rect = att.boundingRectWithSize(CGSize (width: w, height: CGFloat.max), options: NSStringDrawingOptions.UsesLineFragmentOrigin, context: nil)
+        return rect.height
+    }
+    
+    func fitHeight () {
+        self.h = getEstimatedHeight()
+    }
 }
 
 
-func heightForLabel (text: String,
-    font: UIFont,
-    width: CGFloat) -> CGFloat {
-    let att = NSAttributedString (string: text, attributes: NSDictionary (object: font, forKey: NSFontAttributeName))
-    let rect = att.boundingRectWithSize(CGSize (width: width, height: CGFloat.max), options: NSStringDrawingOptions.UsesLineFragmentOrigin, context: nil)
-    return rect.height
-}
 
+// MARK: - UIImage
 
 func getAspectHeightForImage (image: UIImage,
     aspectWidth: CGFloat) -> CGFloat {
