@@ -371,26 +371,71 @@ extension UIViewController {
 
 // MARK: - UILabel
 
+private var UILabelAttributedStringArray: UInt8 = 0
 extension UILabel {
     
+    var attributedStrings: [NSAttributedString]? {
+        get {
+            return objc_getAssociatedObject(self, &UILabelAttributedStringArray) as? [NSAttributedString]
+        } set (value) {
+            objc_setAssociatedObject(self, &UILabelAttributedStringArray, value, UInt(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        }
+    }
+    
     func addAttributedString (text: String, color: UIColor, font: UIFont) {
-        var string = self.text == nil ? "" : self.text!
-        let newString = string + text
-        let range = NSRange(location: countElements(string), length: countElements(text))
+        var att = NSAttributedString (string: text,
+            attributes: [NSFontAttributeName: font,
+                NSForegroundColorAttributeName: color])
+        self.addAttributedString(att)
+    }
+    
+    func addAttributedString (attributedString: NSAttributedString) {
         var att: NSMutableAttributedString?
         
         if let a = self.attributedText {
             att = NSMutableAttributedString (attributedString: a)
-            att?.appendAttributedString(NSAttributedString (string: text))
+            att?.appendAttributedString(attributedString)
         } else {
-            att = NSMutableAttributedString (string: newString)
+            att = NSMutableAttributedString (attributedString: attributedString)
+            attributedStrings = []
         }
         
-        att!.addAttribute(NSFontAttributeName, value: font, range: range)
-        att!.addAttribute(NSForegroundColorAttributeName, value: color, range: range)
-        
+        attributedStrings?.append(attributedString)
         self.attributedText = NSAttributedString (attributedString: att!)
     }
+    
+    
+    func updateAttributedStringAtIndex (index: Int, attributedString: NSAttributedString) {
+        
+        if let att = attributedStrings?[index] {
+            attributedStrings?.removeAtIndex(index)
+            attributedStrings?.insert(attributedString, atIndex: index)
+            
+            let updated = NSMutableAttributedString ()
+            for att in attributedStrings! {
+                updated.appendAttributedString(att)
+            }
+            
+            self.attributedText = NSAttributedString (attributedString: updated)
+        }
+    }
+    
+    func updateAttributedStringAtIndex (index: Int, newText: String) {
+        if let att = attributedStrings?[index] {
+            let newAtt = NSMutableAttributedString (string: newText)
+            
+            att.enumerateAttributesInRange(NSMakeRange(0, countElements(att.string)-1),
+                options: NSAttributedStringEnumerationOptions.LongestEffectiveRangeNotRequired,
+                usingBlock: { (attribute, range, stop) -> Void in
+                    for (key, value) in attribute {
+                        newAtt.addAttribute(key as String, value: value, range: range)
+                    }
+            })
+            
+            updateAttributedStringAtIndex(index, attributedString: newAtt)
+        }
+    }
+    
     
     func getEstimatedHeight () -> CGFloat {
         let att = NSAttributedString (string: self.text!, attributes: NSDictionary (object: font, forKey: NSFontAttributeName))
@@ -586,10 +631,37 @@ func convertNormalizedValue (value: CGFloat,
 
 // MARK: - UIImage
 
-func getAspectHeightForImage (image: UIImage,
-    aspectWidth: CGFloat) -> CGFloat {
-    let aspectHeight = (aspectWidth * image.size.height) / image.size.width
-    return aspectHeight
+extension UIImage {
+    
+    func resizeWidthWithAspect (width: CGFloat) -> UIImage {
+        let aspectSize = CGSize (width: width, height: aspectHeightForWidth(width))
+        
+        UIGraphicsBeginImageContext(aspectSize)
+        self.drawInRect(CGRect(origin: CGPointZero, size: aspectSize))
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return img
+    }
+    
+    func resizeHeightWithAspect (height: CGFloat) -> UIImage {
+        let aspectSize = CGSize (width: aspectWidthForHeight(height), height: height)
+
+        UIGraphicsBeginImageContext(aspectSize)
+        self.drawInRect(CGRect(origin: CGPointZero, size: aspectSize))
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return img
+    }
+    
+    func aspectHeightForWidth (width: CGFloat) -> CGFloat {
+        return (width * self.size.height) / self.size.width
+    }
+    
+    func aspectWidthForHeight (height: CGFloat) -> CGFloat {
+        return (height * self.size.width) / self.size.height
+    }
 }
 
 
