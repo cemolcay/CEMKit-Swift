@@ -395,7 +395,9 @@ extension UILabel {
         }
     }
     
-    func addAttributedString (text: String, color: UIColor, font: UIFont) {
+    func addAttributedString (text: String,
+        color: UIColor,
+        font: UIFont) {
         var att = NSAttributedString (string: text,
             attributes: [NSFontAttributeName: font,
                 NSForegroundColorAttributeName: color])
@@ -418,7 +420,8 @@ extension UILabel {
     }
     
     
-    func updateAttributedStringAtIndex (index: Int, attributedString: NSAttributedString) {
+    func updateAttributedStringAtIndex (index: Int,
+        attributedString: NSAttributedString) {
         
         if let att = attributedStrings?[index] {
             attributedStrings?.removeAtIndex(index)
@@ -433,7 +436,8 @@ extension UILabel {
         }
     }
     
-    func updateAttributedStringAtIndex (index: Int, newText: String) {
+    func updateAttributedStringAtIndex (index: Int,
+        newText: String) {
         if let att = attributedStrings?[index] {
             let newAtt = NSMutableAttributedString (string: newText)
             
