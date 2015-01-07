@@ -639,4 +639,27 @@ Convert [0, 1] to to [min, max]
 
 ### BlockButton <a id="BlockButton"></a>
 
+##### Regular `UIButton` with `actionBlock:` 
+
+``` swift
+    var actionBlock: ((sender: BlockButton) -> ())? {
+        didSet {
+            self.addTarget(self, action: "action:", forControlEvents: UIControlEvents.TouchUpInside)
+        }
+    }
+    
+    func action (sender: BlockButton) {
+        actionBlock! (sender: sender)
+    }
+```
+
 ### BlockWebView <a id="BlockWebView"></a>
+
+##### Regular `UIWebView` with block based actions instead of `UIWebViewDelegate`
+
+``` swift
+    var didStartLoad: ((NSURLRequest) -> ())?
+    var didFinishLoad: ((NSURLRequest) -> ())?
+    var didFailLoad: ((NSURLRequest, NSError) -> ())?    
+    var shouldStartLoadingRequest: ((NSURLRequest) -> (Bool))?
+```
