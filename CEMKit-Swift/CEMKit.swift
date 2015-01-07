@@ -459,6 +459,16 @@ extension UILabel {
 
 
 
+// MARK: - String
+
+extension String {
+    subscript (i: Int) -> String {
+        return String(Array(self)[i])
+    }
+}
+
+
+
 // MARK: - UIFont
 
 extension UIFont {
