@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 
+
 // MARK: - AppDelegate
 
 let APPDELEGATE: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -70,23 +71,6 @@ extension UIView {
     }
     
     
-    var position: CGPoint {
-        get {
-            return self.frame.origin
-        } set (value) {
-            self.frame = CGRect (origin: value, size: self.frame.size)
-        }
-    }
-    
-    var size: CGSize {
-        get {
-            return self.frame.size
-        } set (value) {
-            self.frame = CGRect (origin: self.frame.origin, size: size)
-        }
-    }
-    
-    
     var left: CGFloat {
         get {
             return self.x
@@ -120,6 +104,23 @@ extension UIView {
     }
     
     
+    var position: CGPoint {
+        get {
+            return self.frame.origin
+        } set (value) {
+            self.frame = CGRect (origin: value, size: self.frame.size)
+        }
+    }
+    
+    var size: CGSize {
+        get {
+            return self.frame.size
+        } set (value) {
+            self.frame = CGRect (origin: self.frame.origin, size: size)
+        }
+    }
+    
+
     func leftWithOffset (offset: CGFloat) -> CGFloat {
         return self.left - offset
     }
@@ -177,13 +178,15 @@ extension UIView {
     }
     
     
-    func setScale (x: CGFloat, y: CGFloat) {
+    func setScale (x: CGFloat,
+        y: CGFloat) {
         var transform = CATransform3DIdentity
         transform.m34 = 1.0 / -1000.0
         transform = CATransform3DScale(transform, x, y, 1)
         
         self.layer.transform = transform
     }
+    
     
     
     // MARK: Anchor Extensions
@@ -349,6 +352,7 @@ extension UIViewController {
             }
         }
     }
+    
     
     var navigationBarHeight: CGFloat {
         get {
@@ -553,6 +557,44 @@ extension UIColor {
 
 
 
+// MARK: - UIImage
+
+extension UIImage {
+    
+    func aspectResizeWithWidth (width: CGFloat) -> UIImage {
+        let aspectSize = CGSize (width: width, height: aspectHeightForWidth(width))
+        
+        UIGraphicsBeginImageContext(aspectSize)
+        self.drawInRect(CGRect(origin: CGPointZero, size: aspectSize))
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return img
+    }
+    
+    func aspectResizeWithHeight (height: CGFloat) -> UIImage {
+        let aspectSize = CGSize (width: aspectWidthForHeight(height), height: height)
+        
+        UIGraphicsBeginImageContext(aspectSize)
+        self.drawInRect(CGRect(origin: CGPointZero, size: aspectSize))
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return img
+    }
+    
+    
+    func aspectHeightForWidth (width: CGFloat) -> CGFloat {
+        return (width * self.size.height) / self.size.width
+    }
+    
+    func aspectWidthForHeight (height: CGFloat) -> CGFloat {
+        return (height * self.size.width) / self.size.height
+    }
+}
+
+
+
 // MARK: - CGPoint
 
 func + (left: CGPoint, right: CGPoint) -> CGPoint {
@@ -648,43 +690,6 @@ func convertNormalizedValue (value: CGFloat,
 
 
 
-// MARK: - UIImage
-
-extension UIImage {
-    
-    func resizeWidthWithAspect (width: CGFloat) -> UIImage {
-        let aspectSize = CGSize (width: width, height: aspectHeightForWidth(width))
-        
-        UIGraphicsBeginImageContext(aspectSize)
-        self.drawInRect(CGRect(origin: CGPointZero, size: aspectSize))
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return img
-    }
-    
-    func resizeHeightWithAspect (height: CGFloat) -> UIImage {
-        let aspectSize = CGSize (width: aspectWidthForHeight(height), height: height)
-
-        UIGraphicsBeginImageContext(aspectSize)
-        self.drawInRect(CGRect(origin: CGPointZero, size: aspectSize))
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return img
-    }
-    
-    func aspectHeightForWidth (width: CGFloat) -> CGFloat {
-        return (width * self.size.height) / self.size.width
-    }
-    
-    func aspectWidthForHeight (height: CGFloat) -> CGFloat {
-        return (height * self.size.width) / self.size.height
-    }
-}
-
-
-
 // MARK: - UIAlertController
 
 func alert (title: String,
@@ -739,7 +744,7 @@ class BlockButton: UIButton {
     }
     
     required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
     
     var actionBlock: ((sender: BlockButton) -> ())? {
@@ -771,7 +776,7 @@ class BlockWebView: UIWebView, UIWebViewDelegate {
     }
     
     required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
     
     
