@@ -311,7 +311,7 @@ Pan
         action: Selector)
 ```
 
-### UIViewController <a id="UIViewController"></a>
+### UIViewController extension <a id="UIViewController"></a>
 
 #### Quick access top layout and bottom layout
 
@@ -390,7 +390,7 @@ Get or set navigation bar color
 ```
 
 
-### UILabel <a id="UILabel"></a>
+### UILabel extension <a id="UILabel"></a>
 
 #### NSAttributedString <a id="UILabel-NSAttributedString"></a>
 
@@ -436,7 +436,7 @@ Updating
 	 func fitHeight ()	
 ```
 
-### String <a id="String"></a>
+### String extension <a id="String"></a>
 
 ##### Subscript for accessing characters at index of string
 
@@ -446,7 +446,7 @@ Updating
     }
 ```
 
-### UIFont <a id="UIFont"></a>
+### UIFont extension <a id="UIFont"></a>
 
 ##### FontType and FontName `enum`s for easily create `UIFont`s
 
@@ -468,7 +468,7 @@ Print all family of font on single line
     class func PrintFontFamily (font: FontName)
 ```
 
-### UIColor <a id="UIColor"></a>
+### UIColor extension <a id="UIColor"></a>
 
 ##### Create random color or RGB/A colors easily in range of [0, 255]
 
@@ -489,7 +489,7 @@ Print all family of font on single line
         a: CGFloat) -> UIColor
 ```
 
-### UIImage <a id="UIImage"></a>
+### UIImage extension <a id="UIImage"></a>
 
 ##### Resize an image with keep it aspect ratio
 
