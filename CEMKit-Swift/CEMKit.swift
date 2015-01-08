@@ -599,6 +599,101 @@ extension UIImage {
 
 
 
+// MARK - Globals
+
+
+
+var Orientation: UIInterfaceOrientation {
+    get {
+        return UIApplication.sharedApplication().statusBarOrientation
+    }
+}
+
+var ScreenWidth: CGFloat {
+    get {
+        if UIInterfaceOrientationIsPortrait(Orientation) {
+            return UIScreen.mainScreen().bounds.size.width
+        } else {
+            return UIScreen.mainScreen().bounds.size.height
+        }
+    }
+}
+
+var ScreenHeight: CGFloat {
+    get {
+        if UIInterfaceOrientationIsPortrait(Orientation) {
+            return UIScreen.mainScreen().bounds.size.height
+        } else {
+            return UIScreen.mainScreen().bounds.size.width
+        }
+    }
+}
+
+var StatusBarHeight: CGFloat {
+    get {
+        return UIApplication.sharedApplication().statusBarFrame.height
+    }
+}
+
+
+
+// MARK: - UIAlertController
+
+func alert (title: String,
+    message: String,
+    cancelAction: ((UIAlertAction!)->Void)? = nil,
+    okAction: ((UIAlertAction!)->Void)? = nil) -> UIAlertController {
+        let a = UIAlertController (title: title, message: message, preferredStyle: .Alert)
+        
+        if let ok = okAction {
+            a.addAction(UIAlertAction(title: "OK", style: .Default, handler: ok))
+            a.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelAction))
+        } else {
+            a.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: cancelAction))
+        }
+        
+        return a
+}
+
+
+
+// MARK: - UIBarButtonItem
+
+func barButtonItem (imageName: String,
+    action: (AnyObject)->()) -> UIBarButtonItem {
+        let button = BlockButton (frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        button.setImage(UIImage(named: imageName), forState: .Normal)
+        button.actionBlock = action
+        
+        return UIBarButtonItem (customView: button)
+}
+
+func barButtonItem (title: String,
+    color: UIColor,
+    action: (AnyObject)->()) -> UIBarButtonItem {
+        let button = BlockButton (frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        button.setTitle(title, forState: .Normal)
+        button.setTitleColor(color, forState: .Normal)
+        button.actionBlock = action
+        button.sizeToFit()
+        
+        return UIBarButtonItem (customView: button)
+}
+
+
+
+// MARK: - CGSize
+
+func + (left: CGSize, right: CGSize) -> CGSize {
+    return CGSize (width: left.width + right.width, height: left.height + right.height)
+}
+
+func - (left: CGSize, right: CGSize) -> CGSize {
+    return CGSize (width: left.width - right.width, height: left.width - right.width)
+}
+
+
+
 // MARK: - CGPoint
 
 func + (left: CGPoint, right: CGPoint) -> CGPoint {
@@ -641,38 +736,7 @@ extension CGPoint: StringLiteralConvertible {
 
 
 
-// MARK: - CGSize
-
-func + (left: CGSize, right: CGSize) -> CGSize {
-    return CGSize (width: left.width + right.width, height: left.height + right.height)
-}
-
-func - (left: CGSize, right: CGSize) -> CGSize {
-    return CGSize (width: left.width - right.width, height: left.width - right.width)
-}
-
-
-
 // MARK: - CGFloat
-
-var ScreenWidth: CGFloat {
-    get {
-        return UIScreen.mainScreen().bounds.size.width
-    }
-}
-
-var ScreenHeight: CGFloat {
-    get {
-        return UIScreen.mainScreen().bounds.size.height
-    }
-}
-
-var StatusBarHeight: CGFloat {
-    get {
-        return UIApplication.sharedApplication().statusBarFrame.height
-    }
-}
-
 
 func degreesToRadians (angle: CGFloat) -> CGFloat {
     return (CGFloat (M_PI) * angle) / 180.0
@@ -694,49 +758,8 @@ func convertNormalizedValue (value: CGFloat,
 
 
 
-// MARK: - UIAlertController
 
-func alert (title: String,
-    message: String,
-    cancelAction: ((UIAlertAction!)->Void)? = nil,
-    okAction: ((UIAlertAction!)->Void)? = nil) -> UIAlertController {
-    let a = UIAlertController (title: title, message: message, preferredStyle: .Alert)
-    
-    if let ok = okAction {
-        a.addAction(UIAlertAction(title: "OK", style: .Default, handler: ok))
-        a.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelAction))
-    } else {
-        a.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: cancelAction))
-    }
-    
-    return a
-}
-
-
-
-// MARK: - UIBarButtonItem
-
-func barButtonItem (imageName: String,
-    action: (AnyObject)->()) -> UIBarButtonItem {
-    let button = BlockButton (frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-    button.setImage(UIImage(named: imageName), forState: .Normal)
-    button.actionBlock = action
-    
-    return UIBarButtonItem (customView: button)
-}
-
-func barButtonItem (title: String,
-    color: UIColor,
-    action: (AnyObject)->()) -> UIBarButtonItem {
-    let button = BlockButton (frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-    button.setTitle(title, forState: .Normal)
-    button.setTitleColor(color, forState: .Normal)
-    button.actionBlock = action
-    button.sizeToFit()
-    
-    return UIBarButtonItem (customView: button)
-}
-
+// MARK: - Block Classes
 
 
 // MARK: - BlockButton
