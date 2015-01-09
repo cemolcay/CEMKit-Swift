@@ -363,6 +363,14 @@ Bottom
 
 #### Quick access navigation bar properties
 
+``` swift
+	 var navigationBar: UINavigationBar? {
+        get {
+            return navigationController?.navigationBar
+        }
+    }
+```
+
 Get Navigation bar height of device
 
 ``` swift

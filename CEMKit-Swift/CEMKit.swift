@@ -372,6 +372,11 @@ extension UIViewController {
         }
     }
 
+    var navigationBar: UINavigationBar? {
+        get {
+            return navigationController?.navigationBar
+        }
+    }
     
     var applicationFrame: CGRect {
         get {
