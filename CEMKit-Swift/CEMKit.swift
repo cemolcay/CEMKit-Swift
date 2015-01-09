@@ -354,6 +354,17 @@ extension UIViewController {
     }
     
     
+    var tabBarHeight: CGFloat {
+        get {
+            if let tab = self.tabBarController {
+                return tab.tabBar.frame.size.height
+            }
+            
+            return 0
+        }
+    }
+    
+    
     var navigationBarHeight: CGFloat {
         get {
             if let nav = self.navigationController {
@@ -760,7 +771,6 @@ func convertNormalizedValue (value: CGFloat,
     max: CGFloat) -> CGFloat {
     return ((max - min) * value) + min
 }
-
 
 
 
