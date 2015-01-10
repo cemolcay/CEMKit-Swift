@@ -28,6 +28,10 @@ UIKit toolset for quick prototyping and rapid development
 * [UIBarButtonItem](#UIBarButtonItem)
 * [BlockButton](#BlockButton)
 * [BlockWebView](#BlockWebView)
+* [BlockTap](#BlockTap)
+* [BlockPan](#BlockPan)
+* [BlockSwipe](#BlockSwipe)
+* [BlockPinch](#BlockPinch)
 	
 	
 ## Documentation
@@ -294,6 +298,11 @@ Tap
         target: AnyObject, action: Selector)
 ```
 
+``` swift
+	func addTapGesture (tapNumber: Int,
+	        action: ((UITapGestureRecognizer)->())?)
+```
+
 Swipe
 
 ``` swift
@@ -304,11 +313,33 @@ Swipe
         action: Selector)  
 ```
 
+``` swift
+	func addSwipeGesture (direction: UISwipeGestureRecognizerDirection,
+	        numberOfTouches: Int,
+	        action: ((UISwipeGestureRecognizer)->())?)
+```
+
 Pan
 
 ``` swift
     func addPanGesture (target: AnyObject,
         action: Selector)
+```
+
+``` swift
+	func addPanGesture (action: ((UIPanGestureRecognizer)->())?)
+```
+
+Pinch
+
+
+``` swift
+	func addPinchGesture (target: AnyObject,
+	        action: Selector)
+```
+
+``` swift
+	func addPinchGesture (action: ((UIPinchGestureRecognizer)->())?)
 ```
 
 ### UIViewController extension <a id="UIViewController"></a>
@@ -670,4 +701,40 @@ Convert [0, 1] to to [min, max]
     var didFinishLoad: ((NSURLRequest) -> ())?
     var didFailLoad: ((NSURLRequest, NSError) -> ())?    
     var shouldStartLoadingRequest: ((NSURLRequest) -> (Bool))?
+```
+
+### BlockTap <a id="BlockTap"></a>
+
+##### Regular `UITapGestureRecognizer` with block based action
+
+``` swift
+	init (tapCount: Int,
+	        fingerCount: Int,
+	        action: ((UITapGestureRecognizer)->())?)
+```
+
+### BlockPan <a id="BlockPan"></a>
+
+##### Regular `UIPanGestureRecognizer` with block based action
+
+``` swift
+	init (action: ((UIPanGestureRecognizer)->())?)
+```
+
+### BlockSwipe <a id="BlockSwipe"></a>
+
+##### Regular `UISwipeGestureRecognizer` with block based action
+
+``` swift
+	init (direction: UISwipeGestureRecognizerDirection,
+	        fingerCount: Int,
+	        action: ((UISwipeGestureRecognizer)->())?)
+```
+
+### BlockPinch <a id="BlockPinch"></a>
+
+##### Regular `UIPinchGestureRecognizer` with block based action
+
+``` swift
+	init (action: ((UIPinchGestureRecognizer)->())?)
 ```

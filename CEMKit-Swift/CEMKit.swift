@@ -302,7 +302,8 @@ extension UIView {
         addGestureRecognizer(tap)
     }
     
-    func addTapGesture (tapNumber: Int, action: ((UITapGestureRecognizer)->())?) {
+    func addTapGesture (tapNumber: Int,
+        action: ((UITapGestureRecognizer)->())?) {
         let tap = BlockTap (tapCount: tapNumber,
             fingerCount: 1,
             action: action)
@@ -884,7 +885,9 @@ class BlockTap: UITapGestureRecognizer {
     
     private var tapAction: ((UITapGestureRecognizer)->())?
     
-    init (tapCount: Int, fingerCount: Int, action: ((UITapGestureRecognizer)->())?) {
+    init (tapCount: Int,
+        fingerCount: Int,
+        action: ((UITapGestureRecognizer)->())?) {
         super.init()
         numberOfTapsRequired = tapCount
         numberOfTouchesRequired = fingerCount
@@ -924,7 +927,9 @@ class BlockSwipe: UISwipeGestureRecognizer {
 
     private var swipeAction: ((UISwipeGestureRecognizer)->())?
     
-    init (direction: UISwipeGestureRecognizerDirection, fingerCount: Int, action: ((UISwipeGestureRecognizer)->())?) {
+    init (direction: UISwipeGestureRecognizerDirection,
+        fingerCount: Int,
+        action: ((UISwipeGestureRecognizer)->())?) {
         super.init()
         self.direction = direction
         numberOfTouchesRequired = fingerCount
