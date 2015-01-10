@@ -11,6 +11,7 @@ UIKit toolset for quick prototyping and rapid development
 	* [Layer](#UIView-Layer)
 	* [Transform](#UIView-Transform)
 	* [Animation](#UIView-Animation)
+	* [Rendering](#UIView-Rendering)
 	* [Gestures](#UIView-Gestures)
 * [UIViewController](#UIViewController)
 * [UILabel](#UILabel)
@@ -287,6 +288,13 @@ Animation Mehtods
         completion: ((Bool)->Void)? = nil)
 ```
 
+#### Rendering <a id="UIView-Rendering"></a>
+
+Get UIImage form view
+
+``` swift
+	func toImage () -> UIImage
+```
 
 #### Gestures <a id="UIView-Gestures"></a>
 
