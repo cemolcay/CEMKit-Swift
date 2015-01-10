@@ -350,6 +350,17 @@ extension UIView {
         let pinch = BlockPinch (action: action)
         addGestureRecognizer(pinch)
     }
+
+    func addLongPressGesture (target: AnyObject,
+        action: Selector) {
+        let longPress = UILongPressGestureRecognizer (target: target, action: action)
+        addGestureRecognizer(longPress)
+    }
+    
+    func addLongPressGesture (action: ((UILongPressGestureRecognizer)->())?) {
+        let longPress = BlockLongPress (action: action)
+        addGestureRecognizer(longPress)
+    }
 }
 
 
@@ -958,6 +969,24 @@ class BlockPinch: UIPinchGestureRecognizer {
     
     func didPinch (pinch: UIPinchGestureRecognizer) {
         pinchAction? (pinch)
+    }
+}
+
+
+
+// BlockLongPress
+
+class BlockLongPress: UILongPressGestureRecognizer {
+    
+    private var longPressAction: ((UILongPressGestureRecognizer)->())?
+    
+    init (action: ((UILongPressGestureRecognizer)->())?) {
+        super.init()
+        addTarget(self, action: "didLongPressed:")
+    }
+    
+    func didLongPressed (longPress: UILongPressGestureRecognizer) {
+        longPressAction? (longPress)
     }
 }
     

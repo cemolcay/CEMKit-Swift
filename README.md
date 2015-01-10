@@ -32,6 +32,7 @@ UIKit toolset for quick prototyping and rapid development
 * [BlockPan](#BlockPan)
 * [BlockSwipe](#BlockSwipe)
 * [BlockPinch](#BlockPinch)
+* [BlockLongPress](#BlockLongPress)
 	
 	
 ## Documentation
@@ -341,6 +342,18 @@ Pinch
 ``` swift
 	func addPinchGesture (action: ((UIPinchGestureRecognizer)->())?)
 ```
+
+Long Press
+
+``` swift
+	func addLongPressGesture (target: AnyObject,
+	        action: Selector)
+```
+
+``` swift
+	func addLongPressGesture (action: ((UILongPressGestureRecognizer)->())?)
+```
+
 
 ### UIViewController extension <a id="UIViewController"></a>
 
@@ -738,3 +751,12 @@ Convert [0, 1] to to [min, max]
 ``` swift
 	init (action: ((UIPinchGestureRecognizer)->())?)
 ```
+
+### BlockLongPress <a id="BlockLongPress"></a>
+
+##### Regular `UILongPressGestureRecognizer` with block based action
+
+``` swift
+	init (action: ((UILongPressGestureRecognizer)->())?)
+```
+
