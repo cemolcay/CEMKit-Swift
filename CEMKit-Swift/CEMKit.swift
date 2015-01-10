@@ -295,11 +295,18 @@ extension UIView {
     
     // MARK: Gesture Extensions
     
-    func addTapGesture (tapNumber: NSInteger,
+    func addTapGesture (tapNumber: Int,
         target: AnyObject, action: Selector) {
         let tap = UITapGestureRecognizer (target: target, action: action)
         tap.numberOfTapsRequired = tapNumber
-        self.addGestureRecognizer(tap)
+        addGestureRecognizer(tap)
+    }
+    
+    func addTapGesture (tapNumber: Int, action: ((UITapGestureRecognizer)->())?) {
+        let tap = BlockTap (tapCount: tapNumber,
+            fingerCount: 1,
+            action: action)
+        addGestureRecognizer(tap)
     }
     
     func addSwipeGesture (direction: UISwipeGestureRecognizerDirection,
@@ -309,13 +316,38 @@ extension UIView {
         let swipe = UISwipeGestureRecognizer (target: target, action: action)
         swipe.direction = direction
         swipe.numberOfTouchesRequired = numberOfTouches
-        self.addGestureRecognizer(swipe)
+        addGestureRecognizer(swipe)
+    }
+    
+    func addSwipeGesture (direction: UISwipeGestureRecognizerDirection,
+        numberOfTouches: Int,
+        action: ((UISwipeGestureRecognizer)->())?) {
+        let swipe = BlockSwipe (direction: direction,
+            fingerCount: numberOfTouches,
+            action: action)
+        addGestureRecognizer(swipe)
     }
     
     func addPanGesture (target: AnyObject,
         action: Selector) {
         let pan = UIPanGestureRecognizer (target: target, action: action)
-        self.addGestureRecognizer(pan)
+        addGestureRecognizer(pan)
+    }
+    
+    func addPanGesture (action: ((UIPanGestureRecognizer)->())?) {
+        let pan = BlockPan (action: action)
+        addGestureRecognizer(pan)
+    }
+    
+    func addPinchGesture (target: AnyObject,
+        action: Selector) {
+        let pinch = UIPinchGestureRecognizer (target: target, action: action)
+        addGestureRecognizer(pinch)
+    }
+
+    func addPinchGesture (action: ((UIPinchGestureRecognizer)->())?) {
+        let pinch = BlockPinch (action: action)
+        addGestureRecognizer(pinch)
     }
 }
 
@@ -777,6 +809,7 @@ func convertNormalizedValue (value: CGFloat,
 // MARK: - Block Classes
 
 
+
 // MARK: - BlockButton
 
 class BlockButton: UIButton {
@@ -841,5 +874,86 @@ class BlockWebView: UIWebView, UIWebViewDelegate {
             return true
         }
     }
-    
 }
+
+
+    
+// MARK: BlockTap
+
+class BlockTap: UITapGestureRecognizer {
+    
+    private var tapAction: ((UITapGestureRecognizer)->())?
+    
+    init (tapCount: Int, fingerCount: Int, action: ((UITapGestureRecognizer)->())?) {
+        super.init()
+        numberOfTapsRequired = tapCount
+        numberOfTouchesRequired = fingerCount
+        tapAction = action
+        addTarget(self, action: "didTap:")
+    }
+    
+    func didTap (tap: UITapGestureRecognizer) {
+        tapAction? (tap)
+    }
+}
+
+
+
+// MARK: BlockPan
+
+class BlockPan: UIPanGestureRecognizer {
+    
+    private var panAction: ((UIPanGestureRecognizer)->())?
+    
+    init (action: ((UIPanGestureRecognizer)->())?) {
+        super.init()
+        panAction = action
+        addTarget(self, action: "didPan:")
+    }
+    
+    func didPan (pan: UIPanGestureRecognizer) {
+        panAction? (pan)
+    }
+}
+
+
+
+// MARK: BlockSwipe
+
+class BlockSwipe: UISwipeGestureRecognizer {
+
+    private var swipeAction: ((UISwipeGestureRecognizer)->())?
+    
+    init (direction: UISwipeGestureRecognizerDirection, fingerCount: Int, action: ((UISwipeGestureRecognizer)->())?) {
+        super.init()
+        self.direction = direction
+        numberOfTouchesRequired = fingerCount
+        swipeAction = action
+        addTarget(self, action: "didSwipe:")
+    }
+    
+    func didSwipe (swipe: UISwipeGestureRecognizer) {
+        swipeAction? (swipe)
+    }
+}
+
+
+
+// MARK: BlockPinch
+
+class BlockPinch: UIPinchGestureRecognizer {
+    
+    private var pinchAction: ((UIPinchGestureRecognizer)->())?
+    
+    init (action: ((UIPinchGestureRecognizer)->())?) {
+        super.init()
+        pinchAction = action
+        addTarget(self, action: "didPinch:")
+    }
+    
+    func didPinch (pinch: UIPinchGestureRecognizer) {
+        pinchAction? (pinch)
+    }
+}
+    
+
