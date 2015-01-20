@@ -23,6 +23,8 @@ let UIViewAnimationDuration: NSTimeInterval = 1
 let UIViewAnimationSpringDamping: CGFloat = 0.5
 let UIViewAnimationSpringVelocity: CGFloat = 0.5
 
+private var UIViewBlockBadge: UInt8 = 0
+
 extension UIView {
     
     // MARK: Custom Initilizer
@@ -302,6 +304,27 @@ extension UIView {
         UIGraphicsEndImageContext()
         
         return img
+    }
+    
+    
+    
+    // MARK: Add Badge
+    
+    var badge: BlockBadge? {
+        get {
+            return objc_getAssociatedObject(self, &UIViewBlockBadge) as? BlockBadge
+        } set (value) {
+            objc_setAssociatedObject(self, &UIViewBlockBadge, value, UInt(OBJC_ASSOCIATION_RETAIN))
+        }
+    }
+    
+    func setBadge (text: String) {
+        if let b = badge {
+            b.text = text
+        } else {
+            badge = BlockBadge (color: UIColor.redColor(), font: UIFont.systemFontOfSize(15))
+            badge?.text = text
+        }
     }
     
     
@@ -615,20 +638,84 @@ extension UIColor {
         var randomGreen:CGFloat = CGFloat(drand48())
         var randomBlue:CGFloat = CGFloat(drand48())
         
-        return UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
+        return UIColor(red: randomRed,
+            green: randomGreen,
+            blue: randomBlue,
+            alpha: 1.0)
     }
     
     class func RGBColor (r: CGFloat,
         g: CGFloat,
         b: CGFloat) -> UIColor {
-            return UIColor (red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: 1)
+            return UIColor (red: r / 255.0,
+                green: g / 255.0,
+                blue: b / 255.0,
+                alpha: 1)
     }
     
     class func RGBAColor (r: CGFloat,
         g: CGFloat,
         b: CGFloat,
         a: CGFloat) -> UIColor {
-            return UIColor (red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a)
+            return UIColor (red: r / 255.0,
+                green: g / 255.0,
+                blue: b / 255.0,
+                alpha: a)
+    }
+    
+    class func BarTintRGBColor (r: CGFloat,
+        g: CGFloat,
+        b: CGFloat) -> UIColor {
+            return UIColor (red: (r / 255.0) - 0.12,
+                green: (g / 255.0) - 0.12,
+                blue: (b / 255.0) - 0.12,
+                alpha: 1)
+    }
+    
+    class func HexColor (hex: String) -> UIColor {
+        var red:   CGFloat = 0.0
+        var green: CGFloat = 0.0
+        var blue:  CGFloat = 0.0
+        var alpha: CGFloat = 1.0
+        
+        var rgba = hex
+        if !rgba.hasPrefix("#") {
+            rgba = "#" + rgba
+        }
+        
+        let index   = advance(rgba.startIndex, 1)
+        let hex     = rgba.substringFromIndex(index)
+        let scanner = NSScanner(string: hex)
+        var hexValue: CUnsignedLongLong = 0
+        
+        if scanner.scanHexLongLong(&hexValue) {
+            switch (countElements(hex)) {
+            case 3:
+                red   = CGFloat((hexValue & 0xF00) >> 8)       / 15.0
+                green = CGFloat((hexValue & 0x0F0) >> 4)       / 15.0
+                blue  = CGFloat(hexValue & 0x00F)              / 15.0
+            case 4:
+                red   = CGFloat((hexValue & 0xF000) >> 12)     / 15.0
+                green = CGFloat((hexValue & 0x0F00) >> 8)      / 15.0
+                blue  = CGFloat((hexValue & 0x00F0) >> 4)      / 15.0
+                alpha = CGFloat(hexValue & 0x000F)             / 15.0
+            case 6:
+                red   = CGFloat((hexValue & 0xFF0000) >> 16)   / 255.0
+                green = CGFloat((hexValue & 0x00FF00) >> 8)    / 255.0
+                blue  = CGFloat(hexValue & 0x0000FF)           / 255.0
+            case 8:
+                red   = CGFloat((hexValue & 0xFF000000) >> 24) / 255.0
+                green = CGFloat((hexValue & 0x00FF0000) >> 16) / 255.0
+                blue  = CGFloat((hexValue & 0x0000FF00) >> 8)  / 255.0
+                alpha = CGFloat(hexValue & 0x000000FF)         / 255.0
+            default:
+                print("Invalid RGB string, number of characters after '#' should be either 3, 4, 6 or 8")
+            }
+        } else {
+            println("Scan hex error")
+        }
+
+        return UIColor (red: red, green:green, blue:blue, alpha:alpha)
     }
 }
 
@@ -987,7 +1074,7 @@ class BlockPinch: UIPinchGestureRecognizer {
 
 
 
-// BlockLongPress
+// MARK: BlockLongPress
 
 class BlockLongPress: UILongPressGestureRecognizer {
     
@@ -1004,3 +1091,74 @@ class BlockLongPress: UILongPressGestureRecognizer {
 }
     
 
+
+// MARK: BlockBadge
+
+class BlockBadge: UILabel {
+
+    var attachedView: UIView!
+    
+    override var text: String? {
+        didSet {
+            sizeToFit()
+            h = font.pointSize+5
+            w += 10
+            
+            center = CGPoint (x: attachedView.right, y: attachedView.top)
+        }
+    }
+    
+    init (color: UIColor, font: UIFont) {
+        super.init(frame: CGRect(x: 0, y: 0, width: font.pointSize+5, height: font.pointSize+5))
+        
+        self.backgroundColor = color
+        self.font = font
+        self.textAlignment = .Center
+        setCornerRadius(h/2)
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+
+
+// MARK: BlockPicker
+
+class BlockPicker: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    var items: [String]?
+    var didPick: ((Int)->Void)?
+    
+    init (title: String, items: [String], didPick: (index: Int) -> Void) {
+        super.init()
+        self.items = items
+        self.didPick = didPick
+        
+        self.delegate = self
+        self.dataSource = self
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    // MARK: UIPickerViewDataSource
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return items!.count
+    }
+    
+    
+    // MARK: UIPickerViewDelegate
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        didPick? (row)
+    }
+
+}
