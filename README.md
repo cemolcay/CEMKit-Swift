@@ -14,14 +14,15 @@ UIKit toolset for quick prototyping and rapid development
 	* [Rendering](#UIView-Rendering)
 	* [Gestures](#UIView-Gestures)
 * [UIViewController](#UIViewController)
+* [UIImageView](#UIImageView)
 * [UILabel](#UILabel)
 	* [NSAttributedString](#UILabel-NSAttributedString)
 	* [Frame](#UILabel-Frame)
-* [String](#String)
 * [UIFont](#UIFont)
 * [UIColor](#UIColor)
 * [UIImage](#UIImage)
-* [CGPoint](#CGPoint)
+* [String](#String)
+* [CGPoint](#Globals)
 * [CGSize](#CGSize)
 * [CGPoint](#CGPoint)
 * [CGFloat](#CGFloat)
@@ -34,6 +35,11 @@ UIKit toolset for quick prototyping and rapid development
 * [BlockSwipe](#BlockSwipe)
 * [BlockPinch](#BlockPinch)
 * [BlockLongPress](#BlockLongPress)
+* [BlockPicker](#BlockPicker)
+* [BlockBadge](#BlockBadge)
+* [BlockPicker](#BlockPicker)
+* [DequeuableScrollView](#DequeuableScrollView)
+* 
 	
 	
 ## Documentation
@@ -413,6 +419,20 @@ Bottom
     }
 ```
 
+#### Quick access tab bar properties
+  
+``` swift
+    var tabBarHeight: CGFloat {
+        get {
+            if let tab = self.tabBarController {
+                return tab.tabBar.frame.size.height
+            }
+            
+            return 0
+        }
+    }
+```
+  
 #### Quick access navigation bar properties
 
 ``` swift
@@ -449,7 +469,82 @@ Get or set navigation bar color
     }
 ```
 
+### UIScrollView <a id="UIScrollView"></a>
 
+#### Content Size
+
+``` swift
+    var contentHeight: CGFloat {
+        get {
+            return contentSize.height
+        } set (value) {
+            contentSize = CGSize (width: contentSize.width, height: value)
+        }
+    }
+```
+  
+```swift  
+    var contentWidth: CGFloat {
+        get {
+            return contentSize.height
+        } set (value) {
+            contentSize = CGSize (width: value, height: contentSize.height)
+        }
+    }
+```
+    
+#### Content Offset
+   
+``` swift
+    var offsetX: CGFloat {
+        get {
+            return contentOffset.x
+        } set (value) {
+            contentOffset = CGPoint (x: value, y: contentOffset.y)
+        }
+    }
+```
+  
+``` swift
+    var offsetY: CGFloat {
+        get {
+            return contentOffset.y
+        } set (value) {
+            contentOffset = CGPoint (x: contentOffset.x, y: value)
+        }
+    }
+```
+  
+### UIImageView <a id="UIImageView"></a>  
+
+#### Init with image
+
+``` swift
+    convenience init (frame: CGRect,
+        imageName: String)
+``` 
+  
+``` swift
+    convenience init (frame: CGRect,
+        image: UIImage)
+```
+
+#### Init with aspected image
+
+``` swift
+    convenience init (x: CGFloat,
+        y: CGFloat,
+        width: CGFloat,
+        image: UIImage)
+```
+  
+``` swift
+	convenience init (x: CGFloat,
+	        y: CGFloat,
+	        height: CGFloat,
+	        image: UIImage)
+```
+  
 ### UILabel extension <a id="UILabel"></a>
 
 #### NSAttributedString <a id="UILabel-NSAttributedString"></a>
@@ -495,17 +590,7 @@ Updating
     func getEstimatedHeight () -> CGFloat
 	 func fitHeight ()	
 ```
-
-### String extension <a id="String"></a>
-
-##### Subscript for accessing characters at index of string
-
-``` swift 
-    subscript (i: Int) -> String {
-        return String(Array(self)[i])
-    }
-```
-
+  
 ### UIFont extension <a id="UIFont"></a>
 
 ##### FontType and FontName `enum`s for easily create `UIFont`s
@@ -578,7 +663,69 @@ Resize image based on its height (auto calculates width and keeps aspect ratio)
 ``` swift
     func aspectResizeWithHeight (height: CGFloat) -> UIImage
 ```
+  
+### String extension <a id="String"></a>
 
+##### Subscript for accessing characters at index of string
+
+``` swift 
+    subscript (i: Int) -> String {
+        return String(Array(self)[i])
+    }
+```
+
+### Globals <a id="Globals"></a>
+
+##### Access device related mesurements
+
+Orientation
+
+``` swift
+	var Orientation: UIInterfaceOrientation {
+	    get {
+	        return UIApplication.sharedApplication().statusBarOrientation
+	    }
+	}
+```
+  
+Screen Width
+
+``` swift
+	var ScreenWidth: CGFloat {
+	    get {
+	        if UIInterfaceOrientationIsPortrait(Orientation) {
+	            return UIScreen.mainScreen().bounds.size.width
+	        } else {
+	            return UIScreen.mainScreen().bounds.size.height
+	        }
+	    }
+	}
+```
+
+Screen Height
+
+``` swift
+	var ScreenHeight: CGFloat {
+	    get {
+	        if UIInterfaceOrientationIsPortrait(Orientation) {
+	            return UIScreen.mainScreen().bounds.size.height
+	        } else {
+	            return UIScreen.mainScreen().bounds.size.width
+	        }
+	    }
+	}
+```
+  
+Status bar height
+
+``` swift
+	var StatusBarHeight: CGFloat {
+	    get {
+	        return UIApplication.sharedApplication().statusBarFrame.height
+	    }
+	}
+```
+  
 ### CGPoint <a id="CGPoint"></a>
 
 ##### Custom operators for `CGPoint`s
@@ -606,40 +753,8 @@ Resize image based on its height (auto calculates width and keeps aspect ratio)
 	func + (left: CGSize, right: CGSize) -> CGSize
 	func - (left: CGSize, right: CGSize) -> CGSize
 ```
-
+  
 ### CGFloat <a id="CGFloat"></a>
-
-##### Access device related mesurements
-
-Screen Width
-
-``` swift
-	var ScreenWidth: CGFloat {
-	    get {
-	        return UIScreen.mainScreen().bounds.size.width
-	    }
-	}
-```
-
-Screen Height
-
-``` swift
-	var ScreenHeight: CGFloat {
-	    get {
-	        return UIScreen.mainScreen().bounds.size.height
-	    }
-	}
-```
-
-Status bar height
-
-``` swift
-	var StatusBarHeight: CGFloat {
-	    get {
-	        return UIApplication.sharedApplication().statusBarFrame.height
-	    }
-	}
-```
 
 ##### Convert degrees to radians
 
@@ -683,6 +798,11 @@ Convert [0, 1] to to [min, max]
 
 ##### Create bar button item with image, single line
 
+``` swift
+	func barButtonItem (imageName: String,
+	    size: CGFloat,
+	    action: (AnyObject)->())
+```
 
 ``` swift
 	func barButtonItem (imageName: String,
@@ -767,4 +887,12 @@ Convert [0, 1] to to [min, max]
 ``` swift
 	init (action: ((UILongPressGestureRecognizer)->())?)
 ```
+ 
+### DequeuableScrollViwew <a id="DequeuableScrollView"></a>
 
+##### Deques the added subviews.
+##### Adds or removes subviews from itself depends on its visible frame
+
+``` swift
+	override init (frame: CGRect)
+```

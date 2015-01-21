@@ -469,10 +469,83 @@ extension UIViewController {
         }
     }
     
+    
     var applicationFrame: CGRect {
         get {
             return CGRect (x: view.x, y: top, width: view.w, height: bottom - top)
         }
+    }
+}
+
+
+
+// MARK: - UIScrollView 
+
+extension UIScrollView {
+    
+    var contentHeight: CGFloat {
+        get {
+            return contentSize.height
+        } set (value) {
+            contentSize = CGSize (width: contentSize.width, height: value)
+        }
+    }
+    
+    var contentWidth: CGFloat {
+        get {
+            return contentSize.height
+        } set (value) {
+            contentSize = CGSize (width: value, height: contentSize.height)
+        }
+    }
+    
+    var offsetX: CGFloat {
+        get {
+            return contentOffset.x
+        } set (value) {
+            contentOffset = CGPoint (x: value, y: contentOffset.y)
+        }
+    }
+    
+    var offsetY: CGFloat {
+        get {
+            return contentOffset.y
+        } set (value) {
+            contentOffset = CGPoint (x: contentOffset.x, y: value)
+        }
+    }
+}
+
+
+
+// MARK: - UIImageView
+
+extension UIImageView {
+    
+    convenience init (frame: CGRect,
+        imageName: String) {
+        self.init (frame: frame, image: UIImage (named: imageName)!)
+    }
+    
+    convenience init (frame: CGRect,
+        image: UIImage) {
+        self.init (frame: frame)
+        self.image = image
+        self.contentMode = .ScaleAspectFit
+    }
+    
+    convenience init (x: CGFloat,
+        y: CGFloat,
+        width: CGFloat,
+        image: UIImage) {
+        self.init (frame: CGRect (x: x, y: y, width: width, height: image.aspectHeightForWidth(width)), image: image)
+    }
+    
+    convenience init (x: CGFloat,
+        y: CGFloat,
+        height: CGFloat,
+        image: UIImage) {
+        self.init (frame: CGRect (x: x, y: y, width: image.aspectWidthForHeight(height), height: height), image: image)
     }
 }
 
@@ -563,16 +636,6 @@ extension UILabel {
 
 
 
-// MARK: - String
-
-extension String {
-    subscript (i: Int) -> String {
-        return String(Array(self)[i])
-    }
-}
-
-
-
 // MARK: - UIFont
 
 extension UIFont {
@@ -580,6 +643,7 @@ extension UIFont {
     enum FontType: String {
         case Regular = "Regular"
         case Bold = "Bold"
+        case DemiBold = "DemiBold"
         case Light = "Light"
         case UltraLight = "UltraLight"
         case Italic = "Italic"
@@ -759,6 +823,16 @@ extension UIImage {
 
 
 
+// MARK: - String
+
+extension String {
+    subscript (i: Int) -> String {
+        return String(Array(self)[i])
+    }
+}
+
+
+
 // MARK - Globals
 
 
@@ -793,51 +867,6 @@ var StatusBarHeight: CGFloat {
     get {
         return UIApplication.sharedApplication().statusBarFrame.height
     }
-}
-
-
-
-// MARK: - UIAlertController
-
-func alert (title: String,
-    message: String,
-    cancelAction: ((UIAlertAction!)->Void)? = nil,
-    okAction: ((UIAlertAction!)->Void)? = nil) -> UIAlertController {
-        let a = UIAlertController (title: title, message: message, preferredStyle: .Alert)
-        
-        if let ok = okAction {
-            a.addAction(UIAlertAction(title: "OK", style: .Default, handler: ok))
-            a.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelAction))
-        } else {
-            a.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: cancelAction))
-        }
-        
-        return a
-}
-
-
-
-// MARK: - UIBarButtonItem
-
-func barButtonItem (imageName: String,
-    action: (AnyObject)->()) -> UIBarButtonItem {
-        let button = BlockButton (frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        button.setImage(UIImage(named: imageName), forState: .Normal)
-        button.actionBlock = action
-        
-        return UIBarButtonItem (customView: button)
-}
-
-func barButtonItem (title: String,
-    color: UIColor,
-    action: (AnyObject)->()) -> UIBarButtonItem {
-        let button = BlockButton (frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        button.setTitle(title, forState: .Normal)
-        button.setTitleColor(color, forState: .Normal)
-        button.actionBlock = action
-        button.sizeToFit()
-        
-        return UIBarButtonItem (customView: button)
 }
 
 
@@ -906,16 +935,67 @@ func degreesToRadians (angle: CGFloat) -> CGFloat {
 func normalizeValue (value: CGFloat,
     min: CGFloat,
     max: CGFloat) -> CGFloat {
-    return (max - min) / value
+        return (max - min) / value
 }
 
 
 func convertNormalizedValue (value: CGFloat,
     min: CGFloat,
     max: CGFloat) -> CGFloat {
-    return ((max - min) * value) + min
+        return ((max - min) * value) + min
 }
 
+
+
+
+// MARK: - UIAlertController
+
+func alert (title: String,
+    message: String,
+    cancelAction: ((UIAlertAction!)->Void)? = nil,
+    okAction: ((UIAlertAction!)->Void)? = nil) -> UIAlertController {
+        let a = UIAlertController (title: title, message: message, preferredStyle: .Alert)
+        
+        if let ok = okAction {
+            a.addAction(UIAlertAction(title: "OK", style: .Default, handler: ok))
+            a.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelAction))
+        } else {
+            a.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: cancelAction))
+        }
+        
+        return a
+}
+
+
+
+// MARK: - UIBarButtonItem
+
+func barButtonItem (imageName: String,
+    size: CGFloat,
+    action: (AnyObject)->()) -> UIBarButtonItem {
+    let button = BlockButton (frame: CGRect(x: 0, y: 0, width: size, height: size))
+    button.setImage(UIImage(named: imageName), forState: .Normal)
+    button.actionBlock = action
+    
+    return UIBarButtonItem (customView: button)
+}
+
+func barButtonItem (imageName: String,
+    action: (AnyObject)->()) -> UIBarButtonItem {
+        return barButtonItem(imageName, 20, action)
+}
+
+func barButtonItem (title: String,
+    color: UIColor,
+    action: (AnyObject)->()) -> UIBarButtonItem {
+        let button = BlockButton (frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        button.setTitle(title, forState: .Normal)
+        button.setTitleColor(color, forState: .Normal)
+        button.actionBlock = action
+        button.sizeToFit()
+        
+        return UIBarButtonItem (customView: button)
+}
 
 
 // MARK: - Block Classes
@@ -1123,6 +1203,7 @@ class BlockBadge: UILabel {
 }
 
 
+
 // MARK: BlockPicker
 
 class BlockPicker: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate {
@@ -1162,3 +1243,64 @@ class BlockPicker: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate {
     }
 
 }
+
+
+
+// MARK: DequeuableScrollView
+
+class DequeuableScrollView: UIScrollView {
+    
+    private var reusableViews: [UIView] = []
+    private var visibleRect: CGRect!
+    
+    
+    override init (frame: CGRect) {
+        super.init(frame: frame)
+    }
+
+    required init (coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    override var contentOffset: CGPoint{
+        didSet {
+            visibleRect = CGRect(origin: contentOffset, size: frame.size)
+            updateReusableViews()
+        }
+    }
+    
+    override func addSubview(view: UIView) {
+        super.addSubview(view)
+        reusableViews.append(view)
+        updateReusableViews()
+    }
+    
+    func updateReusableViews () {
+        for v in reusableViews {
+            if CGRectIntersectsRect(v.frame, visibleRect) {
+                if let s = v.superview {
+                    if s == self {
+                        continue
+                    } else {
+                        addSubview(v)
+                    }
+                } else {
+                    addSubview(v)
+                }
+            } else {
+                if let s = v.superview {
+                    if s == self {
+                        v.removeFromSuperview()
+                    } else {
+                        continue
+                    }
+                } else {
+                    continue
+                }
+            }
+        }
+    }
+}
+
+
