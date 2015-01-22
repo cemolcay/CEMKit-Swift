@@ -15,30 +15,41 @@ UIKit toolset for quick prototyping and rapid development
 	* [Rendering](#UIView-Rendering)
 	* [Gestures](#UIView-Gestures)
 * [UIViewController](#UIViewController)
-* [UIImageView](#UIImageView)
+* [UIScrollView](#UIScrollView)
+
 * [UILabel](#UILabel)
-	* [NSAttributedString](#UILabel-NSAttributedString)
-	* [Frame](#UILabel-Frame)
+	* [AttributedString](#UILabel-NSAttributedString)
+	* [Self sizing](#UILabel-Frame)
+	* [Initilizers](#UILabel-Init)
+* [NSAttributedString](#NSAttributedString)
+* [String](#String)
 * [UIFont](#UIFont)
+
+* [UIImageView](#UIImageView)
 * [UIColor](#UIColor)
 * [UIImage](#UIImage)
-* [String](#String)
+
 * [CGPoint](#Globals)
 * [CGSize](#CGSize)
 * [CGPoint](#CGPoint)
 * [CGFloat](#CGFloat)
+
 * [UIAlertController](#UIAlertController)
 * [UIBarButtonItem](#UIBarButtonItem)
+
 * [BlockButton](#BlockButton)
 * [BlockWebView](#BlockWebView)
+
 * [BlockTap](#BlockTap)
 * [BlockPan](#BlockPan)
 * [BlockSwipe](#BlockSwipe)
 * [BlockPinch](#BlockPinch)
 * [BlockLongPress](#BlockLongPress)
 * [BlockPicker](#BlockPicker)
+
 * [BlockBadge](#BlockBadge)
 * [BlockPicker](#BlockPicker)
+
 * [DequeuableScrollView](#DequeuableScrollView)
 
 
@@ -70,7 +81,7 @@ Copy & Paste CEMKit.swift into your project
 
 #### Frame <a id="UIView-Frame"></a>
 
-##### Quick access and manupliate to CGRect values of UIView's frame  
+##### Get/Set frame values  
 
 ``` swift
     var x: CGFloat {
@@ -132,7 +143,7 @@ Copy & Paste CEMKit.swift into your project
     }
 ```
 
-##### Also for autolayout
+##### Logical frame properties
 
 ``` swift
     var left: CGFloat {
@@ -174,7 +185,7 @@ Copy & Paste CEMKit.swift into your project
     }
 ```
 
-##### Getting frame values with offset
+##### Get logical frame values with offset
 
 ``` swift
 	func leftWithOffset (offset: CGFloat) -> CGFloat
@@ -260,9 +271,7 @@ Arc Drawing
 
 #### Transform <a id="UIView-Transform"></a>
 
-##### Manuplating view's rotation and scale
-
-Rotation
+##### Set rotation
 
 ``` swift
 	func setRotationX (x: CGFloat)
@@ -274,7 +283,7 @@ Rotation
    		z: CGFloat)
 ```
 
-Scale
+##### Set scale
 
 ``` swift
     func setScale (x: CGFloat,
@@ -381,7 +390,7 @@ Long Press
 
 ### UIViewController extension <a id="UIViewController"></a>
 
-#### Quick access top layout and bottom layout
+#### Get top layout and bottom layout
 
 Top
 
@@ -478,10 +487,10 @@ Get or set navigation bar color
         }
     }
 ```
+  
+### UIScrollView extension <a id="UIScrollView"></a>
 
-### UIScrollView <a id="UIScrollView"></a>
-
-#### Content Size
+### Get/Set ContentSize Properties
 
 ``` swift
     var contentHeight: CGFloat {
@@ -492,8 +501,8 @@ Get or set navigation bar color
         }
     }
 ```
-  
-```swift  
+
+``` swift
     var contentWidth: CGFloat {
         get {
             return contentSize.height
@@ -501,10 +510,11 @@ Get or set navigation bar color
             contentSize = CGSize (width: value, height: contentSize.height)
         }
     }
+
 ```
-    
-#### Content Offset
-   
+
+### Get/Set ContentOffset Properties
+
 ``` swift
     var offsetX: CGFloat {
         get {
@@ -514,7 +524,7 @@ Get or set navigation bar color
         }
     }
 ```
-  
+
 ``` swift
     var offsetY: CGFloat {
         get {
@@ -524,7 +534,240 @@ Get or set navigation bar color
         }
     }
 ```
+
+
+### UILabel extension <a id="UILabel"></a>
+
+#### NSAttributedString <a id="UILabel-NSAttributedString"></a>
+
+##### `AttributedStrings` property for accessing, adding or updating attributedText of label
+
+
+``` swift
+	private var UILabelAttributedStringArray: UInt8 = 0
+    var attributedStrings: [NSAttributedString]? {
+        get {
+            return objc_getAssociatedObject(self, &UILabelAttributedStringArray) as? [NSAttributedString]
+        } set (value) {
+            objc_setAssociatedObject(self, &UILabelAttributedStringArray, value, UInt(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        }
+    }
+
+```
+
+Adding
+
+``` swift
+    func addAttributedString (text: String,
+        color: UIColor,
+        font: UIFont)
+```
+
+``` swift
+    func addAttributedString (attributedString: NSAttributedString)
+```
+
+Updating
+
+``` swift
+    func updateAttributedStringAtIndex (index: Int,
+        attributedString: NSAttributedString)
+    func updateAttributedStringAtIndex (index: Int,
+        newText: String)
+```
+
+#### Self sizing <a id="UILabel-Frame"></a>
+
+##### Get estimated frame values for current state
+
+``` swift
+	 func getEstimatedRect (width: CGFloat = CGFloat.max, height: CGFloat = CGFloat.max) -> CGRect
+	 func getEstimatedHeight () -> CGFloat
+	 func getEstimatedWidth () -> CGFloat
+```
   
+##### Fix frame for current state
+
+``` swift
+	func fitHeight ()
+	func fitWidth ()
+	func fitSize ()
+```
+  
+#### Initilizers <a id="UILabel-Init"></a>
+
+##### Init with Text, TextColor, TextAlignment & Font
+
+``` swift
+	convenience init (
+	        x: CGFloat,
+	        y: CGFloat,
+	        width: CGFloat,
+	        height: CGFloat,
+	        text: String,
+	        textColor: UIColor,
+	        textAlignment: NSTextAlignment,
+	        font: UIFont)
+```
+
+Auto calculates height
+
+``` swift
+	convenience init (
+	        x: CGFloat,
+	        y: CGFloat,
+	        width: CGFloat,
+	        text: String,
+	        textColor: UIColor,
+	        textAlignment: NSTextAlignment,
+	        font: UIFont)
+```
+
+Auto calculates frame
+
+``` swift
+	convenience init (
+	        x: CGFloat,
+	        y: CGFloat,
+	        text: String,
+	        textColor: UIColor,
+	        textAlignment: NSTextAlignment,
+	        font: UIFont)
+```
+
+##### Init with AttributedText
+
+``` swift
+	convenience init (
+	        x: CGFloat,
+	        y: CGFloat,
+	        width: CGFloat,
+	        height: CGFloat,
+	        attributedText: NSAttributedString,
+	        textAlignment: NSTextAlignment) 
+```
+
+Auto calculates height
+
+``` swift
+	convenience init (
+	        x: CGFloat,
+	        y: CGFloat,
+	        width: CGFloat,
+	        attributedText: NSAttributedString,
+	        textAlignment: NSTextAlignment)
+```
+
+Auto calculates frame
+
+``` swift
+	convenience init (
+	        x: CGFloat,
+	        y: CGFloat,
+	        attributedText: NSAttributedString,
+	        textAlignment: NSTextAlignment)
+```
+
+
+### NSAttributedString <a id="NSAttributedString"></a>
+
+#### `NSAttributedStringStyle` enum
+
+Easy styling 
+
+``` swift
+    enum NSAttributedStringStyle {
+        case plain
+        case underline (NSUnderlineStyle, UIColor)
+        case strike (UIColor, CGFloat)
+     }
+```
+
+``` swift
+	func addAtt (attribute: [NSString: NSObject]) -> NSAttributedString
+```
+
+``` swift
+	func addStyle (style: NSAttributedStringStyle) -> NSAttributedString
+```
+
+#### Easy Init 
+
+``` swift
+    convenience init (text: String,
+        color: UIColor,
+        font: UIFont,
+        style: NSAttributedStringStyle = .plain)
+```
+
+``` swift
+	convenience init (image: UIImage)
+```
+  
+### Create multiple NSAttributeString with closures
+
+``` swift
+	class func withAttributedStrings (mutableString: (NSMutableAttributedString)->()) -> NSAttributedString
+```
+
+Example:
+
+``` swift
+   let att = NSAttributedString.withAttributedStrings({ att in
+       att.appendAttributedString (NSAttributedString(
+           text: "asd",
+           color: UIColor.blackColor(),
+           font: UIFont.systemFontOfSize(22)))
+       att.appendAttributedString (NSAttributedString(
+           text: "\nasd",
+           color: UIColor.blueColor(),
+           font: UIFont.systemFontOfSize(15)))
+       att.appendAttributedString (NSAttributedString(
+           text: "\nasdjnfje",
+           color: UIColor.redColor(),
+           font: UIFont.systemFontOfSize(25)))
+       att.appendAttributedString (NSAttributedString(
+           text: "\nasd",
+           color: UIColor.blackColor(),
+           font: UIFont.Font(.AvenirNext,
+               type: UIFont.FontType.DemiBold,
+               size: 15),
+           style: .underline(.StyleSingle, UIColor.blueColor())))
+   })
+```
+  
+### String extension <a id="String"></a>
+
+##### Subscript for accessing characters at index of string
+
+``` swift 
+    subscript (i: Int) -> String {
+        return String(Array(self)[i])
+    }
+```
+  
+### UIFont extension <a id="UIFont"></a>
+
+##### FontType and FontName `enum`s for easily create `UIFont`s
+
+``` swift
+	enum FontType: String
+	enum FontName: String
+	class func Font (name: FontName, type: FontType, size: CGFloat) -> UIFont
+```
+
+Even customise it for specific font 
+
+``` swift
+    class func HelveticaNeue (type: FontType, size: CGFloat) -> UIFont
+```
+
+Print all family of font on single line
+
+``` swift
+    class func PrintFontFamily (font: FontName)
+```
+
 ### UIImageView <a id="UIImageView"></a>  
 
 #### Init with image
@@ -553,74 +796,6 @@ Get or set navigation bar color
 	        y: CGFloat,
 	        height: CGFloat,
 	        image: UIImage)
-```
-  
-### UILabel extension <a id="UILabel"></a>
-
-#### NSAttributedString <a id="UILabel-NSAttributedString"></a>
-
-##### `AttributedStrings` property for accessing, adding or updating attributedText of label
-
-
-``` swift
-	private var UILabelAttributedStringArray: UInt8 = 0
-    var attributedStrings: [NSAttributedString]? {
-        get {
-            return objc_getAssociatedObject(self, &UILabelAttributedStringArray) as? [NSAttributedString]
-        } set (value) {
-            objc_setAssociatedObject(self, &UILabelAttributedStringArray, value, UInt(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
-        }
-    }
-
-```
-
-Adding
-
-``` swift
-    func addAttributedString (text: String,
-        color: UIColor,
-        font: UIFont)
-    func addAttributedString (attributedString: NSAttributedString)
-```
-
-Updating
-
-``` swift
-    func updateAttributedStringAtIndex (index: Int,
-        attributedString: NSAttributedString)
-    func updateAttributedStringAtIndex (index: Int,
-        newText: String)
-```
-
-#### Frame <a id="UILabel-Frame"></a>
-
-##### Automatically sets its height by the contents
-
-``` swift
-    func getEstimatedHeight () -> CGFloat
-	 func fitHeight ()	
-```
-  
-### UIFont extension <a id="UIFont"></a>
-
-##### FontType and FontName `enum`s for easily create `UIFont`s
-
-``` swift
-	enum FontType: String
-	enum FontName: String
-	class func Font (name: FontName, type: FontType, size: CGFloat) -> UIFont
-```
-
-Even customise it for specific font 
-
-``` swift
-    class func HelveticaNeue (type: FontType, size: CGFloat) -> UIFont
-```
-
-Print all family of font on single line
-
-``` swift
-    class func PrintFontFamily (font: FontName)
 ```
 
 ### UIColor extension <a id="UIColor"></a>
@@ -672,16 +847,6 @@ Resize image based on its height (auto calculates width and keeps aspect ratio)
 
 ``` swift
     func aspectResizeWithHeight (height: CGFloat) -> UIImage
-```
-  
-### String extension <a id="String"></a>
-
-##### Subscript for accessing characters at index of string
-
-``` swift 
-    subscript (i: Int) -> String {
-        return String(Array(self)[i])
-    }
 ```
 
 ### Globals <a id="Globals"></a>
