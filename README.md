@@ -5,6 +5,7 @@ UIKit toolset for quick prototyping and rapid development
 
 ## Table of Contents
 
+* [Installation](#Installation)
 * [UIView](#UIView)
 	* [Init](#UIView-Init)
 	* [Frame](#UIView-Frame)
@@ -39,9 +40,18 @@ UIKit toolset for quick prototyping and rapid development
 * [BlockBadge](#BlockBadge)
 * [BlockPicker](#BlockPicker)
 * [DequeuableScrollView](#DequeuableScrollView)
-* 
-	
-	
+
+
+## Installation
+
+#### Manual
+Copy & Paste CEMKit.swift into your project
+
+#### Cocoapods
+
+	pod "CEMKit-Swift", "~> 0.1.3"
+
+
 ## Documentation
 
 ### UIView extension <a id="UIView"></a>
