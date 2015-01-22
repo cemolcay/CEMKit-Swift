@@ -11,6 +11,16 @@ import UIKit
 
 
 
+// MARK: - Dictionary
+
+func += <KeyType, ValueType> (inout left:
+    Dictionary<KeyType, ValueType>,
+    right: Dictionary<KeyType, ValueType>) {
+    for (k, v) in right {
+        left.updateValue(v, forKey: k)
+    }
+}
+
 // MARK: - AppDelegate
 
 let APPDELEGATE: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -543,45 +553,13 @@ extension UIScrollView {
 
 
 
-// MARK: - UIImageView
-
-extension UIImageView {
-    
-    convenience init (frame: CGRect,
-        imageName: String) {
-        self.init (frame: frame, image: UIImage (named: imageName)!)
-    }
-    
-    convenience init (frame: CGRect,
-        image: UIImage) {
-        self.init (frame: frame)
-        self.image = image
-        self.contentMode = .ScaleAspectFit
-    }
-    
-    convenience init (x: CGFloat,
-        y: CGFloat,
-        width: CGFloat,
-        image: UIImage) {
-        self.init (frame: CGRect (x: x, y: y, width: width, height: image.aspectHeightForWidth(width)), image: image)
-    }
-    
-    convenience init (x: CGFloat,
-        y: CGFloat,
-        height: CGFloat,
-        image: UIImage) {
-        self.init (frame: CGRect (x: x, y: y, width: image.aspectWidthForHeight(height), height: height), image: image)
-    }
-}
-
-
-
 // MARK: - UILabel
 
 private var UILabelAttributedStringArray: UInt8 = 0
+
 extension UILabel {
     
-    var attributedStrings: [NSAttributedString]? {
+     var attributedStrings: [NSAttributedString]? {
         get {
             return objc_getAssociatedObject(self, &UILabelAttributedStringArray) as? [NSAttributedString]
         } set (value) {
@@ -589,12 +567,11 @@ extension UILabel {
         }
     }
     
+    
     func addAttributedString (text: String,
         color: UIColor,
         font: UIFont) {
-        var att = NSAttributedString (string: text,
-            attributes: [NSFontAttributeName: font,
-                NSForegroundColorAttributeName: color])
+        var att = NSAttributedString (text: text, color: color, font: font)
         self.addAttributedString(att)
     }
     
@@ -612,6 +589,7 @@ extension UILabel {
         attributedStrings?.append(attributedString)
         self.attributedText = NSAttributedString (attributedString: att!)
     }
+    
     
     
     func updateAttributedStringAtIndex (index: Int,
@@ -648,14 +626,214 @@ extension UILabel {
     }
     
     
-    func getEstimatedHeight () -> CGFloat {
-        let att = NSAttributedString (string: self.text!, attributes: NSDictionary (object: font, forKey: NSFontAttributeName))
-        let rect = att.boundingRectWithSize(CGSize (width: w, height: CGFloat.max), options: NSStringDrawingOptions.UsesLineFragmentOrigin, context: nil)
-        return rect.height
+    
+    func getEstimatedRect (width: CGFloat = CGFloat.max, height: CGFloat = CGFloat.max) -> CGRect {
+        let rect = attributedText.boundingRectWithSize(
+            CGSize (width: width, height: height),
+            options: NSStringDrawingOptions.UsesLineFragmentOrigin,
+            context: nil)
+        return rect
     }
+    
+    func getEstimatedHeight () -> CGFloat {
+        return getEstimatedRect(width: w).height
+    }
+    
+    func getEstimatedWidth () -> CGFloat {
+        return getEstimatedRect(height: h).width
+    }
+    
+    
     
     func fitHeight () {
         self.h = getEstimatedHeight()
+    }
+    
+    func fitWidth () {
+        self.w = getEstimatedWidth()
+    }
+    
+    func fitSize () {
+        self.fitWidth()
+        self.fitHeight()
+    }
+    
+
+    
+    convenience init (
+        x: CGFloat,
+        y: CGFloat,
+        width: CGFloat,
+        height: CGFloat,
+        text: String,
+        textColor: UIColor,
+        textAlignment: NSTextAlignment,
+        font: UIFont) {
+            self.init(frame: CGRect (x: x, y: y, width: width, height: height))
+            self.text = text
+            self.textColor = textColor
+            self.textAlignment = textAlignment
+            self.font = font
+            
+            self.numberOfLines = 0
+    }
+    
+    convenience init (
+        x: CGFloat,
+        y: CGFloat,
+        width: CGFloat,
+        text: String,
+        textColor: UIColor,
+        textAlignment: NSTextAlignment,
+        font: UIFont) {
+        self.init(frame: CGRect (x: x, y: y, width: width, height: 10.0))
+        self.text = text
+        self.textColor = textColor
+        self.textAlignment = textAlignment
+        self.font = font
+        
+        self.numberOfLines = 0
+        self.fitHeight()
+    }
+    
+    convenience init (
+        x: CGFloat,
+        y: CGFloat,
+        text: String,
+        textColor: UIColor,
+        textAlignment: NSTextAlignment,
+        font: UIFont) {
+        self.init(frame: CGRect (x: x, y: y, width: 10.0, height: 10.0))
+        self.text = text
+        self.textColor = textColor
+        self.textAlignment = textAlignment
+        self.font = font
+        
+        self.numberOfLines = 0
+        self.fitSize()
+    }
+    
+    
+    
+    convenience init (
+        x: CGFloat,
+        y: CGFloat,
+        width: CGFloat,
+        height: CGFloat,
+        attributedText: NSAttributedString,
+        textAlignment: NSTextAlignment) {
+            self.init(frame: CGRect (x: x, y: y, width: width, height: height))
+            self.attributedText = attributedText
+            self.textAlignment = textAlignment
+            
+            self.numberOfLines = 0
+    }
+    
+    convenience init (
+        x: CGFloat,
+        y: CGFloat,
+        width: CGFloat,
+        attributedText: NSAttributedString,
+        textAlignment: NSTextAlignment) {
+        self.init(frame: CGRect (x: x, y: y, width: width, height: 10.0))
+        self.attributedText = attributedText
+        self.textAlignment = textAlignment
+        
+        self.numberOfLines = 0
+        self.fitHeight()
+    }
+ 
+    convenience init (
+        x: CGFloat,
+        y: CGFloat,
+        attributedText: NSAttributedString,
+        textAlignment: NSTextAlignment) {
+        self.init(frame: CGRect (x: x, y: y, width: 10.0, height: 10.0))
+        self.attributedText = attributedText
+        self.textAlignment = textAlignment
+        
+        self.numberOfLines = 0
+        self.fitSize()
+    }
+    
+}
+
+
+
+// MARK: NSAttributedString 
+
+extension NSAttributedString {
+    
+    enum NSAttributedStringStyle {
+        case plain
+        case underline (NSUnderlineStyle, UIColor)
+        case strike (UIColor, CGFloat)
+        
+        func attribute () -> [NSString: NSObject] {
+            switch self {
+            
+            case .plain:
+                return [:]
+                
+            case .underline(let styleName, let color):
+                return [NSUnderlineStyleAttributeName: styleName.rawValue, NSUnderlineColorAttributeName: color]
+                
+            case .strike(let color, let width):
+                return [NSStrikethroughColorAttributeName: color, NSStrikethroughStyleAttributeName: width]
+            }
+        }
+    }
+    
+    func addAtt (attribute: [NSString: NSObject]) -> NSAttributedString {
+        let mutable = NSMutableAttributedString (attributedString: self)
+        let count = countElements(string)
+        
+        for (key, value) in attribute {
+            mutable.addAttribute(key, value: value, range: NSMakeRange(0, count))
+        }
+        
+        return mutable
+    }
+    
+    func addStyle (style: NSAttributedStringStyle) -> NSAttributedString {
+        return addAtt(style.attribute())
+    }
+    
+    
+    
+    convenience init (text: String,
+        color: UIColor,
+        font: UIFont,
+        style: NSAttributedStringStyle = .plain) {
+            
+        var atts = [NSFontAttributeName: font, NSForegroundColorAttributeName: color]
+        atts += style.attribute()
+            
+        self.init (string: text, attributes: atts)
+    }
+    
+    convenience init (image: UIImage) {
+        let att = NSTextAttachment ()
+        att.image = image
+        self.init (attachment: att)
+    }
+    
+    
+    
+    class func withAttributedStrings (mutableString: (NSMutableAttributedString)->()) -> NSAttributedString {
+        var mutable = NSMutableAttributedString ()
+        mutableString (mutable)
+        return mutable
+    }
+}
+
+
+
+// MARK: - String
+
+extension String {
+    subscript (i: Int) -> String {
+        return String(Array(self)[i])
     }
 }
 
@@ -713,6 +891,77 @@ extension UIFont {
     
     class func HelveticaNeue (type: FontType, size: CGFloat) -> UIFont {
         return Font(.HelveticaNeue, type: type, size: size)
+    }
+}
+
+
+
+// MARK: - UIImageView
+
+extension UIImageView {
+    
+    convenience init (frame: CGRect,
+        imageName: String) {
+            self.init (frame: frame, image: UIImage (named: imageName)!)
+    }
+    
+    convenience init (frame: CGRect,
+        image: UIImage) {
+            self.init (frame: frame)
+            self.image = image
+            self.contentMode = .ScaleAspectFit
+    }
+    
+    convenience init (x: CGFloat,
+        y: CGFloat,
+        width: CGFloat,
+        image: UIImage) {
+            self.init (frame: CGRect (x: x, y: y, width: width, height: image.aspectHeightForWidth(width)), image: image)
+    }
+    
+    convenience init (x: CGFloat,
+        y: CGFloat,
+        height: CGFloat,
+        image: UIImage) {
+            self.init (frame: CGRect (x: x, y: y, width: image.aspectWidthForHeight(height), height: height), image: image)
+    }
+}
+
+
+
+// MARK: - UIImage
+
+extension UIImage {
+    
+    func aspectResizeWithWidth (width: CGFloat) -> UIImage {
+        let aspectSize = CGSize (width: width, height: aspectHeightForWidth(width))
+        
+        UIGraphicsBeginImageContext(aspectSize)
+        self.drawInRect(CGRect(origin: CGPointZero, size: aspectSize))
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return img
+    }
+    
+    func aspectResizeWithHeight (height: CGFloat) -> UIImage {
+        let aspectSize = CGSize (width: aspectWidthForHeight(height), height: height)
+        
+        UIGraphicsBeginImageContext(aspectSize)
+        self.drawInRect(CGRect(origin: CGPointZero, size: aspectSize))
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return img
+    }
+    
+    
+    func aspectHeightForWidth (width: CGFloat) -> CGFloat {
+        return (width * self.size.height) / self.size.width
+    }
+    
+    func aspectWidthForHeight (height: CGFloat) -> CGFloat {
+        return (height * self.size.width) / self.size.height
     }
 }
 
@@ -805,54 +1054,6 @@ extension UIColor {
         }
 
         return UIColor (red: red, green:green, blue:blue, alpha:alpha)
-    }
-}
-
-
-
-// MARK: - UIImage
-
-extension UIImage {
-    
-    func aspectResizeWithWidth (width: CGFloat) -> UIImage {
-        let aspectSize = CGSize (width: width, height: aspectHeightForWidth(width))
-        
-        UIGraphicsBeginImageContext(aspectSize)
-        self.drawInRect(CGRect(origin: CGPointZero, size: aspectSize))
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return img
-    }
-    
-    func aspectResizeWithHeight (height: CGFloat) -> UIImage {
-        let aspectSize = CGSize (width: aspectWidthForHeight(height), height: height)
-        
-        UIGraphicsBeginImageContext(aspectSize)
-        self.drawInRect(CGRect(origin: CGPointZero, size: aspectSize))
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return img
-    }
-    
-    
-    func aspectHeightForWidth (width: CGFloat) -> CGFloat {
-        return (width * self.size.height) / self.size.width
-    }
-    
-    func aspectWidthForHeight (height: CGFloat) -> CGFloat {
-        return (height * self.size.width) / self.size.height
-    }
-}
-
-
-
-// MARK: - String
-
-extension String {
-    subscript (i: Int) -> String {
-        return String(Array(self)[i])
     }
 }
 

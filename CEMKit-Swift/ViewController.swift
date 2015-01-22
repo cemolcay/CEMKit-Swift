@@ -12,37 +12,39 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let scroll = DequeuableScrollView (frame: view.frame)
-        view.addSubview(scroll)
         
-        var contenth: CGFloat = 10
-        for _ in 0...1000 {
-            let i = item()
-            i.y = contenth
-            contenth += i.h + 10
-            scroll.addSubview(i)
-        }
-        scroll.contentHeight = contenth
+        let att = NSAttributedString.withAttributedStrings({ att in
+            att.appendAttributedString (NSAttributedString(
+                text: "asd",
+                color: UIColor.blackColor(),
+                font: UIFont.systemFontOfSize(22)))
+            att.appendAttributedString (NSAttributedString(
+                text: "\nasd",
+                color: UIColor.blueColor(),
+                font: UIFont.systemFontOfSize(15)))
+            att.appendAttributedString (NSAttributedString(
+                text: "\nasdjnfje",
+                color: UIColor.redColor(),
+                font: UIFont.systemFontOfSize(25)))
+            att.appendAttributedString (NSAttributedString(
+                text: "\nasd",
+                color: UIColor.blackColor(),
+                font: UIFont.Font(.AvenirNext,
+                    type: UIFont.FontType.DemiBold,
+                    size: 15),
+                style: .underline(.StyleSingle, UIColor.blueColor())))
+        })
+        
+        
+        let l = UILabel (
+            x: 0,
+            y: 0,
+            attributedText: att,
+            textAlignment: .Left)
+        l.backgroundColor = UIColor.yellowColor()
+        view.addSubview(l)
     }
     
-    func item () -> UIView {
-        let v = UIView (x: 10, y: 0, w: ScreenWidth-20, h: 100)
-        v.backgroundColor = UIColor.randomColor()
-        
-        let c = UIView (x: 0, y: 0, w: 10, h: 10)
-        c.backgroundColor = UIColor.randomColor()
-        v.addSubview(c)
-        
-        let d = UIView (x: 0, y: 10, w: 10, h: 10)
-        d.backgroundColor = UIColor.randomColor()
-        v.addSubview(d)
-        
-        let e = UIView (x: 0, y: 20, w: 10, h: 10)
-        e.backgroundColor = UIColor.randomColor()
-        v.addSubview(e)
-        
-        return v
-    }
+    
 }
 
