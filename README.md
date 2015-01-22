@@ -16,7 +16,6 @@ UIKit toolset for quick prototyping and rapid development
 	* [Gestures](#UIView-Gestures)
 * [UIViewController](#UIViewController)
 * [UIScrollView](#UIScrollView)
-
 * [UILabel](#UILabel)
 	* [AttributedString](#UILabel-NSAttributedString)
 	* [Self sizing](#UILabel-Frame)
@@ -24,32 +23,25 @@ UIKit toolset for quick prototyping and rapid development
 * [NSAttributedString](#NSAttributedString)
 * [String](#String)
 * [UIFont](#UIFont)
-
 * [UIImageView](#UIImageView)
 * [UIColor](#UIColor)
 * [UIImage](#UIImage)
-
 * [CGPoint](#Globals)
 * [CGSize](#CGSize)
 * [CGPoint](#CGPoint)
 * [CGFloat](#CGFloat)
-
 * [UIAlertController](#UIAlertController)
 * [UIBarButtonItem](#UIBarButtonItem)
-
 * [BlockButton](#BlockButton)
 * [BlockWebView](#BlockWebView)
-
 * [BlockTap](#BlockTap)
 * [BlockPan](#BlockPan)
 * [BlockSwipe](#BlockSwipe)
 * [BlockPinch](#BlockPinch)
 * [BlockLongPress](#BlockLongPress)
 * [BlockPicker](#BlockPicker)
-
 * [BlockBadge](#BlockBadge)
 * [BlockPicker](#BlockPicker)
-
 * [DequeuableScrollView](#DequeuableScrollView)
 
 
