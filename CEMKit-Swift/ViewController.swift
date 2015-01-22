@@ -42,7 +42,6 @@ class ViewController: UIViewController {
         e.backgroundColor = UIColor.randomColor()
         v.addSubview(e)
         
-        
         return v
     }
 }

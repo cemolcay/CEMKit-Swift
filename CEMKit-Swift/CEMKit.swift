@@ -407,6 +407,11 @@ extension UIViewController {
     
     var top: CGFloat {
         get {
+            
+            if let me = self as? UINavigationController {
+                return me.visibleViewController.top
+            }
+            
             if let nav = self.navigationController {
                 if nav.navigationBarHidden {
                     return view.top
@@ -421,6 +426,11 @@ extension UIViewController {
     
     var bottom: CGFloat {
         get {
+            
+            if let me = self as? UINavigationController {
+                return me.visibleViewController.bottom
+            }
+            
             if let tab = tabBarController {
                 if tab.tabBar.hidden {
                     return view.bottom
@@ -436,6 +446,11 @@ extension UIViewController {
     
     var tabBarHeight: CGFloat {
         get {
+            
+            if let me = self as? UINavigationController {
+                return me.visibleViewController.tabBarHeight
+            }
+            
             if let tab = self.tabBarController {
                 return tab.tabBar.frame.size.height
             }
@@ -447,6 +462,11 @@ extension UIViewController {
     
     var navigationBarHeight: CGFloat {
         get {
+            
+            if let me = self as? UINavigationController {
+                return me.visibleViewController.navigationBarHeight
+            }
+            
             if let nav = self.navigationController {
                 return nav.navigationBar.h
             }
@@ -457,13 +477,18 @@ extension UIViewController {
     
     var navigationBarColor: UIColor? {
         get {
+            
+            if let me = self as? UINavigationController {
+                return me.visibleViewController.navigationBarColor
+            }
+            
             return navigationController?.navigationBar.tintColor
         } set (value) {
             navigationController?.navigationBar.barTintColor = value
         }
     }
 
-    var navigationBar: UINavigationBar? {
+    var navBar: UINavigationBar? {
         get {
             return navigationController?.navigationBar
         }
