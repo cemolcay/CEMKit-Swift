@@ -436,7 +436,7 @@ Bottom
 #### Quick access navigation bar properties
 
 ``` swift
-	 var navigationBar: UINavigationBar? {
+	 var navBar: UINavigationBar? {
         get {
             return navigationController?.navigationBar
         }
