@@ -43,6 +43,16 @@ class ViewController: UIViewController {
             textAlignment: .Left)
         l.backgroundColor = UIColor.yellowColor()
         view.addSubview(l)
+        
+        let b = UILabel (
+            x: 0,
+            y: l.bottom,
+            text: "asdkmkalsmd\ndedmed\nkdmkemandjkns",
+            textColor: UIColor.blackColor(),
+            textAlignment: .Center,
+            font: UIFont.systemFontOfSize(20))
+        b.backgroundColor = UIColor.redColor()
+        view.addSubview(b)
     }
     
     

@@ -10,20 +10,9 @@ import Foundation
 import UIKit
 
 
-
-// MARK: - Dictionary
-
-func += <KeyType, ValueType> (inout left:
-    Dictionary<KeyType, ValueType>,
-    right: Dictionary<KeyType, ValueType>) {
-    for (k, v) in right {
-        left.updateValue(v, forKey: k)
-    }
-}
-
 // MARK: - AppDelegate
 
-let APPDELEGATE: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+// let APPDELEGATE: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 
 
 
@@ -619,7 +608,8 @@ extension UILabel {
                     for (key, value) in attribute {
                         newAtt.addAttribute(key as String, value: value, range: range)
                     }
-            })
+                }
+            )
             
             updateAttributedStringAtIndex(index, attributedString: newAtt)
         }
@@ -656,6 +646,7 @@ extension UILabel {
     func fitSize () {
         self.fitWidth()
         self.fitHeight()
+        sizeToFit()
     }
     
 
@@ -1054,6 +1045,17 @@ extension UIColor {
         }
 
         return UIColor (red: red, green:green, blue:blue, alpha:alpha)
+    }
+}
+
+
+
+// MARK: - Dictionary
+
+func += <KeyType, ValueType> (inout left: Dictionary<KeyType, ValueType>,
+    right: Dictionary<KeyType, ValueType>) {
+    for (k, v) in right {
+        left.updateValue(v, forKey: k)
     }
 }
 
