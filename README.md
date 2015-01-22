@@ -42,7 +42,7 @@ UIKit toolset for quick prototyping and rapid development
 * [DequeuableScrollView](#DequeuableScrollView)
 
 
-## Installation
+## Installation <a id="Installation"></a>
 
 #### Manual
 Copy & Paste CEMKit.swift into your project
