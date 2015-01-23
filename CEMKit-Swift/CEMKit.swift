@@ -117,7 +117,7 @@ extension UIView {
         get {
             return self.frame.size
         } set (value) {
-            self.frame = CGRect (origin: self.frame.origin, size: size)
+            self.frame = CGRect (origin: self.frame.origin, size: value)
         }
     }
     
