@@ -857,7 +857,7 @@ Resize image based on its height (auto calculates width and keeps aspect ratio)
     func aspectResizeWithHeight (height: CGFloat) -> UIImage
 ```
 
-### Array
+### Array <a id="Array"></a>
 
 ##### Remove Object
 
@@ -865,7 +865,7 @@ Resize image based on its height (auto calculates width and keeps aspect ratio)
 	mutating func removeObject<U: Equatable> (object: U)
 ```
 
-### Dictionary
+### Dictionary <a id="Dictionary"></a>
 
 ##### Add operator
 
