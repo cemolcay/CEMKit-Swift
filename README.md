@@ -26,6 +26,8 @@ UIKit toolset for quick prototyping and rapid development
 * [UIImageView](#UIImageView)
 * [UIColor](#UIColor)
 * [UIImage](#UIImage)
+* [Array](#Array)
+* [Dictionary](#Dictionary)
 * [CGPoint](#Globals)
 * [CGSize](#CGSize)
 * [CGPoint](#CGPoint)
@@ -615,6 +617,20 @@ Auto calculates height
 	        font: UIFont)
 ```
 
+Auto calculates height with giving padding
+
+``` swift
+	convenience init (
+	        x: CGFloat,
+	        y: CGFloat,
+	        width: CGFloat,
+	        padding: CGFloat,
+	        text: String,
+	        textColor: UIColor,
+	        textAlignment: NSTextAlignment,
+	        font: UIFont)
+```
+
 Auto calculates frame
 
 ``` swift
@@ -839,6 +855,23 @@ Resize image based on its height (auto calculates width and keeps aspect ratio)
 
 ``` swift
     func aspectResizeWithHeight (height: CGFloat) -> UIImage
+```
+
+### Array
+
+##### Remove Object
+
+``` swift
+	mutating func removeObject<U: Equatable> (object: U)
+```
+
+### Dictionary
+
+##### Add operator
+
+``` swift
+	func += <KeyType, ValueType> (inout left: Dictionary<KeyType, ValueType>,
+	    right: Dictionary<KeyType, ValueType>)
 ```
 
 ### Globals <a id="Globals"></a>
