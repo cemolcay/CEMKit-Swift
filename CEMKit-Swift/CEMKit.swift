@@ -690,6 +690,25 @@ extension UILabel {
     convenience init (
         x: CGFloat,
         y: CGFloat,
+        width: CGFloat,
+        padding: CGFloat,
+        text: String,
+        textColor: UIColor,
+        textAlignment: NSTextAlignment,
+        font: UIFont) {
+            self.init(frame: CGRect (x: x, y: y, width: width, height: 10.0))
+            self.text = text
+            self.textColor = textColor
+            self.textAlignment = textAlignment
+            self.font = font
+            
+            self.numberOfLines = 0
+            self.h = self.getEstimatedHeight() + 2*padding
+    }
+    
+    convenience init (
+        x: CGFloat,
+        y: CGFloat,
         text: String,
         textColor: UIColor,
         textAlignment: NSTextAlignment,
@@ -1045,6 +1064,27 @@ extension UIColor {
         }
 
         return UIColor (red: red, green:green, blue:blue, alpha:alpha)
+    }
+}
+
+
+
+// MARK: - Array
+
+extension Array {
+    mutating func removeObject<U: Equatable> (object: U) {
+        var index: Int?
+        for (idx, objectToCompare) in enumerate(self) {
+            if let to = objectToCompare as? U {
+                if object == to {
+                    index = idx
+                }
+            }
+        }
+        
+        if(index != nil) {
+            self.removeAtIndex(index!)
+        }
     }
 }
 
