@@ -1019,6 +1019,10 @@ extension UIColor {
                 blue: (b / 255.0) - 0.12,
                 alpha: 1)
     }
+
+    class func GrayTone (gray: CGFloat) -> UIColor {
+        return self.RGBColor(gray, g: gray, b: gray)
+    }
     
     class func HexColor (hex: String) -> UIColor {
         var red:   CGFloat = 0.0
@@ -1101,9 +1105,20 @@ func += <KeyType, ValueType> (inout left: Dictionary<KeyType, ValueType>,
 
 
 
-// MARK - Globals
+// MARK: - Dispatch
+
+func delay (
+    seconds: Double,
+    queue: dispatch_queue_t = dispatch_get_main_queue(),
+    after: ()->()) {
+        
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(seconds * Double(NSEC_PER_SEC)))
+        dispatch_after(time, queue, after)
+}
 
 
+
+// MARK - UIScreen
 
 var Orientation: UIInterfaceOrientation {
     get {
