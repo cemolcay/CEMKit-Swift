@@ -828,17 +828,19 @@ Print all family of font on single line
 #### Init with aspected image
 
 ``` swift
-    convenience init (x: CGFloat,
-        y: CGFloat,
-        width: CGFloat,
-        image: UIImage)
+    convenience init (
+			x: CGFloat,
+			y: CGFloat,
+			width: CGFloat,
+			image: UIImage)
 ```
   
 ``` swift
-	convenience init (x: CGFloat,
-	        y: CGFloat,
-	        height: CGFloat,
-	        image: UIImage)
+	convenience init (
+			x: CGFloat,
+	      	y: CGFloat,
+	      	height: CGFloat,
+	      	image: UIImage)
 ```
 
 ### UIColor extension <a id="UIColor"></a>
@@ -1031,7 +1033,8 @@ Status bar height
 Convert [min, max] to [0, 1]
 
 ``` swift
-	func normalizeValue (value: CGFloat,
+	func normalizeValue (
+		value: CGFloat,
 	    min: CGFloat,
 	    max: CGFloat) -> CGFloat
 ```
@@ -1039,11 +1042,20 @@ Convert [min, max] to [0, 1]
 Convert [0, 1] to to [min, max]
 
 ``` swift
-	func convertNormalizedValue (value: CGFloat,
+	func convertNormalizedValue (
+		value: CGFloat,
 	    min: CGFloat,
 	    max: CGFloat) -> CGFloat
 ```
 
+##### Clamp a value between minimum and maximum values
+
+``` swift
+	func clamp (
+	    value: CGFloat,
+	    minimum: CGFloat,
+	    maximum: CGFloat) -> CGFloat
+```
 
 ### UIAlertViewController <a id="UIAlertViewController"></a>
 
@@ -1062,20 +1074,23 @@ Convert [0, 1] to to [min, max]
 ##### Create bar button item with image, single line
 
 ``` swift
-	func barButtonItem (imageName: String,
+	func barButtonItem (
+		imageName: String,
 	    size: CGFloat,
 	    action: (AnyObject)->())
 ```
 
 ``` swift
-	func barButtonItem (imageName: String,
+	func barButtonItem (
+		imageName: String,
 	    action: (AnyObject)->()) -> UIBarButtonItem
 ```
 
 #### Create bar button item with text and color
 
 ``` swift
-	func barButtonItem (title: String,
+	func barButtonItem (
+		title: String,
 	    color: UIColor,
 	    action: (AnyObject)->()) -> UIBarButtonItem
 ```
