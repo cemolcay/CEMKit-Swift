@@ -1039,6 +1039,20 @@ extension UIFont {
         size: CGFloat) -> UIFont {
             return Font(.HelveticaNeue, type: type, size: size)
     }
+    
+    class func AvenirNext (
+        type: FontType,
+        size: CGFloat) -> UIFont {
+        return UIFont.Font(UIFont.FontName.AvenirNext, type: type, size: size)
+    }
+    
+    class func AvenirNextDemiBold (size: CGFloat) -> UIFont {
+        return AvenirNext(UIFont.FontType.DemiBold, size: size)
+    }
+    
+    class func AvenirNextRegular (size: CGFloat) -> UIFont {
+        return AvenirNext(UIFont.FontType.Regular, size: size)
+    }
 }
 
 
