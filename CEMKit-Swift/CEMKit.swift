@@ -34,6 +34,10 @@ extension UIView {
         h: CGFloat) {
             self.init (frame: CGRect (x: x, y: y, width: w, height: h))
     }
+
+    convenience init (superView: UIView) {
+        self.init (frame: CGRect (origin: CGPointZero, size: superView.size))
+    }
 }
 
 
@@ -1265,35 +1269,35 @@ func delay (
 // MARK - UIScreen
 
 var Orientation: UIInterfaceOrientation {
-get {
-    return UIApplication.sharedApplication().statusBarOrientation
-}
+    get {
+        return UIApplication.sharedApplication().statusBarOrientation
+    }
 }
 
 var ScreenWidth: CGFloat {
-get {
-    if UIInterfaceOrientationIsPortrait(Orientation) {
-        return UIScreen.mainScreen().bounds.size.width
-    } else {
-        return UIScreen.mainScreen().bounds.size.height
+    get {
+        if UIInterfaceOrientationIsPortrait(Orientation) {
+            return UIScreen.mainScreen().bounds.size.width
+        } else {
+            return UIScreen.mainScreen().bounds.size.height
+        }
     }
-}
 }
 
 var ScreenHeight: CGFloat {
-get {
-    if UIInterfaceOrientationIsPortrait(Orientation) {
-        return UIScreen.mainScreen().bounds.size.height
-    } else {
-        return UIScreen.mainScreen().bounds.size.width
+    get {
+        if UIInterfaceOrientationIsPortrait(Orientation) {
+            return UIScreen.mainScreen().bounds.size.height
+        } else {
+            return UIScreen.mainScreen().bounds.size.width
+        }
     }
-}
 }
 
 var StatusBarHeight: CGFloat {
-get {
-    return UIApplication.sharedApplication().statusBarFrame.height
-}
+    get {
+        return UIApplication.sharedApplication().statusBarFrame.height
+    }
 }
 
 
@@ -1366,10 +1370,10 @@ func normalizeValue (value: CGFloat,
 }
 
 
-func convertNormalizedValue (value: CGFloat,
+func convertNormalizedValue (normalizedValue: CGFloat,
     min: CGFloat,
     max: CGFloat) -> CGFloat {
-        return ((max - min) * value) + min
+        return ((max - min) * normalizedValue) + min
 }
 
 
