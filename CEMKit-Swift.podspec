@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CEMKit-Swift"
-  s.version      = "0.1.3"
+  s.version      = "0.1.4"
   s.summary      = "UIKit toolset for quick prototyping and rapid development"
 
   s.description  = <<-DESC
