@@ -74,7 +74,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/cemolcay/CEMKit-Swift.git", :tag => "v0.1.3" }
+  s.source       = { :git => "https://github.com/cemolcay/CEMKit-Swift.git", :tag => "v0.1.4" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
