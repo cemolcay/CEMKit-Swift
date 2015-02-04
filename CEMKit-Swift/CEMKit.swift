@@ -1363,19 +1363,28 @@ func degreesToRadians (angle: CGFloat) -> CGFloat {
 }
 
 
-func normalizeValue (value: CGFloat,
+func normalizeValue (
+    value: CGFloat,
     min: CGFloat,
     max: CGFloat) -> CGFloat {
         return (max - min) / value
 }
 
 
-func convertNormalizedValue (normalizedValue: CGFloat,
+func convertNormalizedValue (
+    normalizedValue: CGFloat,
     min: CGFloat,
     max: CGFloat) -> CGFloat {
         return ((max - min) * normalizedValue) + min
 }
 
+
+func clamp (
+    value: CGFloat,
+    minimum: CGFloat,
+    maximum: CGFloat) -> CGFloat {
+    return min (maximum, max(value, minimum))
+}
 
 
 
