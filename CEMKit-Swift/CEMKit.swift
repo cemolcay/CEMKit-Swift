@@ -32,12 +32,14 @@ extension UIView {
         y: CGFloat,
         w: CGFloat,
         h: CGFloat) {
-        self.init (frame: CGRect (x: x, y: y, width: w, height: h))
+            self.init (frame: CGRect (x: x, y: y, width: w, height: h))
     }
-    
-    
-    
-    // MARK: Frame Extensions
+}
+
+
+// MARK: Frame Extensions
+
+extension UIView {
     
     var x: CGFloat {
         get {
@@ -121,7 +123,7 @@ extension UIView {
         }
     }
     
-
+    
     func leftWithOffset (offset: CGFloat) -> CGFloat {
         return self.left - offset
     }
@@ -138,9 +140,12 @@ extension UIView {
         return self.bottom + offset
     }
     
-    
-    
-    // MARK: Transform Extensions
+}
+
+
+// MARK: Transform Extensions
+
+extension UIView {
     
     func setRotationX (x: CGFloat) {
         var transform = CATransform3DIdentity
@@ -166,135 +171,178 @@ extension UIView {
         self.layer.transform = transform
     }
     
-    func setRotation (x: CGFloat,
+    func setRotation (
+        x: CGFloat,
         y: CGFloat,
         z: CGFloat) {
-        var transform = CATransform3DIdentity
-        transform.m34 = 1.0 / -1000.0
-        transform = CATransform3DRotate(transform, degreesToRadians(x), 1.0, 0.0, 0.0)
-        transform = CATransform3DRotate(transform, degreesToRadians(y), 0.0, 1.0, 0.0)
-        transform = CATransform3DRotate(transform, degreesToRadians(z), 0.0, 0.0, 1.0)
-        
-        self.layer.transform = transform
+            var transform = CATransform3DIdentity
+            transform.m34 = 1.0 / -1000.0
+            transform = CATransform3DRotate(transform, degreesToRadians(x), 1.0, 0.0, 0.0)
+            transform = CATransform3DRotate(transform, degreesToRadians(y), 0.0, 1.0, 0.0)
+            transform = CATransform3DRotate(transform, degreesToRadians(z), 0.0, 0.0, 1.0)
+            
+            self.layer.transform = transform
     }
     
     
-    func setScale (x: CGFloat,
+    func setScale (
+        x: CGFloat,
         y: CGFloat) {
-        var transform = CATransform3DIdentity
-        transform.m34 = 1.0 / -1000.0
-        transform = CATransform3DScale(transform, x, y, 1)
-        
-        self.layer.transform = transform
+            var transform = CATransform3DIdentity
+            transform.m34 = 1.0 / -1000.0
+            transform = CATransform3DScale(transform, x, y, 1)
+            
+            self.layer.transform = transform
     }
     
-    
-    
-    // MARK: Anchor Extensions
+}
+
+
+// MARK: Layer Extensions
+
+extension UIView {
     
     func setAnchorPosition (anchorPosition: AnchorPosition) {
         println(anchorPosition.rawValue)
         self.layer.anchorPoint = anchorPosition.rawValue
     }
     
-    
-    
-    // MARK: Layer Extensions
-    
-    func addShadow (offset: CGSize,
-        radius: CGFloat,
-        color: UIColor,
-        opacity: Float) {
-        self.layer.shadowOffset = offset
-        self.layer.shadowRadius = radius
-        self.layer.shadowOpacity = opacity
-        self.layer.shadowColor = color.CGColor
-    }
-    
-    func addBorder (width: CGFloat,
-        color: UIColor) {
-        self.layer.borderWidth = width
-        self.layer.borderColor = color.CGColor
-        self.layer.masksToBounds = true
-    }
-    
-    
     func setCornerRadius (radius: CGFloat) {
         self.layer.cornerRadius = radius
         self.layer.masksToBounds = true
     }
     
+    func addShadow (
+        offset: CGSize,
+        radius: CGFloat,
+        color: UIColor,
+        opacity: Float,
+        cornerRadius: CGFloat? = nil) {
+            self.layer.shadowOffset = offset
+            self.layer.shadowRadius = radius
+            self.layer.shadowOpacity = opacity
+            self.layer.shadowColor = color.CGColor
+            
+            if let r = cornerRadius {
+                self.layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: r).CGPath
+            }
+    }
     
-    func drawCircle (fillColor: UIColor,
+    func addBorder (
+        width: CGFloat,
+        color: UIColor) {
+            self.layer.borderWidth = width
+            self.layer.borderColor = color.CGColor
+            self.layer.masksToBounds = true
+    }
+    
+    func drawCircle (
+        fillColor: UIColor,
         strokeColor: UIColor,
         strokeWidth: CGFloat) {
-        let path = UIBezierPath (roundedRect: CGRect (x: 0, y: 0, width: self.w, height: self.w), cornerRadius: self.w/2)
-        
-        let shapeLayer = CAShapeLayer ()
-        shapeLayer.path = path.CGPath
-        shapeLayer.fillColor = fillColor.CGColor
-        shapeLayer.strokeColor = strokeColor.CGColor
-        shapeLayer.lineWidth = strokeWidth
-        
-        self.layer.addSublayer(shapeLayer)
+            let path = UIBezierPath (roundedRect: CGRect (x: 0, y: 0, width: self.w, height: self.w), cornerRadius: self.w/2)
+            
+            let shapeLayer = CAShapeLayer ()
+            shapeLayer.path = path.CGPath
+            shapeLayer.fillColor = fillColor.CGColor
+            shapeLayer.strokeColor = strokeColor.CGColor
+            shapeLayer.lineWidth = strokeWidth
+            
+            self.layer.addSublayer(shapeLayer)
     }
     
-    func drawStroke (width: CGFloat,
+    func drawStroke (
+        width: CGFloat,
         color: UIColor) {
-        let path = UIBezierPath (roundedRect: CGRect (x: 0, y: 0, width: self.w, height: self.w), cornerRadius: self.w/2)
-        
-        let shapeLayer = CAShapeLayer ()
-        shapeLayer.path = path.CGPath
-        shapeLayer.fillColor = UIColor.clearColor().CGColor
-        shapeLayer.strokeColor = color.CGColor
-        shapeLayer.lineWidth = width
-        
-        self.layer.addSublayer(shapeLayer)
+            let path = UIBezierPath (roundedRect: CGRect (x: 0, y: 0, width: self.w, height: self.w), cornerRadius: self.w/2)
+            
+            let shapeLayer = CAShapeLayer ()
+            shapeLayer.path = path.CGPath
+            shapeLayer.fillColor = UIColor.clearColor().CGColor
+            shapeLayer.strokeColor = color.CGColor
+            shapeLayer.lineWidth = width
+            
+            self.layer.addSublayer(shapeLayer)
     }
     
-    func drawArc (from: CGFloat,
+    func drawArc (
+        from: CGFloat,
         to: CGFloat,
         clockwise: Bool,
         width: CGFloat,
         fillColor: UIColor,
         strokeColor: UIColor,
         lineCap: String) {
-        let path = UIBezierPath (arcCenter: self.center, radius: self.w/2, startAngle: degreesToRadians(from), endAngle: degreesToRadians(to), clockwise: clockwise)
-        
-        let shapeLayer = CAShapeLayer ()
-        shapeLayer.path = path.CGPath
-        shapeLayer.fillColor = fillColor.CGColor
-        shapeLayer.strokeColor = strokeColor.CGColor
-        shapeLayer.lineWidth = width
-        
-        self.layer.addSublayer(shapeLayer)
+            let path = UIBezierPath (arcCenter: self.center, radius: self.w/2, startAngle: degreesToRadians(from), endAngle: degreesToRadians(to), clockwise: clockwise)
+            
+            let shapeLayer = CAShapeLayer ()
+            shapeLayer.path = path.CGPath
+            shapeLayer.fillColor = fillColor.CGColor
+            shapeLayer.strokeColor = strokeColor.CGColor
+            shapeLayer.lineWidth = width
+            
+            self.layer.addSublayer(shapeLayer)
     }
     
+}
 
 
-    // MARK: Animation Extensions
+// MARK: Animation Extensions
+
+extension UIView {
     
-    func spring (animations: (()->Void)!,
+    func spring (
+        animations: (()->Void),
         completion: ((Bool)->Void)? = nil) {
-        UIView.animateWithDuration(UIViewAnimationDuration,
-            delay: 0,
-            usingSpringWithDamping: UIViewAnimationSpringDamping,
-            initialSpringVelocity: UIViewAnimationSpringVelocity,
-            options: UIViewAnimationOptions.AllowAnimatedContent,
-            animations: animations,
-            completion: completion)
+            spring(UIViewAnimationDuration,
+                animations: animations,
+                completion: completion)
     }
-
-    func animate (animations: (()->Void)!,
+    
+    func spring (
+        duration: NSTimeInterval,
+        animations: (()->Void),
         completion: ((Bool)->Void)? = nil) {
-        UIView.animateWithDuration(UIViewAnimationDuration,
-            animations: animations,
-            completion: completion)
+            UIView.animateWithDuration(UIViewAnimationDuration,
+                delay: 0,
+                usingSpringWithDamping: UIViewAnimationSpringDamping,
+                initialSpringVelocity: UIViewAnimationSpringVelocity,
+                options: UIViewAnimationOptions.AllowAnimatedContent,
+                animations: animations,
+                completion: completion)
     }
+    
+    func animate (
+        duration: NSTimeInterval,
+        animations: (()->Void),
+        completion: ((Bool)->Void)? = nil) {
+            UIView.animateWithDuration(duration,
+                animations: animations,
+                completion: completion)
+    }
+    
+    func animate (
+        animations: (()->Void),
+        completion: ((Bool)->Void)? = nil) {
+            animate(
+                UIViewAnimationDuration,
+                animations: animations,
+                completion: completion)
+    }
+    
+    func pop () {
+        setScale(1.1, y: 1.1)
+        spring(0.2) {
+            [unowned self] in
+            self.setScale(1, y: 1)
+        }
+    }
+}
 
-    
-    
-    // MARK: Render Extensions
+
+// MARK: Render Extensions
+
+extension UIView {
     
     func toImage () -> UIImage {
         UIGraphicsBeginImageContextWithOptions(bounds.size, opaque, 0.0)
@@ -304,10 +352,12 @@ extension UIView {
         
         return img
     }
-    
-    
-    
-    // MARK: Add Badge
+}
+
+
+// MARK: Badge Extensions
+
+extension UIView {
     
     var badge: BlockBadge? {
         get {
@@ -326,75 +376,95 @@ extension UIView {
         }
     }
     
+}
+
+
+// MARK: Gesture Extensions
+
+extension UIView {
     
-    
-    // MARK: Gesture Extensions
-    
-    func addTapGesture (tapNumber: Int,
+    func addTapGesture (
+        tapNumber: Int,
         target: AnyObject, action: Selector) {
-        let tap = UITapGestureRecognizer (target: target, action: action)
-        tap.numberOfTapsRequired = tapNumber
-        addGestureRecognizer(tap)
+            let tap = UITapGestureRecognizer (target: target, action: action)
+            tap.numberOfTapsRequired = tapNumber
+            addGestureRecognizer(tap)
+            userInteractionEnabled = true
     }
     
-    func addTapGesture (tapNumber: Int,
+    func addTapGesture (
+        tapNumber: Int,
         action: ((UITapGestureRecognizer)->())?) {
-        let tap = BlockTap (tapCount: tapNumber,
-            fingerCount: 1,
-            action: action)
-        addGestureRecognizer(tap)
+            let tap = BlockTap (tapCount: tapNumber,
+                fingerCount: 1,
+                action: action)
+            addGestureRecognizer(tap)
+            userInteractionEnabled = true
     }
     
-    func addSwipeGesture (direction: UISwipeGestureRecognizerDirection,
+    func addSwipeGesture (
+        direction: UISwipeGestureRecognizerDirection,
         numberOfTouches: Int,
         target: AnyObject,
         action: Selector) {
-        let swipe = UISwipeGestureRecognizer (target: target, action: action)
-        swipe.direction = direction
-        swipe.numberOfTouchesRequired = numberOfTouches
-        addGestureRecognizer(swipe)
+            let swipe = UISwipeGestureRecognizer (target: target, action: action)
+            swipe.direction = direction
+            swipe.numberOfTouchesRequired = numberOfTouches
+            addGestureRecognizer(swipe)
+            userInteractionEnabled = true
     }
     
-    func addSwipeGesture (direction: UISwipeGestureRecognizerDirection,
+    func addSwipeGesture (
+        direction: UISwipeGestureRecognizerDirection,
         numberOfTouches: Int,
         action: ((UISwipeGestureRecognizer)->())?) {
-        let swipe = BlockSwipe (direction: direction,
-            fingerCount: numberOfTouches,
-            action: action)
-        addGestureRecognizer(swipe)
+            let swipe = BlockSwipe (direction: direction,
+                fingerCount: numberOfTouches,
+                action: action)
+            addGestureRecognizer(swipe)
+            userInteractionEnabled = true
     }
     
-    func addPanGesture (target: AnyObject,
+    func addPanGesture (
+        target: AnyObject,
         action: Selector) {
-        let pan = UIPanGestureRecognizer (target: target, action: action)
-        addGestureRecognizer(pan)
+            let pan = UIPanGestureRecognizer (target: target, action: action)
+            addGestureRecognizer(pan)
+            userInteractionEnabled = true
     }
     
     func addPanGesture (action: ((UIPanGestureRecognizer)->())?) {
         let pan = BlockPan (action: action)
         addGestureRecognizer(pan)
+        userInteractionEnabled = true
     }
     
-    func addPinchGesture (target: AnyObject,
+    func addPinchGesture (
+        target: AnyObject,
         action: Selector) {
-        let pinch = UIPinchGestureRecognizer (target: target, action: action)
-        addGestureRecognizer(pinch)
+            let pinch = UIPinchGestureRecognizer (target: target, action: action)
+            addGestureRecognizer(pinch)
+            userInteractionEnabled = true
     }
-
+    
     func addPinchGesture (action: ((UIPinchGestureRecognizer)->())?) {
         let pinch = BlockPinch (action: action)
         addGestureRecognizer(pinch)
+        userInteractionEnabled = true
     }
-
-    func addLongPressGesture (target: AnyObject,
+    
+    func addLongPressGesture (
+        target: AnyObject,
         action: Selector) {
-        let longPress = UILongPressGestureRecognizer (target: target, action: action)
-        addGestureRecognizer(longPress)
+            let longPress = UILongPressGestureRecognizer (target: target, action: action)
+            addGestureRecognizer(longPress)
+            userInteractionEnabled = true
     }
     
     func addLongPressGesture (action: ((UILongPressGestureRecognizer)->())?) {
         let longPress = BlockLongPress (action: action)
         addGestureRecognizer(longPress)
+        userInteractionEnabled = true
     }
 }
 
@@ -486,7 +556,7 @@ extension UIViewController {
             navigationController?.navigationBar.barTintColor = value
         }
     }
-
+    
     var navBar: UINavigationBar? {
         get {
             return navigationController?.navigationBar
@@ -499,11 +569,20 @@ extension UIViewController {
             return CGRect (x: view.x, y: top, width: view.w, height: bottom - top)
         }
     }
+    
+    
+    func push (vc: UIViewController) {
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func pop () {
+        navigationController?.popViewControllerAnimated(true)
+    }
 }
 
 
 
-// MARK: - UIScrollView 
+// MARK: - UIScrollView
 
 extension UIScrollView {
     
@@ -548,7 +627,7 @@ private var UILabelAttributedStringArray: UInt8 = 0
 
 extension UILabel {
     
-     var attributedStrings: [NSAttributedString]? {
+    var attributedStrings: [NSAttributedString]? {
         get {
             return objc_getAssociatedObject(self, &UILabelAttributedStringArray) as? [NSAttributedString]
         } set (value) {
@@ -557,11 +636,12 @@ extension UILabel {
     }
     
     
-    func addAttributedString (text: String,
+    func addAttributedString (
+        text: String,
         color: UIColor,
         font: UIFont) {
-        var att = NSAttributedString (text: text, color: color, font: font)
-        self.addAttributedString(att)
+            var att = NSAttributedString (text: text, color: color, font: font)
+            self.addAttributedString(att)
     }
     
     func addAttributedString (attributedString: NSAttributedString) {
@@ -583,46 +663,48 @@ extension UILabel {
     
     func updateAttributedStringAtIndex (index: Int,
         attributedString: NSAttributedString) {
-        
-        if let att = attributedStrings?[index] {
-            attributedStrings?.removeAtIndex(index)
-            attributedStrings?.insert(attributedString, atIndex: index)
             
-            let updated = NSMutableAttributedString ()
-            for att in attributedStrings! {
-                updated.appendAttributedString(att)
+            if let att = attributedStrings?[index] {
+                attributedStrings?.removeAtIndex(index)
+                attributedStrings?.insert(attributedString, atIndex: index)
+                
+                let updated = NSMutableAttributedString ()
+                for att in attributedStrings! {
+                    updated.appendAttributedString(att)
+                }
+                
+                self.attributedText = NSAttributedString (attributedString: updated)
             }
-            
-            self.attributedText = NSAttributedString (attributedString: updated)
-        }
     }
     
     func updateAttributedStringAtIndex (index: Int,
         newText: String) {
-        if let att = attributedStrings?[index] {
-            let newAtt = NSMutableAttributedString (string: newText)
-            
-            att.enumerateAttributesInRange(NSMakeRange(0, countElements(att.string)-1),
-                options: NSAttributedStringEnumerationOptions.LongestEffectiveRangeNotRequired,
-                usingBlock: { (attribute, range, stop) -> Void in
-                    for (key, value) in attribute {
-                        newAtt.addAttribute(key as String, value: value, range: range)
+            if let att = attributedStrings?[index] {
+                let newAtt = NSMutableAttributedString (string: newText)
+                
+                att.enumerateAttributesInRange(NSMakeRange(0, countElements(att.string)-1),
+                    options: NSAttributedStringEnumerationOptions.LongestEffectiveRangeNotRequired,
+                    usingBlock: { (attribute, range, stop) -> Void in
+                        for (key, value) in attribute {
+                            newAtt.addAttribute(key as String, value: value, range: range)
+                        }
                     }
-                }
-            )
-            
-            updateAttributedStringAtIndex(index, attributedString: newAtt)
-        }
+                )
+                
+                updateAttributedStringAtIndex(index, attributedString: newAtt)
+            }
     }
     
     
     
-    func getEstimatedRect (width: CGFloat = CGFloat.max, height: CGFloat = CGFloat.max) -> CGRect {
-        let rect = attributedText.boundingRectWithSize(
-            CGSize (width: width, height: height),
-            options: NSStringDrawingOptions.UsesLineFragmentOrigin,
-            context: nil)
-        return rect
+    func getEstimatedRect (
+        width: CGFloat = CGFloat.max,
+        height: CGFloat = CGFloat.max) -> CGRect {
+            let rect = attributedText.boundingRectWithSize(
+                CGSize (width: width, height: height),
+                options: NSStringDrawingOptions.UsesLineFragmentOrigin,
+                context: nil)
+            return rect
     }
     
     func getEstimatedHeight () -> CGFloat {
@@ -649,7 +731,24 @@ extension UILabel {
         sizeToFit()
     }
     
-
+    
+    
+    // Text, TextColor, TextAlignment, Font
+    
+    convenience init (
+        frame: CGRect,
+        text: String,
+        textColor: UIColor,
+        textAlignment: NSTextAlignment,
+        font: UIFont) {
+            self.init(frame: frame)
+            self.text = text
+            self.textColor = textColor
+            self.textAlignment = textAlignment
+            self.font = font
+            
+            self.numberOfLines = 0
+    }
     
     convenience init (
         x: CGFloat,
@@ -677,14 +776,14 @@ extension UILabel {
         textColor: UIColor,
         textAlignment: NSTextAlignment,
         font: UIFont) {
-        self.init(frame: CGRect (x: x, y: y, width: width, height: 10.0))
-        self.text = text
-        self.textColor = textColor
-        self.textAlignment = textAlignment
-        self.font = font
-        
-        self.numberOfLines = 0
-        self.fitHeight()
+            self.init(frame: CGRect (x: x, y: y, width: width, height: 10.0))
+            self.text = text
+            self.textColor = textColor
+            self.textAlignment = textAlignment
+            self.font = font
+            
+            self.numberOfLines = 0
+            self.fitHeight()
     }
     
     convenience init (
@@ -713,17 +812,30 @@ extension UILabel {
         textColor: UIColor,
         textAlignment: NSTextAlignment,
         font: UIFont) {
-        self.init(frame: CGRect (x: x, y: y, width: 10.0, height: 10.0))
-        self.text = text
-        self.textColor = textColor
-        self.textAlignment = textAlignment
-        self.font = font
-        
-        self.numberOfLines = 0
-        self.fitSize()
+            self.init(frame: CGRect (x: x, y: y, width: 10.0, height: 10.0))
+            self.text = text
+            self.textColor = textColor
+            self.textAlignment = textAlignment
+            self.font = font
+            
+            self.numberOfLines = 0
+            self.fitSize()
     }
     
     
+    
+    // AttributedText
+    
+    convenience init (
+        frame: CGRect,
+        attributedText: NSAttributedString,
+        textAlignment: NSTextAlignment) {
+            self.init(frame: frame)
+            self.attributedText = attributedText
+            self.textAlignment = textAlignment
+            
+            self.numberOfLines = 0
+    }
     
     convenience init (
         x: CGFloat,
@@ -745,32 +857,48 @@ extension UILabel {
         width: CGFloat,
         attributedText: NSAttributedString,
         textAlignment: NSTextAlignment) {
-        self.init(frame: CGRect (x: x, y: y, width: width, height: 10.0))
-        self.attributedText = attributedText
-        self.textAlignment = textAlignment
-        
-        self.numberOfLines = 0
-        self.fitHeight()
+            self.init(frame: CGRect (x: x, y: y, width: width, height: 10.0))
+            self.attributedText = attributedText
+            self.textAlignment = textAlignment
+            
+            self.numberOfLines = 0
+            self.fitHeight()
     }
- 
+    
+    convenience init (
+        x: CGFloat,
+        y: CGFloat,
+        width: CGFloat,
+        padding: CGFloat,
+        attributedText: NSAttributedString,
+        textAlignment: NSTextAlignment) {
+            self.init(frame: CGRect (x: x, y: y, width: width, height: 10.0))
+            self.attributedText = attributedText
+            self.textAlignment = textAlignment
+            
+            self.numberOfLines = 0
+            self.fitHeight()
+            self.h += padding*2
+    }
+    
     convenience init (
         x: CGFloat,
         y: CGFloat,
         attributedText: NSAttributedString,
         textAlignment: NSTextAlignment) {
-        self.init(frame: CGRect (x: x, y: y, width: 10.0, height: 10.0))
-        self.attributedText = attributedText
-        self.textAlignment = textAlignment
-        
-        self.numberOfLines = 0
-        self.fitSize()
+            self.init(frame: CGRect (x: x, y: y, width: 10.0, height: 10.0))
+            self.attributedText = attributedText
+            self.textAlignment = textAlignment
+            
+            self.numberOfLines = 0
+            self.fitSize()
     }
     
 }
 
 
 
-// MARK: NSAttributedString 
+// MARK: NSAttributedString
 
 extension NSAttributedString {
     
@@ -781,7 +909,7 @@ extension NSAttributedString {
         
         func attribute () -> [NSString: NSObject] {
             switch self {
-            
+                
             case .plain:
                 return [:]
                 
@@ -811,15 +939,16 @@ extension NSAttributedString {
     
     
     
-    convenience init (text: String,
+    convenience init (
+        text: String,
         color: UIColor,
         font: UIFont,
         style: NSAttributedStringStyle = .plain) {
             
-        var atts = [NSFontAttributeName: font, NSForegroundColorAttributeName: color]
-        atts += style.attribute()
+            var atts = [NSFontAttributeName: font, NSForegroundColorAttributeName: color]
+            atts += style.attribute()
             
-        self.init (string: text, attributes: atts)
+            self.init (string: text, attributes: atts)
     }
     
     convenience init (image: UIImage) {
@@ -827,7 +956,6 @@ extension NSAttributedString {
         att.image = image
         self.init (attachment: att)
     }
-    
     
     
     class func withAttributedStrings (mutableString: (NSMutableAttributedString)->()) -> NSAttributedString {
@@ -895,12 +1023,17 @@ extension UIFont {
         }
     }
     
-    class func Font (name: FontName, type: FontType, size: CGFloat) -> UIFont {
-        return UIFont (name: name.rawValue + "-" + type.rawValue, size: size)!
+    class func Font (
+        name: FontName,
+        type: FontType,
+        size: CGFloat) -> UIFont {
+            return UIFont (name: name.rawValue + "-" + type.rawValue, size: size)!
     }
     
-    class func HelveticaNeue (type: FontType, size: CGFloat) -> UIFont {
-        return Font(.HelveticaNeue, type: type, size: size)
+    class func HelveticaNeue (
+        type: FontType,
+        size: CGFloat) -> UIFont {
+            return Font(.HelveticaNeue, type: type, size: size)
     }
 }
 
@@ -910,26 +1043,30 @@ extension UIFont {
 
 extension UIImageView {
     
-    convenience init (frame: CGRect,
+    convenience init (
+        frame: CGRect,
         imageName: String) {
             self.init (frame: frame, image: UIImage (named: imageName)!)
     }
     
-    convenience init (frame: CGRect,
+    convenience init (
+        frame: CGRect,
         image: UIImage) {
             self.init (frame: frame)
             self.image = image
             self.contentMode = .ScaleAspectFit
     }
     
-    convenience init (x: CGFloat,
+    convenience init (
+        x: CGFloat,
         y: CGFloat,
         width: CGFloat,
         image: UIImage) {
             self.init (frame: CGRect (x: x, y: y, width: width, height: image.aspectHeightForWidth(width)), image: image)
     }
     
-    convenience init (x: CGFloat,
+    convenience init (
+        x: CGFloat,
         y: CGFloat,
         height: CGFloat,
         image: UIImage) {
@@ -992,7 +1129,8 @@ extension UIColor {
             alpha: 1.0)
     }
     
-    class func RGBColor (r: CGFloat,
+    class func RGBColor (
+        r: CGFloat,
         g: CGFloat,
         b: CGFloat) -> UIColor {
             return UIColor (red: r / 255.0,
@@ -1001,7 +1139,8 @@ extension UIColor {
                 alpha: 1)
     }
     
-    class func RGBAColor (r: CGFloat,
+    class func RGBAColor (
+        r: CGFloat,
         g: CGFloat,
         b: CGFloat,
         a: CGFloat) -> UIColor {
@@ -1011,7 +1150,8 @@ extension UIColor {
                 alpha: a)
     }
     
-    class func BarTintRGBColor (r: CGFloat,
+    class func BarTintRGBColor (
+        r: CGFloat,
         g: CGFloat,
         b: CGFloat) -> UIColor {
             return UIColor (red: (r / 255.0) - 0.12,
@@ -1019,9 +1159,13 @@ extension UIColor {
                 blue: (b / 255.0) - 0.12,
                 alpha: 1)
     }
-
-    class func GrayTone (gray: CGFloat) -> UIColor {
+    
+    class func Gray (gray: CGFloat) -> UIColor {
         return self.RGBColor(gray, g: gray, b: gray)
+    }
+    
+    class func Gray (gray: CGFloat, alpha: CGFloat) -> UIColor {
+        return self.RGBAColor(gray, g: gray, b: gray, a: alpha)
     }
     
     class func HexColor (hex: String) -> UIColor {
@@ -1066,7 +1210,7 @@ extension UIColor {
         } else {
             println("Scan hex error")
         }
-
+        
         return UIColor (red: red, green:green, blue:blue, alpha:alpha)
     }
 }
@@ -1098,9 +1242,9 @@ extension Array {
 
 func += <KeyType, ValueType> (inout left: Dictionary<KeyType, ValueType>,
     right: Dictionary<KeyType, ValueType>) {
-    for (k, v) in right {
-        left.updateValue(v, forKey: k)
-    }
+        for (k, v) in right {
+            left.updateValue(v, forKey: k)
+        }
 }
 
 
@@ -1121,35 +1265,35 @@ func delay (
 // MARK - UIScreen
 
 var Orientation: UIInterfaceOrientation {
-    get {
-        return UIApplication.sharedApplication().statusBarOrientation
-    }
+get {
+    return UIApplication.sharedApplication().statusBarOrientation
+}
 }
 
 var ScreenWidth: CGFloat {
-    get {
-        if UIInterfaceOrientationIsPortrait(Orientation) {
-            return UIScreen.mainScreen().bounds.size.width
-        } else {
-            return UIScreen.mainScreen().bounds.size.height
-        }
+get {
+    if UIInterfaceOrientationIsPortrait(Orientation) {
+        return UIScreen.mainScreen().bounds.size.width
+    } else {
+        return UIScreen.mainScreen().bounds.size.height
     }
+}
 }
 
 var ScreenHeight: CGFloat {
-    get {
-        if UIInterfaceOrientationIsPortrait(Orientation) {
-            return UIScreen.mainScreen().bounds.size.height
-        } else {
-            return UIScreen.mainScreen().bounds.size.width
-        }
+get {
+    if UIInterfaceOrientationIsPortrait(Orientation) {
+        return UIScreen.mainScreen().bounds.size.height
+    } else {
+        return UIScreen.mainScreen().bounds.size.width
     }
+}
 }
 
 var StatusBarHeight: CGFloat {
-    get {
-        return UIApplication.sharedApplication().statusBarFrame.height
-    }
+get {
+    return UIApplication.sharedApplication().statusBarFrame.height
+}
 }
 
 
@@ -1233,7 +1377,8 @@ func convertNormalizedValue (value: CGFloat,
 
 // MARK: - UIAlertController
 
-func alert (title: String,
+func alert (
+    title: String,
     message: String,
     cancelAction: ((UIAlertAction!)->Void)? = nil,
     okAction: ((UIAlertAction!)->Void)? = nil) -> UIAlertController {
@@ -1253,22 +1398,25 @@ func alert (title: String,
 
 // MARK: - UIBarButtonItem
 
-func barButtonItem (imageName: String,
+func barButtonItem (
+    imageName: String,
     size: CGFloat,
     action: (AnyObject)->()) -> UIBarButtonItem {
-    let button = BlockButton (frame: CGRect(x: 0, y: 0, width: size, height: size))
-    button.setImage(UIImage(named: imageName), forState: .Normal)
-    button.actionBlock = action
-    
-    return UIBarButtonItem (customView: button)
+        let button = BlockButton (frame: CGRect(x: 0, y: 0, width: size, height: size))
+        button.setImage(UIImage(named: imageName), forState: .Normal)
+        button.actionBlock = action
+        
+        return UIBarButtonItem (customView: button)
 }
 
-func barButtonItem (imageName: String,
+func barButtonItem (
+    imageName: String,
     action: (AnyObject)->()) -> UIBarButtonItem {
         return barButtonItem(imageName, 20, action)
 }
 
-func barButtonItem (title: String,
+func barButtonItem (
+    title: String,
     color: UIColor,
     action: (AnyObject)->()) -> UIBarButtonItem {
         let button = BlockButton (frame: CGRect(x: 0, y: 0, width: 20, height: 20))
@@ -1338,35 +1486,45 @@ class BlockWebView: UIWebView, UIWebViewDelegate {
         didFinishLoad? (webView.request!)
     }
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
-        didFailLoad? (webView.request!, error)
+    func webView(
+        webView: UIWebView,
+        didFailLoadWithError error: NSError) {
+            didFailLoad? (webView.request!, error)
     }
     
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        if let should = shouldStartLoadingRequest {
-            return should (request)
-        } else {
-            return true
-        }
+    func webView(
+        webView: UIWebView,
+        shouldStartLoadWithRequest request: NSURLRequest,
+        navigationType: UIWebViewNavigationType) -> Bool {
+            if let should = shouldStartLoadingRequest {
+                return should (request)
+            } else {
+                return true
+            }
     }
 }
 
 
-    
+
 // MARK: BlockTap
 
 class BlockTap: UITapGestureRecognizer {
     
     private var tapAction: ((UITapGestureRecognizer)->())?
     
-    init (tapCount: Int,
+    override init(target: AnyObject, action: Selector) {
+        super.init(target: target, action: action)
+    }
+    
+    init (
+        tapCount: Int,
         fingerCount: Int,
         action: ((UITapGestureRecognizer)->())?) {
-        super.init()
-        numberOfTapsRequired = tapCount
-        numberOfTouchesRequired = fingerCount
-        tapAction = action
-        addTarget(self, action: "didTap:")
+            super.init()
+            numberOfTapsRequired = tapCount
+            numberOfTouchesRequired = fingerCount
+            tapAction = action
+            addTarget(self, action: "didTap:")
     }
     
     func didTap (tap: UITapGestureRecognizer) {
@@ -1381,6 +1539,10 @@ class BlockTap: UITapGestureRecognizer {
 class BlockPan: UIPanGestureRecognizer {
     
     private var panAction: ((UIPanGestureRecognizer)->())?
+    
+    override init(target: AnyObject, action: Selector) {
+        super.init(target: target, action: action)
+    }
     
     init (action: ((UIPanGestureRecognizer)->())?) {
         super.init()
@@ -1398,17 +1560,21 @@ class BlockPan: UIPanGestureRecognizer {
 // MARK: BlockSwipe
 
 class BlockSwipe: UISwipeGestureRecognizer {
-
+    
     private var swipeAction: ((UISwipeGestureRecognizer)->())?
+    
+    override init(target: AnyObject, action: Selector) {
+        super.init(target: target, action: action)
+    }
     
     init (direction: UISwipeGestureRecognizerDirection,
         fingerCount: Int,
         action: ((UISwipeGestureRecognizer)->())?) {
-        super.init()
-        self.direction = direction
-        numberOfTouchesRequired = fingerCount
-        swipeAction = action
-        addTarget(self, action: "didSwipe:")
+            super.init()
+            self.direction = direction
+            numberOfTouchesRequired = fingerCount
+            swipeAction = action
+            addTarget(self, action: "didSwipe:")
     }
     
     func didSwipe (swipe: UISwipeGestureRecognizer) {
@@ -1423,6 +1589,10 @@ class BlockSwipe: UISwipeGestureRecognizer {
 class BlockPinch: UIPinchGestureRecognizer {
     
     private var pinchAction: ((UIPinchGestureRecognizer)->())?
+    
+    override init(target: AnyObject, action: Selector) {
+        super.init(target: target, action: action)
+    }
     
     init (action: ((UIPinchGestureRecognizer)->())?) {
         super.init()
@@ -1443,8 +1613,13 @@ class BlockLongPress: UILongPressGestureRecognizer {
     
     private var longPressAction: ((UILongPressGestureRecognizer)->())?
     
+    override init(target: AnyObject, action: Selector) {
+        super.init(target: target, action: action)
+    }
+    
     init (action: ((UILongPressGestureRecognizer)->())?) {
         super.init()
+        longPressAction = action
         addTarget(self, action: "didLongPressed:")
     }
     
@@ -1452,13 +1627,13 @@ class BlockLongPress: UILongPressGestureRecognizer {
         longPressAction? (longPress)
     }
 }
-    
+
 
 
 // MARK: BlockBadge
 
 class BlockBadge: UILabel {
-
+    
     var attachedView: UIView!
     
     override var text: String? {
@@ -1479,7 +1654,7 @@ class BlockBadge: UILabel {
         self.textAlignment = .Center
         setCornerRadius(h/2)
     }
-
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -1502,7 +1677,7 @@ class BlockPicker: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate {
         self.delegate = self
         self.dataSource = self
     }
-
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -1524,7 +1699,7 @@ class BlockPicker: UIPickerView, UIPickerViewDataSource, UIPickerViewDelegate {
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         didPick? (row)
     }
-
+    
 }
 
 
@@ -1540,7 +1715,7 @@ class DequeuableScrollView: UIScrollView {
     override init (frame: CGRect) {
         super.init(frame: frame)
     }
-
+    
     required init (coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

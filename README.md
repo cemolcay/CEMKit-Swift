@@ -217,10 +217,13 @@ Copy & Paste CEMKit.swift into your project
 Adding shadow
 
 ``` swift
-    func addShadow (offset: CGSize,
+    
+    func addShadow (
+        offset: CGSize,
         radius: CGFloat,
         color: UIColor,
-        opacity: Float)
+        opacity: Float,
+        cornerRadius: CGFloat? = nil)    
 ```
 
 Adding borders
@@ -481,6 +484,22 @@ Get or set navigation bar color
         }
     }
 ```
+
+Push view controller
+
+``` swift
+    func push (vc: UIViewController) {
+        navigationController?.pushViewController(vc, animated: true)
+    }
+```
+
+Pop view controller
+   
+``` swift 
+    func pop () {
+        navigationController?.popViewControllerAnimated(true)
+    }
+```
   
 ### UIScrollView extension <a id="UIScrollView"></a>
 
@@ -593,6 +612,15 @@ Updating
 ##### Init with Text, TextColor, TextAlignment & Font
 
 ``` swift
+	    convenience init (
+        frame: CGRect,
+        text: String,
+        textColor: UIColor,
+        textAlignment: NSTextAlignment,
+        font: UIFont)
+```
+
+``` swift
 	convenience init (
 	        x: CGFloat,
 	        y: CGFloat,
@@ -644,6 +672,13 @@ Auto calculates frame
 ```
 
 ##### Init with AttributedText
+
+``` swift
+    convenience init (
+        frame: CGRect,
+        attributedText: NSAttributedString,
+        textAlignment: NSTextAlignment)
+```
 
 ``` swift
 	convenience init (
@@ -826,6 +861,19 @@ Print all family of font on single line
         b: CGFloat,
         a: CGFloat) -> UIColor
 ```
+
+``` swift
+	class func Gray (gray: CGFloat) -> UIColor
+```
+
+``` swift
+	class func Gray (gray: CGFloat, alpha: CGFloat) -> UIColor
+```
+
+``` swift
+	class func HexColor (hex: String) -> UIColor
+```
+
 
 ### UIImage extension <a id="UIImage"></a>
 
