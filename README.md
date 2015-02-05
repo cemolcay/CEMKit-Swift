@@ -501,6 +501,18 @@ Pop view controller
     }
 ```
   
+Present view controller
+
+``` swift
+	func present (vc: UIViewController)
+```
+
+Dismiss view controller 
+
+``` swift
+	func dismiss (completion: (()->Void)?) 
+```
+  
 ### UIScrollView extension <a id="UIScrollView"></a>
 
 ### Get/Set ContentSize Properties
@@ -1066,6 +1078,15 @@ Convert [0, 1] to to [min, max]
 	    message: String,
 	    cancelAction: ((UIAlertAction!)->Void)? = nil,
 	    okAction: ((UIAlertAction!)->Void)? = nil) -> UIAlertController
+```
+
+##### Action sheet
+
+```swift
+	func actionSheet (
+	    title: String,
+	    message: String,
+	    actions: [UIAlertAction]) -> UIAlertController
 ```
 
 
