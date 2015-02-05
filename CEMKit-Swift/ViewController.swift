@@ -53,6 +53,34 @@ class ViewController: UIViewController {
             font: UIFont.systemFontOfSize(20))
         b.backgroundColor = UIColor.redColor()
         view.addSubview(b)
+        
+        let sheeter = BlockButton (frame: CGRect (x: 0, y: 0, width: 100, height: 60))
+        sheeter.top = b.botttomWithOffset(10)
+        sheeter.left = 10
+        sheeter.setTitle("sheet", forState: .Normal)
+        sheeter.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        
+        sheeter.actionBlock = { [unowned self] sender in
+            
+            let sheet = actionSheet("title", "message", [
+                UIAlertAction (title: "action title", style: .Default, handler: { (action) -> Void in
+                    println("pressed")
+                }),
+                UIAlertAction (title: "another action", style: .Default, handler: { (action) -> Void in
+                    println("pressed")
+                }),
+                UIAlertAction (title: "cancel", style: .Cancel, handler: { (action) -> Void in
+                    println("pressed")
+                }),
+                UIAlertAction (title: "destructive", style: .Destructive, handler: { (action) -> Void in
+                    println("pressed")
+                })
+            ])
+            
+            self.presentViewController(sheet, animated: true, completion: nil)
+        }
+        
+        view.addSubview(sheeter)
     }
     
     

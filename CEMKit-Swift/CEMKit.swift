@@ -582,6 +582,14 @@ extension UIViewController {
     func pop () {
         navigationController?.popViewControllerAnimated(true)
     }
+
+    func present (vc: UIViewController) {
+        presentViewController(vc, animated: true, completion: nil)
+    }
+    
+    func dismiss (completion: (()->Void)?) {
+        dismissViewControllerAnimated(true, completion: completion)
+    }
 }
 
 
@@ -1416,6 +1424,19 @@ func alert (
             a.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: cancelAction))
         } else {
             a.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: cancelAction))
+        }
+        
+        return a
+}
+
+func actionSheet (
+    title: String,
+    message: String,
+    actions: [UIAlertAction]) -> UIAlertController {
+        let a = UIAlertController (title: title, message: message, preferredStyle: .ActionSheet)
+        
+        for action in actions {
+            a.addAction(action)
         }
         
         return a
