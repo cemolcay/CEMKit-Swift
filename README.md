@@ -28,6 +28,8 @@ UIKit toolset for quick prototyping and rapid development
 * [UIImage](#UIImage)
 * [Array](#Array)
 * [Dictionary](#Dictionary)
+* [Dispatch](#Dispatch)
+* [Download Task](#Download)
 * [UIScreen](#UIScreen)
 * [CGSize](#CGSize)
 * [CGPoint](#CGPoint)
@@ -988,6 +990,21 @@ Request image
 	    success: (UIImage?)->Void)
 ```
 
+Request json
+
+``` swift
+	func jsonRequets (
+	    url: String,
+	    success: (AnyObject?->Void),
+	    error: ((NSError)->Void)?) 
+```
+  
+NSData to json serialized AnyObject?  
+(could be [AnyObject], [String: AnyObject], nil)
+
+``` swift
+	func dataToJsonDict (data: NSData?) -> AnyObject? 
+```
 
 ### UIScreen <a id="UIScreen"></a>
 
