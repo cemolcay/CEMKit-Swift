@@ -1,7 +1,7 @@
 
 # CEMKit
 
-UIKit toolset for quick prototyping and rapid development
+UIKit & Foundation toolbelt for quick prototyping and rapid development.
 
 ## Table of Contents
 
