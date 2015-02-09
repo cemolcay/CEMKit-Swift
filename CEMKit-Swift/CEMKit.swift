@@ -1138,32 +1138,6 @@ extension UIImage {
 
 
 
-// MARK: - DownloadTask
-
-func urlRequest (url: String, success: (NSData?)->Void, error: ((NSError)->Void)? = nil) {
-    NSURLConnection.sendAsynchronousRequest(
-        NSURLRequest (URL: NSURL (string: url)!),
-        queue: NSOperationQueue.mainQueue(),
-        completionHandler: { response, data, err in
-            if let e = err {
-                error? (e)
-            } else {
-                success (data)
-            }
-        })
-}
-
-func imageRequest (url: String, success: (UIImage?)->Void) {
-    
-    urlRequest(url) {data in
-        if let d = data {
-            success (UIImage (data: d))
-        }
-    }
-}
-
-
-
 // MARK: - UIColor
 
 extension UIColor {
@@ -1308,6 +1282,73 @@ func delay (
         
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(seconds * Double(NSEC_PER_SEC)))
         dispatch_after(time, queue, after)
+}
+
+
+
+// MARK: - DownloadTask
+
+func urlRequest (
+    url: String,
+    success: (NSData?)->Void,
+    error: ((NSError)->Void)? = nil) {
+    NSURLConnection.sendAsynchronousRequest(
+        NSURLRequest (URL: NSURL (string: url)!),
+        queue: NSOperationQueue.mainQueue(),
+        completionHandler: { response, data, err in
+            if let e = err {
+                error? (e)
+            } else {
+                success (data)
+            }
+    })
+}
+
+func imageRequest (
+    url: String,
+    success: (UIImage?)->Void) {
+    
+    urlRequest(url) {data in
+        if let d = data {
+            success (UIImage (data: d))
+        }
+    }
+}
+
+func jsonRequets (
+    url: String,
+    success: (AnyObject?->Void),
+    error: ((NSError)->Void)?) {
+    urlRequest(
+        url,
+        { (data)->Void in
+            let json: AnyObject? = dataToJsonDict(data)
+            success (json)
+        },
+        { (err)->Void in
+            if let e = error {
+                e (err)
+            }
+        })
+}
+
+func dataToJsonDict (data: NSData?) -> AnyObject? {
+
+    if let d = data {
+        var error: NSError?
+        let json: AnyObject? = NSJSONSerialization.JSONObjectWithData(
+            d,
+            options: NSJSONReadingOptions.AllowFragments,
+            error: &error)
+        
+        if let e = error {
+            return nil
+        } else {
+            return json
+        }
+    } else {
+        return nil
+    }
 }
 
 

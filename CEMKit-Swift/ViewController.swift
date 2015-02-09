@@ -89,6 +89,14 @@ class ViewController: UIViewController {
             ]))
         }
         
+        jsonRequets("https://api.github.com/repositories",
+            { json in
+                println (json)
+            },
+            { error in
+                println("error" + error.description)
+            })
+        
         view.addSubview(sheeter)
     }
     

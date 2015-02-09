@@ -855,6 +855,24 @@ Print all family of font on single line
 	      	image: UIImage)
 ```
 
+#### Downlaod image background
+
+``` swift
+	func imageWithUrl (url: String)
+```
+
+With placeholder image
+
+``` swift
+	func imageWithUrl (url: String, placeholder: UIImage)
+```
+
+With placeholder image named
+
+``` swift
+	func imageWithUrl (url: String, placeholder: String)
+```
+
 ### UIColor extension <a id="UIColor"></a>
 
 ##### Create random color or RGB/A colors easily in range of [0, 255]
@@ -950,6 +968,26 @@ Resize image based on its height (auto calculates width and keeps aspect ratio)
 	        dispatch_after(time, queue, after)
 	}
 ```
+
+### Download Tasks <a id="Download"></a>
+
+Request url string
+
+``` swift
+	func urlRequest (
+	    url: String,
+	    success: (NSData?)->Void,
+	    error: ((NSError)->Void)? = nil)
+```
+
+Request image
+
+``` swift
+	func imageRequest (
+	    url: String,
+	    success: (UIImage?)->Void)
+```
+
 
 ### UIScreen <a id="UIScreen"></a>
 
