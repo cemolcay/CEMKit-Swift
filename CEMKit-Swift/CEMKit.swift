@@ -709,22 +709,18 @@ extension UILabel {
     
     
     
-    func getEstimatedRect (
+    func getEstimatedSize (
         width: CGFloat = CGFloat.max,
-        height: CGFloat = CGFloat.max) -> CGRect {
-            let rect = attributedText.boundingRectWithSize(
-                CGSize (width: width, height: height),
-                options: NSStringDrawingOptions.UsesLineFragmentOrigin,
-                context: nil)
-            return rect
+        height: CGFloat = CGFloat.max) -> CGSize {
+            return sizeThatFits(CGSize(width: width, height: height))
     }
     
     func getEstimatedHeight () -> CGFloat {
-        return getEstimatedRect(width: w).height
+        return sizeThatFits(CGSize(width: w, height: CGFloat.max)).height
     }
     
     func getEstimatedWidth () -> CGFloat {
-        return getEstimatedRect(height: h).width
+        return sizeThatFits(CGSize(width: CGFloat.max, height: h)).width
     }
     
     

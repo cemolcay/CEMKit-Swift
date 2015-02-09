@@ -54,6 +54,17 @@ class ViewController: UIViewController {
         b.backgroundColor = UIColor.redColor()
         view.addSubview(b)
         
+        let c = UILabel (
+            x: l.right,
+            y: StatusBarHeight,
+            width: 150,
+            text: "asdjndajsndajksdnkjanj\njewfwj\njfnewkfn",
+            textColor: UIColor.blackColor(),
+            textAlignment: .Center,
+            font: UIFont.systemFontOfSize(15))
+        c.backgroundColor = UIColor.lightGrayColor()
+        view.addSubview(c)
+        
         let sheeter = BlockButton (frame: CGRect (x: 0, y: 0, width: 100, height: 60))
         sheeter.top = b.botttomWithOffset(10)
         sheeter.left = 10
@@ -62,7 +73,7 @@ class ViewController: UIViewController {
         
         sheeter.actionBlock = { [unowned self] sender in
             
-            let sheet = actionSheet("title", "message", [
+            self.present(actionSheet("title", "message", [
                 UIAlertAction (title: "action title", style: .Default, handler: { (action) -> Void in
                     println("pressed")
                 }),
@@ -75,9 +86,7 @@ class ViewController: UIViewController {
                 UIAlertAction (title: "destructive", style: .Destructive, handler: { (action) -> Void in
                     println("pressed")
                 })
-            ])
-            
-            self.presentViewController(sheet, animated: true, completion: nil)
+            ]))
         }
         
         view.addSubview(sheeter)
