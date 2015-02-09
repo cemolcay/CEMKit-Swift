@@ -1315,7 +1315,7 @@ func imageRequest (
     }
 }
 
-func jsonRequets (
+func jsonRequest (
     url: String,
     success: (AnyObject?->Void),
     error: ((NSError)->Void)?) {

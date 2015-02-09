@@ -89,7 +89,7 @@ class ViewController: UIViewController {
             ]))
         }
         
-        jsonRequets("https://api.github.com/repositories",
+        jsonRequest("https://api.github.com/repositories",
             { json in
                 println (json)
             },

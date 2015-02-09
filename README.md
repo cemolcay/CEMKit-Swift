@@ -389,7 +389,7 @@ Long Press
 
 ### UIViewController extension <a id="UIViewController"></a>
 
-#### Get top layout and bottom layout
+##### Get top layout and bottom layout
 
 Top
 
@@ -426,7 +426,7 @@ Bottom
         }
     }
 ```
-#### Calculate app area exluding NavigationBar and TabBar
+##### Calculate app area exluding NavigationBar and TabBar
 
 
 ``` swift
@@ -437,7 +437,7 @@ Bottom
     }
 ```
 
-#### Quick access tab bar properties
+##### Quick access tab bar properties
   
 ``` swift
     var tabBarHeight: CGFloat {
@@ -451,7 +451,7 @@ Bottom
     }
 ```
   
-#### Quick access navigation bar properties
+##### Quick access navigation bar properties
 
 ``` swift
 	 var navBar: UINavigationBar? {
@@ -517,7 +517,7 @@ Dismiss view controller
   
 ### UIScrollView extension <a id="UIScrollView"></a>
 
-### Get/Set ContentSize Properties
+##### Get/Set ContentSize Properties
 
 ``` swift
     var contentHeight: CGFloat {
@@ -540,7 +540,7 @@ Dismiss view controller
 
 ```
 
-### Get/Set ContentOffset Properties
+##### Get/Set ContentOffset Properties
 
 ``` swift
     var offsetX: CGFloat {
@@ -761,7 +761,7 @@ Easy styling
 	convenience init (image: UIImage)
 ```
   
-### Create multiple NSAttributeString with closures
+#### Create multiple NSAttributeString with closures
 
 ``` swift
 	class func withAttributedStrings (mutableString: (NSMutableAttributedString)->()) -> NSAttributedString
@@ -993,7 +993,7 @@ Request image
 Request json
 
 ``` swift
-	func jsonRequets (
+	func jsonRequest (
 	    url: String,
 	    success: (AnyObject?->Void),
 	    error: ((NSError)->Void)?) 
