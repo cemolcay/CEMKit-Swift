@@ -66,7 +66,7 @@ class ViewController: UIViewController {
         view.addSubview(c)
         
         let sheeter = BlockButton (frame: CGRect (x: 0, y: 0, width: 100, height: 60))
-        sheeter.top = b.botttomWithOffset(10)
+        sheeter.top = b.bottomWithOffset(10)
         sheeter.left = 10
         sheeter.setTitle("sheet", forState: .Normal)
         sheeter.setTitleColor(UIColor.blackColor(), forState: .Normal)

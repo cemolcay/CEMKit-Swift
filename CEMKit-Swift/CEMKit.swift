@@ -22,7 +22,6 @@ let UIViewAnimationDuration: NSTimeInterval = 1
 let UIViewAnimationSpringDamping: CGFloat = 0.5
 let UIViewAnimationSpringVelocity: CGFloat = 0.5
 
-private var UIViewBlockBadge: UInt8 = 0
 
 extension UIView {
     
@@ -140,7 +139,7 @@ extension UIView {
         return self.top - offset
     }
     
-    func botttomWithOffset (offset: CGFloat) -> CGFloat {
+    func bottomWithOffset (offset: CGFloat) -> CGFloat {
         return self.bottom + offset
     }
     
@@ -356,30 +355,6 @@ extension UIView {
         
         return img
     }
-}
-
-
-// MARK: Badge Extensions
-
-extension UIView {
-    
-    var badge: BlockBadge? {
-        get {
-            return objc_getAssociatedObject(self, &UIViewBlockBadge) as? BlockBadge
-        } set (value) {
-            objc_setAssociatedObject(self, &UIViewBlockBadge, value, UInt(OBJC_ASSOCIATION_RETAIN))
-        }
-    }
-    
-    func setBadge (text: String) {
-        if let b = badge {
-            b.text = text
-        } else {
-            badge = BlockBadge (color: UIColor.redColor(), font: UIFont.systemFontOfSize(15))
-            badge?.text = text
-        }
-    }
-    
 }
 
 
@@ -1094,6 +1069,33 @@ extension UIImageView {
         image: UIImage) {
             self.init (frame: CGRect (x: x, y: y, width: image.aspectWidthForHeight(height), height: height), image: image)
     }
+
+    
+    func imageWithUrl (url: String) {
+        imageRequest(url, { (image) -> Void in
+            if let img = image {
+                self.image = image
+            }
+        })
+    }
+    
+    func imageWithUrl (url: String, placeholder: UIImage) {
+        self.image = placeholder
+        imageRequest(url, { (image) -> Void in
+            if let img = image {
+                self.image = image
+            }
+        })
+    }
+    
+    func imageWithUrl (url: String, placeholder: String) {
+        self.image = UIImage (named: placeholder)
+        imageRequest(url, { (image) -> Void in
+            if let img = image {
+                self.image = image
+            }
+        })
+    }
 }
 
 
@@ -1131,6 +1133,32 @@ extension UIImage {
     
     func aspectWidthForHeight (height: CGFloat) -> CGFloat {
         return (height * self.size.width) / self.size.height
+    }
+}
+
+
+
+// MARK: - DownloadTask
+
+func urlRequest (url: String, success: (NSData?)->Void, error: ((NSError)->Void)? = nil) {
+    NSURLConnection.sendAsynchronousRequest(
+        NSURLRequest (URL: NSURL (string: url)!),
+        queue: NSOperationQueue.mainQueue(),
+        completionHandler: { response, data, err in
+            if let e = err {
+                error? (e)
+            } else {
+                success (data)
+            }
+        })
+}
+
+func imageRequest (url: String, success: (UIImage?)->Void) {
+    
+    urlRequest(url) {data in
+        if let d = data {
+            success (UIImage (data: d))
+        }
     }
 }
 
@@ -1480,6 +1508,10 @@ func barButtonItem (
 // MARK: - BlockButton
 
 class BlockButton: UIButton {
+    
+    init (x: CGFloat, y: CGFloat, w: CGFloat, h: CGFloat) {
+        super.init (frame: CGRect (x: x, y: y, width: w, height: h))
+    }
     
     override init (frame: CGRect) {
         super.init(frame: frame)
