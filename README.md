@@ -1124,6 +1124,25 @@ Convert [0, 1] to to [min, max]
 	    maximum: CGFloat) -> CGFloat
 ```
 
+
+##### Calculate aspected height of wanted target aspect width by current width & height 
+
+``` swift
+	func aspectHeightForTargetAspectWidth (
+	    currentHeight: CGFloat,
+	    currentWidth: CGFloat,
+	    targetAspectWidth: CGFloat) -> CGFloat 
+```
+
+##### Calculate aspected width of wanted target aspect height by current width & height 
+
+``` swift
+	func aspectWidthForTargetAspectHeight (
+	    currentHeight: CGFloat,
+	    currentWidth: CGFloat,
+	    targetAspectHeight: CGFloat) -> CGFloat
+```
+
 ### UIAlertViewController <a id="UIAlertViewController"></a>
 
 ##### Single line, block based ios 8 alert

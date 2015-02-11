@@ -1474,6 +1474,21 @@ func clamp (
 }
 
 
+func aspectHeightForTargetAspectWidth (
+    currentHeight: CGFloat,
+    currentWidth: CGFloat,
+    targetAspectWidth: CGFloat) -> CGFloat {
+        return (targetAspectWidth * currentHeight) / currentWidth
+}
+
+func aspectWidthForTargetAspectHeight (
+    currentHeight: CGFloat,
+    currentWidth: CGFloat,
+    targetAspectHeight: CGFloat) -> CGFloat {
+        return (targetAspectHeight * currentWidth) / currentHeight
+}
+
+
 
 // MARK: - UIAlertController
 
