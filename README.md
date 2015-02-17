@@ -857,7 +857,7 @@ Print all family of font on single line
 	      	image: UIImage)
 ```
 
-#### Downlaod image background
+#### Download image background
 
 ``` swift
 	func imageWithUrl (url: String)
