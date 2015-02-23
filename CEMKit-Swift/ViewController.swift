@@ -12,7 +12,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        cemkitDemo()
+    }
+    
+    
+    func cemkitDemo () {
         let att = NSAttributedString.withAttributedStrings({ att in
             att.appendAttributedString (NSAttributedString(
                 text: "asd",
@@ -30,7 +34,7 @@ class ViewController: UIViewController {
                 text: "\nasd",
                 color: UIColor.blackColor(),
                 font: UIFont.Font(.AvenirNext,
-                    type: UIFont.FontType.DemiBold,
+                    type: .DemiBold,
                     size: 15),
                 style: .underline(.StyleSingle, UIColor.blueColor())))
         })
@@ -56,7 +60,7 @@ class ViewController: UIViewController {
         
         let c = UILabel (
             x: l.right,
-            y: StatusBarHeight,
+            y: UIScreen.StatusBarHeight,
             width: 150,
             text: "asdjndajsndajksdnkjanj\njewfwj\njfnewkfn",
             textColor: UIColor.blackColor(),
@@ -95,7 +99,7 @@ class ViewController: UIViewController {
             },
             { error in
                 println("error" + error.description)
-            })
+        })
         
         view.addSubview(sheeter)
     }
