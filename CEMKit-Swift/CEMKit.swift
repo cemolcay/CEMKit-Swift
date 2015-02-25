@@ -1297,6 +1297,21 @@ extension Array {
 
 
 
+// MARK: - NSDate
+
+extension NSDate {
+    
+    func toString (format: String) -> String {
+        let formatter = NSDateFormatter ()
+        formatter.dateFormat = format
+        
+        return formatter.stringFromDate(self)
+    }
+    
+}
+
+
+
 // MARK: - CGSize
 
 func + (left: CGSize, right: CGSize) -> CGSize {
