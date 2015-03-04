@@ -26,6 +26,7 @@ UIKit & Foundation toolbelt for quick prototyping and rapid development.
 * [UIImageView](#UIImageView)
 * [UIColor](#UIColor)
 * [UIImage](#UIImage)
+* [NSDate](#NSDate)
 * [Array](#Array)
 * [Dictionary](#Dictionary)
 * [Dispatch](#Dispatch)
@@ -938,6 +939,19 @@ Resize image based on its height (auto calculates width and keeps aspect ratio)
 ``` swift
     func aspectResizeWithHeight (height: CGFloat) -> UIImage
 ```
+
+### NSDate <a id="NSDate"></a>
+
+##### Easy convert to string with format
+
+``` swift
+    func toString (format: String) -> String {
+        let formatter = NSDateFormatter ()
+        formatter.dateFormat = format
+        
+        return formatter.stringFromDate(self)
+    }
+``` 
 
 ### Array <a id="Array"></a>
 
