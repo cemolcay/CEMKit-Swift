@@ -26,7 +26,8 @@ extension UIView {
     
     // MARK: Custom Initilizer
     
-    convenience init (x: CGFloat,
+    convenience init (
+        x: CGFloat,
         y: CGFloat,
         w: CGFloat,
         h: CGFloat) {
@@ -644,7 +645,8 @@ extension UILabel {
     
     
     
-    func updateAttributedStringAtIndex (index: Int,
+    func updateAttributedStringAtIndex (
+        index: Int,
         attributedString: NSAttributedString) {
             
             if let att = attributedStrings?[index] {
@@ -660,7 +662,8 @@ extension UILabel {
             }
     }
     
-    func updateAttributedStringAtIndex (index: Int,
+    func updateAttributedStringAtIndex (
+        index: Int,
         newText: String) {
             if let att = attributedStrings?[index] {
                 let newAtt = NSMutableAttributedString (string: newText)
