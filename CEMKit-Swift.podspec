@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CEMKit-Swift"
-  s.version      = "0.1.4"
+  s.version      = "0.1.5"
   s.summary      = "UIKit toolset for quick prototyping and rapid development"
 
   s.description  = <<-DESC
@@ -64,7 +64,7 @@ Pod::Spec.new do |s|
    s.platform     = :ios, "8.0"
 
   #  When using multiple platforms
-  # s.ios.deployment_target = "5.0"
+  s.ios.deployment_target = "8.0"
   # s.osx.deployment_target = "10.7"
 
 
@@ -74,7 +74,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/cemolcay/CEMKit-Swift.git", :tag => "v0.1.4" }
+  s.source       = { :git => "https://github.com/cemolcay/CEMKit-Swift.git", :tag => "v0.1.5" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
