@@ -55,7 +55,7 @@ Copy & Paste CEMKit.swift into your project
 
 #### Cocoapods
 
-	pod "CEMKit-Swift", "~> 0.1.3"
+	pod "CEMKit-Swift", "~> 0.1.5"
 
 
 ## Documentation
