@@ -45,9 +45,7 @@ UIKit & Foundation toolbelt for quick prototyping and rapid development.
 * [BlockPinch](#BlockPinch)
 * [BlockLongPress](#BlockLongPress)
 * [BlockPicker](#BlockPicker)
-* [BlockBadge](#BlockBadge)
 * [BlockPicker](#BlockPicker)
-* [DequeuableScrollView](#DequeuableScrollView)
 
 
 ## Installation <a id="Installation"></a>
@@ -1273,13 +1271,4 @@ Convert [0, 1] to to [min, max]
 
 ``` swift
 	init (action: ((UILongPressGestureRecognizer)->())?)
-```
- 
-### DequeuableScrollViwew <a id="DequeuableScrollView"></a>
-
-##### Deques the added subviews.
-##### Adds or removes subviews from itself depends on its visible frame
-
-``` swift
-	override init (frame: CGRect)
 ```
