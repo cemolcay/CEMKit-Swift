@@ -48,16 +48,6 @@ class ViewController: UIViewController {
         l.backgroundColor = UIColor.yellowColor()
         view.addSubview(l)
         
-        let b = UILabel (
-            x: 0,
-            y: l.bottom,
-            text: "asdkmkalsmd\ndedmed\nkdmkemandjkns",
-            textColor: UIColor.blackColor(),
-            textAlignment: .Center,
-            font: UIFont.systemFontOfSize(20))
-        b.backgroundColor = UIColor.redColor()
-        view.addSubview(b)
-        
         let c = UILabel (
             x: l.right,
             y: UIScreen.StatusBarHeight,
@@ -70,7 +60,7 @@ class ViewController: UIViewController {
         view.addSubview(c)
         
         let sheeter = BlockButton (frame: CGRect (x: 0, y: 0, width: 100, height: 60))
-        sheeter.top = b.bottomWithOffset(10)
+        sheeter.top = c.bottomWithOffset(10)
         sheeter.left = 10
         sheeter.setTitle("sheet", forState: .Normal)
         sheeter.setTitleColor(UIColor.blackColor(), forState: .Normal)
@@ -93,13 +83,13 @@ class ViewController: UIViewController {
             ]))
         }
         
-        jsonRequest("https://api.github.com/repositories",
-            { json in
+        NSURLConnection.jsonRequest("https://api.github.com/repositories",
+            success: { json in
                 println (json)
             },
-            { error in
+            error: { error in
                 println("error" + error.description)
-        })
+            })
         
         view.addSubview(sheeter)
     }

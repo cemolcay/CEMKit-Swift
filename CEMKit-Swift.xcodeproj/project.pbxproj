@@ -7,13 +7,47 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B25037F41A0A7BDC00CDAB1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25037F31A0A7BDC00CDAB1C /* AppDelegate.swift */; };
-		B25037F61A0A7BDC00CDAB1C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25037F51A0A7BDC00CDAB1C /* ViewController.swift */; };
-		B25037F91A0A7BDC00CDAB1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B25037F71A0A7BDC00CDAB1C /* Main.storyboard */; };
-		B25037FB1A0A7BDC00CDAB1C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B25037FA1A0A7BDC00CDAB1C /* Images.xcassets */; };
-		B25037FE1A0A7BDC00CDAB1C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B25037FC1A0A7BDC00CDAB1C /* LaunchScreen.xib */; };
+		B236FF0C1B81D21F00EA2689 /* BlockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEDE1B81D21E00EA2689 /* BlockButton.swift */; };
+		B236FF0D1B81D21F00EA2689 /* BlockLongPress.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEDF1B81D21E00EA2689 /* BlockLongPress.swift */; };
+		B236FF0E1B81D21F00EA2689 /* BlockPan.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEE01B81D21F00EA2689 /* BlockPan.swift */; };
+		B236FF0F1B81D21F00EA2689 /* BlockPinch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEE11B81D21F00EA2689 /* BlockPinch.swift */; };
+		B236FF101B81D21F00EA2689 /* BlockSwipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEE21B81D21F00EA2689 /* BlockSwipe.swift */; };
+		B236FF111B81D21F00EA2689 /* BlockTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEE31B81D21F00EA2689 /* BlockTap.swift */; };
+		B236FF121B81D21F00EA2689 /* BlockWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEE41B81D21F00EA2689 /* BlockWebView.swift */; };
+		B236FF131B81D21F00EA2689 /* CEMKit+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEE61B81D21F00EA2689 /* CEMKit+Array.swift */; };
+		B236FF141B81D21F00EA2689 /* CEMKit+CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEE71B81D21F00EA2689 /* CEMKit+CGFloat.swift */; };
+		B236FF151B81D21F00EA2689 /* CEMKit+CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEE81B81D21F00EA2689 /* CEMKit+CGPoint.swift */; };
+		B236FF161B81D21F00EA2689 /* CEMKit+CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEE91B81D21F00EA2689 /* CEMKit+CGRect.swift */; };
+		B236FF171B81D21F00EA2689 /* CEMKit+CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEEA1B81D21F00EA2689 /* CEMKit+CGSize.swift */; };
+		B236FF181B81D21F00EA2689 /* CEMKit+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEEB1B81D21F00EA2689 /* CEMKit+Dictionary.swift */; };
+		B236FF191B81D21F00EA2689 /* CEMKit+GDC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEEC1B81D21F00EA2689 /* CEMKit+GDC.swift */; };
+		B236FF1A1B81D21F00EA2689 /* CEMKit+NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEED1B81D21F00EA2689 /* CEMKit+NSAttributedString.swift */; };
+		B236FF1B1B81D21F00EA2689 /* CEMKit+NSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEEE1B81D21F00EA2689 /* CEMKit+NSData.swift */; };
+		B236FF1C1B81D21F00EA2689 /* CEMKit+NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEEF1B81D21F00EA2689 /* CEMKit+NSDate.swift */; };
+		B236FF1D1B81D21F00EA2689 /* CEMKit+NSString.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEF01B81D21F00EA2689 /* CEMKit+NSString.swift */; };
+		B236FF1E1B81D21F00EA2689 /* CEMKit+NSURLConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEF11B81D21F00EA2689 /* CEMKit+NSURLConnection.swift */; };
+		B236FF1F1B81D21F00EA2689 /* CEMKit+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEF21B81D21F00EA2689 /* CEMKit+String.swift */; };
+		B236FF201B81D21F00EA2689 /* CEMKit+CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEF41B81D21F00EA2689 /* CEMKit+CALayer.swift */; };
+		B236FF211B81D21F00EA2689 /* CEMKit+UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEF51B81D21F00EA2689 /* CEMKit+UIAlertController.swift */; };
+		B236FF221B81D21F00EA2689 /* CEMKit+UIBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEF61B81D21F00EA2689 /* CEMKit+UIBarButtonItem.swift */; };
+		B236FF231B81D21F00EA2689 /* CEMKit+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEF71B81D21F00EA2689 /* CEMKit+UIColor.swift */; };
+		B236FF241B81D21F00EA2689 /* CEMKit+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEF81B81D21F00EA2689 /* CEMKit+UIFont.swift */; };
+		B236FF251B81D21F00EA2689 /* CEMKit+UIGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEF91B81D21F00EA2689 /* CEMKit+UIGestureRecognizer.swift */; };
+		B236FF261B81D21F00EA2689 /* CEMKit+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEFA1B81D21F00EA2689 /* CEMKit+UIImage.swift */; };
+		B236FF271B81D21F00EA2689 /* CEMKit+UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEFB1B81D21F00EA2689 /* CEMKit+UIImageView.swift */; };
+		B236FF281B81D21F00EA2689 /* CEMKit+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEFC1B81D21F00EA2689 /* CEMKit+UILabel.swift */; };
+		B236FF291B81D21F00EA2689 /* CEMKit+UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEFD1B81D21F00EA2689 /* CEMKit+UINavigationController.swift */; };
+		B236FF2A1B81D21F00EA2689 /* CEMKit+UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEFE1B81D21F00EA2689 /* CEMKit+UIScreen.swift */; };
+		B236FF2B1B81D21F00EA2689 /* CEMKit+UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEFF1B81D21F00EA2689 /* CEMKit+UIScrollView.swift */; };
+		B236FF2C1B81D21F00EA2689 /* CEMKit+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FF001B81D21F00EA2689 /* CEMKit+UIView.swift */; };
+		B236FF2D1B81D21F00EA2689 /* CEMKit+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FF011B81D21F00EA2689 /* CEMKit+UIViewController.swift */; };
+		B236FF2E1B81D21F00EA2689 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FF031B81D21F00EA2689 /* ViewController.swift */; };
+		B236FF2F1B81D21F00EA2689 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FF051B81D21F00EA2689 /* AppDelegate.swift */; };
+		B236FF301B81D21F00EA2689 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B236FF061B81D21F00EA2689 /* LaunchScreen.xib */; };
+		B236FF311B81D21F00EA2689 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B236FF081B81D21F00EA2689 /* Main.storyboard */; };
+		B236FF321B81D21F00EA2689 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B236FF0A1B81D21F00EA2689 /* Images.xcassets */; };
+		B236FF331B81D21F00EA2689 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B236FF0B1B81D21F00EA2689 /* Info.plist */; };
 		B250380A1A0A7BDC00CDAB1C /* CEMKit_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25038091A0A7BDC00CDAB1C /* CEMKit_SwiftTests.swift */; };
-		B2D4AD951A1DDE6100B071E8 /* CEMKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D4AD941A1DDE6100B071E8 /* CEMKit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,17 +61,50 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B236FEDE1B81D21E00EA2689 /* BlockButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockButton.swift; sourceTree = "<group>"; };
+		B236FEDF1B81D21E00EA2689 /* BlockLongPress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockLongPress.swift; sourceTree = "<group>"; };
+		B236FEE01B81D21F00EA2689 /* BlockPan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockPan.swift; sourceTree = "<group>"; };
+		B236FEE11B81D21F00EA2689 /* BlockPinch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockPinch.swift; sourceTree = "<group>"; };
+		B236FEE21B81D21F00EA2689 /* BlockSwipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockSwipe.swift; sourceTree = "<group>"; };
+		B236FEE31B81D21F00EA2689 /* BlockTap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTap.swift; sourceTree = "<group>"; };
+		B236FEE41B81D21F00EA2689 /* BlockWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockWebView.swift; sourceTree = "<group>"; };
+		B236FEE61B81D21F00EA2689 /* CEMKit+Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+Array.swift"; sourceTree = "<group>"; };
+		B236FEE71B81D21F00EA2689 /* CEMKit+CGFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+CGFloat.swift"; sourceTree = "<group>"; };
+		B236FEE81B81D21F00EA2689 /* CEMKit+CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+CGPoint.swift"; sourceTree = "<group>"; };
+		B236FEE91B81D21F00EA2689 /* CEMKit+CGRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+CGRect.swift"; sourceTree = "<group>"; };
+		B236FEEA1B81D21F00EA2689 /* CEMKit+CGSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+CGSize.swift"; sourceTree = "<group>"; };
+		B236FEEB1B81D21F00EA2689 /* CEMKit+Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+Dictionary.swift"; sourceTree = "<group>"; };
+		B236FEEC1B81D21F00EA2689 /* CEMKit+GDC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+GDC.swift"; sourceTree = "<group>"; };
+		B236FEED1B81D21F00EA2689 /* CEMKit+NSAttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+NSAttributedString.swift"; sourceTree = "<group>"; };
+		B236FEEE1B81D21F00EA2689 /* CEMKit+NSData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+NSData.swift"; sourceTree = "<group>"; };
+		B236FEEF1B81D21F00EA2689 /* CEMKit+NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+NSDate.swift"; sourceTree = "<group>"; };
+		B236FEF01B81D21F00EA2689 /* CEMKit+NSString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+NSString.swift"; sourceTree = "<group>"; };
+		B236FEF11B81D21F00EA2689 /* CEMKit+NSURLConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+NSURLConnection.swift"; sourceTree = "<group>"; };
+		B236FEF21B81D21F00EA2689 /* CEMKit+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+String.swift"; sourceTree = "<group>"; };
+		B236FEF41B81D21F00EA2689 /* CEMKit+CALayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+CALayer.swift"; sourceTree = "<group>"; };
+		B236FEF51B81D21F00EA2689 /* CEMKit+UIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+UIAlertController.swift"; sourceTree = "<group>"; };
+		B236FEF61B81D21F00EA2689 /* CEMKit+UIBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+UIBarButtonItem.swift"; sourceTree = "<group>"; };
+		B236FEF71B81D21F00EA2689 /* CEMKit+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+UIColor.swift"; sourceTree = "<group>"; };
+		B236FEF81B81D21F00EA2689 /* CEMKit+UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+UIFont.swift"; sourceTree = "<group>"; };
+		B236FEF91B81D21F00EA2689 /* CEMKit+UIGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+UIGestureRecognizer.swift"; sourceTree = "<group>"; };
+		B236FEFA1B81D21F00EA2689 /* CEMKit+UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+UIImage.swift"; sourceTree = "<group>"; };
+		B236FEFB1B81D21F00EA2689 /* CEMKit+UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+UIImageView.swift"; sourceTree = "<group>"; };
+		B236FEFC1B81D21F00EA2689 /* CEMKit+UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+UILabel.swift"; sourceTree = "<group>"; };
+		B236FEFD1B81D21F00EA2689 /* CEMKit+UINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+UINavigationController.swift"; sourceTree = "<group>"; };
+		B236FEFE1B81D21F00EA2689 /* CEMKit+UIScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+UIScreen.swift"; sourceTree = "<group>"; };
+		B236FEFF1B81D21F00EA2689 /* CEMKit+UIScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+UIScrollView.swift"; sourceTree = "<group>"; };
+		B236FF001B81D21F00EA2689 /* CEMKit+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+UIView.swift"; sourceTree = "<group>"; };
+		B236FF011B81D21F00EA2689 /* CEMKit+UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CEMKit+UIViewController.swift"; sourceTree = "<group>"; };
+		B236FF031B81D21F00EA2689 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B236FF051B81D21F00EA2689 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B236FF071B81D21F00EA2689 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		B236FF091B81D21F00EA2689 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B236FF0A1B81D21F00EA2689 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		B236FF0B1B81D21F00EA2689 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B25037EE1A0A7BDC00CDAB1C /* CEMKit-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CEMKit-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B25037F21A0A7BDC00CDAB1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B25037F31A0A7BDC00CDAB1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B25037F51A0A7BDC00CDAB1C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B25037F81A0A7BDC00CDAB1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B25037FA1A0A7BDC00CDAB1C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		B25037FD1A0A7BDC00CDAB1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		B25038031A0A7BDC00CDAB1C /* CEMKit-SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CEMKit-SwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B25038081A0A7BDC00CDAB1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B25038091A0A7BDC00CDAB1C /* CEMKit_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEMKit_SwiftTests.swift; sourceTree = "<group>"; };
-		B2D4AD941A1DDE6100B071E8 /* CEMKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CEMKit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +125,91 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B236FEDC1B81D21E00EA2689 /* CEMKit */ = {
+			isa = PBXGroup;
+			children = (
+				B236FEDD1B81D21E00EA2689 /* BlockObjects */,
+				B236FEE51B81D21F00EA2689 /* Foundation */,
+				B236FEF31B81D21F00EA2689 /* UIKit */,
+			);
+			path = CEMKit;
+			sourceTree = "<group>";
+		};
+		B236FEDD1B81D21E00EA2689 /* BlockObjects */ = {
+			isa = PBXGroup;
+			children = (
+				B236FEDE1B81D21E00EA2689 /* BlockButton.swift */,
+				B236FEDF1B81D21E00EA2689 /* BlockLongPress.swift */,
+				B236FEE01B81D21F00EA2689 /* BlockPan.swift */,
+				B236FEE11B81D21F00EA2689 /* BlockPinch.swift */,
+				B236FEE21B81D21F00EA2689 /* BlockSwipe.swift */,
+				B236FEE31B81D21F00EA2689 /* BlockTap.swift */,
+				B236FEE41B81D21F00EA2689 /* BlockWebView.swift */,
+			);
+			path = BlockObjects;
+			sourceTree = "<group>";
+		};
+		B236FEE51B81D21F00EA2689 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				B236FEE61B81D21F00EA2689 /* CEMKit+Array.swift */,
+				B236FEE71B81D21F00EA2689 /* CEMKit+CGFloat.swift */,
+				B236FEE81B81D21F00EA2689 /* CEMKit+CGPoint.swift */,
+				B236FEE91B81D21F00EA2689 /* CEMKit+CGRect.swift */,
+				B236FEEA1B81D21F00EA2689 /* CEMKit+CGSize.swift */,
+				B236FEEB1B81D21F00EA2689 /* CEMKit+Dictionary.swift */,
+				B236FEEC1B81D21F00EA2689 /* CEMKit+GDC.swift */,
+				B236FEED1B81D21F00EA2689 /* CEMKit+NSAttributedString.swift */,
+				B236FEEE1B81D21F00EA2689 /* CEMKit+NSData.swift */,
+				B236FEEF1B81D21F00EA2689 /* CEMKit+NSDate.swift */,
+				B236FEF01B81D21F00EA2689 /* CEMKit+NSString.swift */,
+				B236FEF11B81D21F00EA2689 /* CEMKit+NSURLConnection.swift */,
+				B236FEF21B81D21F00EA2689 /* CEMKit+String.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		B236FEF31B81D21F00EA2689 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				B236FEF41B81D21F00EA2689 /* CEMKit+CALayer.swift */,
+				B236FEF51B81D21F00EA2689 /* CEMKit+UIAlertController.swift */,
+				B236FEF61B81D21F00EA2689 /* CEMKit+UIBarButtonItem.swift */,
+				B236FEF71B81D21F00EA2689 /* CEMKit+UIColor.swift */,
+				B236FEF81B81D21F00EA2689 /* CEMKit+UIFont.swift */,
+				B236FEF91B81D21F00EA2689 /* CEMKit+UIGestureRecognizer.swift */,
+				B236FEFA1B81D21F00EA2689 /* CEMKit+UIImage.swift */,
+				B236FEFB1B81D21F00EA2689 /* CEMKit+UIImageView.swift */,
+				B236FEFC1B81D21F00EA2689 /* CEMKit+UILabel.swift */,
+				B236FEFD1B81D21F00EA2689 /* CEMKit+UINavigationController.swift */,
+				B236FEFE1B81D21F00EA2689 /* CEMKit+UIScreen.swift */,
+				B236FEFF1B81D21F00EA2689 /* CEMKit+UIScrollView.swift */,
+				B236FF001B81D21F00EA2689 /* CEMKit+UIView.swift */,
+				B236FF011B81D21F00EA2689 /* CEMKit+UIViewController.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		B236FF021B81D21F00EA2689 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				B236FF031B81D21F00EA2689 /* ViewController.swift */,
+			);
+			path = Demo;
+			sourceTree = "<group>";
+		};
+		B236FF041B81D21F00EA2689 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				B236FF051B81D21F00EA2689 /* AppDelegate.swift */,
+				B236FF061B81D21F00EA2689 /* LaunchScreen.xib */,
+				B236FF081B81D21F00EA2689 /* Main.storyboard */,
+				B236FF0A1B81D21F00EA2689 /* Images.xcassets */,
+				B236FF0B1B81D21F00EA2689 /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
 		B25037E51A0A7BDC00CDAB1C = {
 			isa = PBXGroup;
 			children = (
@@ -79,23 +231,11 @@
 		B25037F01A0A7BDC00CDAB1C /* CEMKit-Swift */ = {
 			isa = PBXGroup;
 			children = (
-				B25037F31A0A7BDC00CDAB1C /* AppDelegate.swift */,
-				B25037F51A0A7BDC00CDAB1C /* ViewController.swift */,
-				B2D4AD941A1DDE6100B071E8 /* CEMKit.swift */,
-				B25037F71A0A7BDC00CDAB1C /* Main.storyboard */,
-				B25037FA1A0A7BDC00CDAB1C /* Images.xcassets */,
-				B25037FC1A0A7BDC00CDAB1C /* LaunchScreen.xib */,
-				B25037F11A0A7BDC00CDAB1C /* Supporting Files */,
+				B236FEDC1B81D21E00EA2689 /* CEMKit */,
+				B236FF021B81D21F00EA2689 /* Demo */,
+				B236FF041B81D21F00EA2689 /* SupportingFiles */,
 			);
 			path = "CEMKit-Swift";
-			sourceTree = "<group>";
-		};
-		B25037F11A0A7BDC00CDAB1C /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				B25037F21A0A7BDC00CDAB1C /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		B25038061A0A7BDC00CDAB1C /* CEMKit-SwiftTests */ = {
@@ -195,9 +335,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B25037F91A0A7BDC00CDAB1C /* Main.storyboard in Resources */,
-				B25037FE1A0A7BDC00CDAB1C /* LaunchScreen.xib in Resources */,
-				B25037FB1A0A7BDC00CDAB1C /* Images.xcassets in Resources */,
+				B236FF331B81D21F00EA2689 /* Info.plist in Resources */,
+				B236FF321B81D21F00EA2689 /* Images.xcassets in Resources */,
+				B236FF301B81D21F00EA2689 /* LaunchScreen.xib in Resources */,
+				B236FF311B81D21F00EA2689 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,9 +356,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B25037F61A0A7BDC00CDAB1C /* ViewController.swift in Sources */,
-				B2D4AD951A1DDE6100B071E8 /* CEMKit.swift in Sources */,
-				B25037F41A0A7BDC00CDAB1C /* AppDelegate.swift in Sources */,
+				B236FF0F1B81D21F00EA2689 /* BlockPinch.swift in Sources */,
+				B236FF281B81D21F00EA2689 /* CEMKit+UILabel.swift in Sources */,
+				B236FF1C1B81D21F00EA2689 /* CEMKit+NSDate.swift in Sources */,
+				B236FF1B1B81D21F00EA2689 /* CEMKit+NSData.swift in Sources */,
+				B236FF2B1B81D21F00EA2689 /* CEMKit+UIScrollView.swift in Sources */,
+				B236FF2A1B81D21F00EA2689 /* CEMKit+UIScreen.swift in Sources */,
+				B236FF101B81D21F00EA2689 /* BlockSwipe.swift in Sources */,
+				B236FF251B81D21F00EA2689 /* CEMKit+UIGestureRecognizer.swift in Sources */,
+				B236FF161B81D21F00EA2689 /* CEMKit+CGRect.swift in Sources */,
+				B236FF1F1B81D21F00EA2689 /* CEMKit+String.swift in Sources */,
+				B236FF291B81D21F00EA2689 /* CEMKit+UINavigationController.swift in Sources */,
+				B236FF191B81D21F00EA2689 /* CEMKit+GDC.swift in Sources */,
+				B236FF2F1B81D21F00EA2689 /* AppDelegate.swift in Sources */,
+				B236FF171B81D21F00EA2689 /* CEMKit+CGSize.swift in Sources */,
+				B236FF201B81D21F00EA2689 /* CEMKit+CALayer.swift in Sources */,
+				B236FF211B81D21F00EA2689 /* CEMKit+UIAlertController.swift in Sources */,
+				B236FF181B81D21F00EA2689 /* CEMKit+Dictionary.swift in Sources */,
+				B236FF0C1B81D21F00EA2689 /* BlockButton.swift in Sources */,
+				B236FF151B81D21F00EA2689 /* CEMKit+CGPoint.swift in Sources */,
+				B236FF1D1B81D21F00EA2689 /* CEMKit+NSString.swift in Sources */,
+				B236FF271B81D21F00EA2689 /* CEMKit+UIImageView.swift in Sources */,
+				B236FF0E1B81D21F00EA2689 /* BlockPan.swift in Sources */,
+				B236FF2D1B81D21F00EA2689 /* CEMKit+UIViewController.swift in Sources */,
+				B236FF131B81D21F00EA2689 /* CEMKit+Array.swift in Sources */,
+				B236FF0D1B81D21F00EA2689 /* BlockLongPress.swift in Sources */,
+				B236FF141B81D21F00EA2689 /* CEMKit+CGFloat.swift in Sources */,
+				B236FF2E1B81D21F00EA2689 /* ViewController.swift in Sources */,
+				B236FF111B81D21F00EA2689 /* BlockTap.swift in Sources */,
+				B236FF121B81D21F00EA2689 /* BlockWebView.swift in Sources */,
+				B236FF241B81D21F00EA2689 /* CEMKit+UIFont.swift in Sources */,
+				B236FF2C1B81D21F00EA2689 /* CEMKit+UIView.swift in Sources */,
+				B236FF231B81D21F00EA2689 /* CEMKit+UIColor.swift in Sources */,
+				B236FF261B81D21F00EA2689 /* CEMKit+UIImage.swift in Sources */,
+				B236FF1A1B81D21F00EA2689 /* CEMKit+NSAttributedString.swift in Sources */,
+				B236FF1E1B81D21F00EA2689 /* CEMKit+NSURLConnection.swift in Sources */,
+				B236FF221B81D21F00EA2689 /* CEMKit+UIBarButtonItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,20 +414,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		B25037F71A0A7BDC00CDAB1C /* Main.storyboard */ = {
+		B236FF061B81D21F00EA2689 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B25037F81A0A7BDC00CDAB1C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		B25037FC1A0A7BDC00CDAB1C /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B25037FD1A0A7BDC00CDAB1C /* Base */,
+				B236FF071B81D21F00EA2689 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		B236FF081B81D21F00EA2689 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B236FF091B81D21F00EA2689 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -340,7 +514,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "CEMKit-Swift/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/CEMKit-Swift/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -350,7 +524,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "CEMKit-Swift/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/CEMKit-Swift/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
