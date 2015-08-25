@@ -305,6 +305,37 @@ extension UIView {
 }
 
 
+// MARK: - Border Extensions
+
+extension UIView {
+    
+    func addTopBorder (inset: UIEdgeInsets = UIEdgeInsetsZero, lineWidth: CGFloat, color: UIColor) {
+        let border = CALayer(x: inset.left, y: inset.top, w: w - inset.left - inset.right, h: lineWidth)
+        border.backgroundColor = color.CGColor
+        layer.addSublayer(border)
+    }
+    
+    func addBottomBorder (inset: UIEdgeInsets = UIEdgeInsetsZero, lineWidth: CGFloat, color: UIColor) {
+        let border = CALayer(x: inset.left, y: h - inset.bottom, w: w - inset.left - inset.right, h: lineWidth)
+        border.backgroundColor = color.CGColor
+        layer.addSublayer(border)
+    }
+    
+    func addLeftBorder (inset: UIEdgeInsets = UIEdgeInsetsZero, lineWidth: CGFloat, color: UIColor) {
+        let border = CALayer(x: inset.left, y: inset.top, w: lineWidth, h: h - inset.top - inset.bottom)
+        border.backgroundColor = color.CGColor
+        layer.addSublayer(border)
+    }
+    
+    func addRightBorder (inset: UIEdgeInsets = UIEdgeInsetsZero, lineWidth: CGFloat, color: UIColor) {
+        let border = CALayer(x: inset.left, y: inset.top, w: lineWidth, h: h - inset.top - inset.bottom)
+        border.backgroundColor = color.CGColor
+        layer.addSublayer(border)
+    }
+    
+}
+
+
 // MARK: - Animation Extensions
 
 extension UIView {
