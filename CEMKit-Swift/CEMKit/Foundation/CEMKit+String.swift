@@ -33,4 +33,8 @@ extension String {
             height: height,
             font: font)
     }
+    
+    func contains (string: String, options: NSStringCompareOptions = NSStringCompareOptions.CaseInsensitiveSearch) -> Bool {
+        return rangeOfString(string, options: options, range: nil, locale: nil) != nil
+    }
 }
