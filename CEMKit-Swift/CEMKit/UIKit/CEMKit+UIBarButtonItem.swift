@@ -14,7 +14,7 @@ extension UIBarButtonItem {
         
         let button = BlockButton (frame: CGRect(x: 0, y: 0, width: size, height: size))
         button.setImage(UIImage(named: imageName), forState: .Normal)
-        button.actionBlock = { sender in action() }
+        button.action = { sender in action() }
         
         self.init(customView: button)
     }
@@ -27,7 +27,7 @@ extension UIBarButtonItem {
         let button = BlockButton (frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         button.setTitle(title, forState: .Normal)
         button.setTitleColor(color, forState: .Normal)
-        button.actionBlock = { sender in action() }
+        button.action = { sender in action() }
         button.sizeToFit()
         
         self.init(customView: button)

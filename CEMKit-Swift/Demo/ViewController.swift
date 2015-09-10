@@ -12,9 +12,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        cemkitDemo()
+//        cemkitDemo()
+        blockButtonDemo()
     }
-    
     
     func cemkitDemo () {
         let att = NSAttributedString.withAttributedStrings({ att in
@@ -65,7 +65,7 @@ class ViewController: UIViewController {
         sheeter.setTitle("sheet", forState: .Normal)
         sheeter.setTitleColor(UIColor.blackColor(), forState: .Normal)
         
-        sheeter.actionBlock = { [unowned self] sender in
+        sheeter.action = { [unowned self] sender in
             
             self.present(actionSheet("title", "message", [
                 UIAlertAction (title: "action title", style: .Default, handler: { (action) -> Void in
@@ -83,17 +83,25 @@ class ViewController: UIViewController {
             ]))
         }
         
-        NSURLConnection.jsonRequest("https://api.github.com/repositories",
-            success: { json in
-                println (json)
-            },
-            error: { error in
-                println("error" + error.description)
-            })
+        let empt = UILabel(x: 0, y: 200, attributedText: NSAttributedString.withAttributedStrings({ (atts) -> Void in
+            atts.appendAttributedString(NSAttributedString(text: "", color: UIColor.blackColor(), font: UIFont.systemFontOfSize(15)))
+        }), textAlignment: .Left)
+        empt.backgroundColor = UIColor.redColor()
+        println(empt.h)
+        view.addSubview(empt)
         
         view.addSubview(sheeter)
     }
-    
-    
+ 
+    func blockButtonDemo () {
+        let block = BlockButton(x: 10, y: 30, w: 120, h: 45)
+        block.backgroundColor = UIColor.redColor()
+        block.setTitle("block", forState: .Normal)
+        block.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        block.action = { sender in
+            println ("button press")
+        }
+        view.addSubview(block)
+    }
 }
 
