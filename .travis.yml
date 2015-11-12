@@ -1,0 +1,9 @@
+language: objective-c
+
+before_install:
+- brew update
+- if brew outdated | grep -qx xctool; then brew upgrade xctool; fi
+
+script:
+- xctool clean build -project CEMKit-Swift.xcodeproj -scheme SwiftSortsRelease
+- xctool test -project CEMKit-Swift.xcodeproj -scheme CEMKit-Swift
