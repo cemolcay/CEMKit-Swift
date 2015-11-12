@@ -29,7 +29,7 @@ extension UIView {
             
             var overlay: CALayer!
             
-            for sub in self.layer.sublayers as! [CALayer] {
+            for sub in self.layer.sublayers! {
                 if let tag = sub.valueForKey("nameTag") as? String {
                     if tag == "overlay layer" {
                         overlay = sub

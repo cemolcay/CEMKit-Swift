@@ -46,7 +46,6 @@
 		B236FF301B81D21F00EA2689 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B236FF061B81D21F00EA2689 /* LaunchScreen.xib */; };
 		B236FF311B81D21F00EA2689 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B236FF081B81D21F00EA2689 /* Main.storyboard */; };
 		B236FF321B81D21F00EA2689 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B236FF0A1B81D21F00EA2689 /* Images.xcassets */; };
-		B236FF331B81D21F00EA2689 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B236FF0B1B81D21F00EA2689 /* Info.plist */; };
 		B250380A1A0A7BDC00CDAB1C /* CEMKit_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25038091A0A7BDC00CDAB1C /* CEMKit_SwiftTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -299,7 +298,9 @@
 		B25037E61A0A7BDC00CDAB1C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastSwiftMigration = 0710;
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Cem Olcay";
 				TargetAttributes = {
 					B25037ED1A0A7BDC00CDAB1C = {
@@ -335,7 +336,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B236FF331B81D21F00EA2689 /* Info.plist in Resources */,
 				B236FF321B81D21F00EA2689 /* Images.xcassets in Resources */,
 				B236FF301B81D21F00EA2689 /* LaunchScreen.xib in Resources */,
 				B236FF311B81D21F00EA2689 /* Main.storyboard in Resources */,
@@ -453,6 +453,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -516,6 +517,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "$(SRCROOT)/CEMKit-Swift/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.questa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -526,6 +528,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "$(SRCROOT)/CEMKit-Swift/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.questa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -544,6 +547,7 @@
 				);
 				INFOPLIST_FILE = "CEMKit-SwiftTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.questa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CEMKit-Swift.app/CEMKit-Swift";
 			};
@@ -559,6 +563,7 @@
 				);
 				INFOPLIST_FILE = "CEMKit-SwiftTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.questa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CEMKit-Swift.app/CEMKit-Swift";
 			};

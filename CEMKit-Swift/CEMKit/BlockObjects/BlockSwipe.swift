@@ -12,7 +12,7 @@ class BlockSwipe: UISwipeGestureRecognizer {
     
     private var swipeAction: ((UISwipeGestureRecognizer) -> Void)?
     
-    override init(target: AnyObject, action: Selector) {
+    override init(target: AnyObject?, action: Selector) {
         super.init(target: target, action: action)
     }
     

@@ -41,14 +41,14 @@ class BlockButton: UIButton {
         defaulInit()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
     private func defaulInit () {
         addTarget(self, action: "didPressed:", forControlEvents: .TouchUpInside)
-        addTarget(self, action: "highlight", forControlEvents: .TouchDown | .TouchDragEnter)
-        addTarget(self, action: "unhighlight", forControlEvents: .TouchUpInside | .TouchUpOutside | .TouchCancel | .TouchDragExit)
+        addTarget(self, action: "highlight", forControlEvents: [.TouchDown, .TouchDragEnter])
+        addTarget(self, action: "unhighlight", forControlEvents: [.TouchUpInside, .TouchUpOutside, .TouchCancel, .TouchDragExit])
     }
     
     // MARK: Action
@@ -68,7 +68,7 @@ class BlockButton: UIButton {
         highlightLayer.backgroundColor = UIColor.blackColor().CGColor
         highlightLayer.opacity = 0.5
         UIGraphicsBeginImageContextWithOptions(layer.bounds.size, false, 0)
-        layer.renderInContext(UIGraphicsGetCurrentContext())
+        layer.renderInContext(UIGraphicsGetCurrentContext()!)
         let maskImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         let maskLayer = CALayer()

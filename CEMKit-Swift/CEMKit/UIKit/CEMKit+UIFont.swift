@@ -48,7 +48,7 @@ extension UIFont {
     class func PrintFontFamily (font: FontName) {
         let arr = UIFont.fontNamesForFamilyName(font.rawValue)
         for name in arr {
-            println(name)
+            print(name)
         }
     }
     

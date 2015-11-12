@@ -13,11 +13,16 @@ extension NSData {
     func toJSONDictionary () -> AnyObject? {
         
         var error: NSError?
-        let json: AnyObject? = NSJSONSerialization.JSONObjectWithData(self,
-            options: NSJSONReadingOptions.AllowFragments,
-            error: &error)
+        let json: AnyObject?
+        do {
+            json = try NSJSONSerialization.JSONObjectWithData(self,
+                        options: NSJSONReadingOptions.AllowFragments)
+        } catch let error1 as NSError {
+            error = error1
+            json = nil
+        }
         
-        if let e = error {
+        if let _ = error {
             return nil
         } else {
             return json

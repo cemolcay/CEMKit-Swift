@@ -13,7 +13,7 @@ extension UIViewController {
     var top: CGFloat {
         
         if let me = self as? UINavigationController {
-            return me.visibleViewController.top
+            return me.visibleViewController!.top
         }
         
         if let nav = self.navigationController {
@@ -30,7 +30,7 @@ extension UIViewController {
     var bottom: CGFloat {
         
         if let me = self as? UINavigationController {
-            return me.visibleViewController.bottom
+            return me.visibleViewController!.bottom
         }
         
         if let tab = tabBarController {
@@ -48,7 +48,7 @@ extension UIViewController {
     var tabBarHeight: CGFloat {
             
         if let me = self as? UINavigationController {
-            return me.visibleViewController.tabBarHeight
+            return me.visibleViewController!.tabBarHeight
         }
         
         if let tab = self.tabBarController {
@@ -62,7 +62,7 @@ extension UIViewController {
     var navigationBarHeight: CGFloat {
 
         if let me = self as? UINavigationController {
-            return me.visibleViewController.navigationBarHeight
+            return me.visibleViewController!.navigationBarHeight
         }
         
         if let nav = self.navigationController {
@@ -77,7 +77,7 @@ extension UIViewController {
         get {
             
             if let me = self as? UINavigationController {
-                return me.visibleViewController.navigationBarColor
+                return me.visibleViewController!.navigationBarColor
             }
             
             return navigationController?.navigationBar.tintColor

@@ -14,7 +14,7 @@ enum NSAttributedStringStyle {
     case underline (NSUnderlineStyle, UIColor)
     case strike (UIColor, CGFloat)
     
-    func attribute () -> [NSString: NSObject] {
+    func attribute () -> [String: NSObject] {
         switch self {
             
         case .plain:
@@ -39,7 +39,7 @@ extension NSAttributedString {
         font: UIFont,
         style: NSAttributedStringStyle = .plain) {
             
-            var atts = [NSFontAttributeName as NSString: font, NSForegroundColorAttributeName as NSString: color]
+            var atts = [NSFontAttributeName: font, NSForegroundColorAttributeName: color]
             atts += style.attribute()
             
             self.init (string: text, attributes: atts)
@@ -52,20 +52,19 @@ extension NSAttributedString {
     }
     
     convenience init? (string: String, html: String) {
-        self.init(
+        try? self.init(
             data: (html + string).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!,
             options: [
                 NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
                 NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding],
-            documentAttributes: nil,
-            error: nil)
+            documentAttributes: nil)
     }
     
     
     // MARK: Static Init
     
     class func withAttributedStrings (mutableString: (NSMutableAttributedString) -> Void) -> NSAttributedString {
-        var mutable = NSMutableAttributedString ()
+        let mutable = NSMutableAttributedString ()
         mutableString (mutable)
         return mutable
     }
@@ -75,10 +74,10 @@ extension NSAttributedString {
     
     func addAtt (attribute: [NSString: NSObject]) -> NSAttributedString {
         let mutable = NSMutableAttributedString (attributedString: self)
-        let c = count(string)
+        let c = string.characters.count
         
         for (key, value) in attribute {
-            mutable.addAttribute(key as! String, value: value, range: NSMakeRange(0, c))
+            mutable.addAttribute(key as String, value: value, range: NSMakeRange(0, c))
         }
         
         return mutable
