@@ -6,3 +6,6 @@ before_install:
 
 script:
 - xctool clean build -project CEMKit-Swift.xcodeproj -scheme CEMKit-Swift
+- xcodebuild [DEFAULT_OPTIONS] CODE_SIGNING_REQUIRED=NO
+notifications:
+ email: true
