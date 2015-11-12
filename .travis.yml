@@ -5,5 +5,4 @@ before_install:
 - if brew outdated | grep -qx xctool; then brew upgrade xctool; fi
 
 script:
-- xctool clean build -project CEMKit-Swift.xcodeproj -scheme CEMKit-SwiftRelease
-- xctool test -project CEMKit-Swift.xcodeproj -scheme CEMKit-Swift
+- xctool clean build -project CEMKit-Swift.xcodeproj -scheme CEMKit-Swift

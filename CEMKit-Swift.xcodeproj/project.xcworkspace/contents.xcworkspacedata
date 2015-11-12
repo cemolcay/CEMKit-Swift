@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:CEMKit-Swift.xcodeproj">
+      location = "self:">
    </FileRef>
 </Workspace>
