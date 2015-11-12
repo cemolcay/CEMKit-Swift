@@ -6,6 +6,9 @@ before_install:
 
 script:
 - xctool clean build -project CEMKit-Swift.xcodeproj -scheme CEMKit-Swift
-- xcodebuild [DEFAULT_OPTIONS] CODE_SIGNING_REQUIRED=NO
+
+- sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6' ONLY_ACTIVE_ARCH=NO clean build test
+
+
 notifications:
- email: true
+email: true
