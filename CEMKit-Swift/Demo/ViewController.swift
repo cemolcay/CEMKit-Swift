@@ -67,18 +67,18 @@ class ViewController: UIViewController {
         
         sheeter.action = { [unowned self] sender in
             
-            self.present(actionSheet("title", "message", [
+            self.present(actionSheet("title", message: "message", actions: [
                 UIAlertAction (title: "action title", style: .Default, handler: { (action) -> Void in
-                    println("pressed")
+                    print("pressed")
                 }),
                 UIAlertAction (title: "another action", style: .Default, handler: { (action) -> Void in
-                    println("pressed")
+                    print("pressed")
                 }),
                 UIAlertAction (title: "cancel", style: .Cancel, handler: { (action) -> Void in
-                    println("pressed")
+                    print("pressed")
                 }),
                 UIAlertAction (title: "destructive", style: .Destructive, handler: { (action) -> Void in
-                    println("pressed")
+                    print("pressed")
                 })
             ]))
         }
@@ -87,7 +87,7 @@ class ViewController: UIViewController {
             atts.appendAttributedString(NSAttributedString(text: "", color: UIColor.blackColor(), font: UIFont.systemFontOfSize(15)))
         }), textAlignment: .Left)
         empt.backgroundColor = UIColor.redColor()
-        println(empt.h)
+        print(empt.h)
         view.addSubview(empt)
         
         view.addSubview(sheeter)
@@ -99,7 +99,7 @@ class ViewController: UIViewController {
         block.setTitle("block", forState: .Normal)
         block.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         block.action = { sender in
-            println ("button press")
+            print ("button press")
         }
         view.addSubview(block)
     }

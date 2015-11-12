@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		56F5F3FB1BF4C8CC00298C66 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = 56F5F3FA1BF4C8CC00298C66 /* .travis.yml */; };
 		B236FF0C1B81D21F00EA2689 /* BlockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEDE1B81D21E00EA2689 /* BlockButton.swift */; };
 		B236FF0D1B81D21F00EA2689 /* BlockLongPress.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEDF1B81D21E00EA2689 /* BlockLongPress.swift */; };
 		B236FF0E1B81D21F00EA2689 /* BlockPan.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236FEE01B81D21F00EA2689 /* BlockPan.swift */; };
@@ -46,7 +47,6 @@
 		B236FF301B81D21F00EA2689 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B236FF061B81D21F00EA2689 /* LaunchScreen.xib */; };
 		B236FF311B81D21F00EA2689 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B236FF081B81D21F00EA2689 /* Main.storyboard */; };
 		B236FF321B81D21F00EA2689 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B236FF0A1B81D21F00EA2689 /* Images.xcassets */; };
-		B236FF331B81D21F00EA2689 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B236FF0B1B81D21F00EA2689 /* Info.plist */; };
 		B250380A1A0A7BDC00CDAB1C /* CEMKit_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25038091A0A7BDC00CDAB1C /* CEMKit_SwiftTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		56F5F3FA1BF4C8CC00298C66 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
 		B236FEDE1B81D21E00EA2689 /* BlockButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockButton.swift; sourceTree = "<group>"; };
 		B236FEDF1B81D21E00EA2689 /* BlockLongPress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockLongPress.swift; sourceTree = "<group>"; };
 		B236FEE01B81D21F00EA2689 /* BlockPan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockPan.swift; sourceTree = "<group>"; };
@@ -131,6 +132,7 @@
 				B236FEDD1B81D21E00EA2689 /* BlockObjects */,
 				B236FEE51B81D21F00EA2689 /* Foundation */,
 				B236FEF31B81D21F00EA2689 /* UIKit */,
+				56F5F3FA1BF4C8CC00298C66 /* .travis.yml */,
 			);
 			path = CEMKit;
 			sourceTree = "<group>";
@@ -299,7 +301,9 @@
 		B25037E61A0A7BDC00CDAB1C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastSwiftMigration = 0710;
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Cem Olcay";
 				TargetAttributes = {
 					B25037ED1A0A7BDC00CDAB1C = {
@@ -335,9 +339,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B236FF331B81D21F00EA2689 /* Info.plist in Resources */,
 				B236FF321B81D21F00EA2689 /* Images.xcassets in Resources */,
 				B236FF301B81D21F00EA2689 /* LaunchScreen.xib in Resources */,
+				56F5F3FB1BF4C8CC00298C66 /* .travis.yml in Resources */,
 				B236FF311B81D21F00EA2689 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -453,6 +457,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -516,6 +521,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "$(SRCROOT)/CEMKit-Swift/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.questa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -526,6 +532,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "$(SRCROOT)/CEMKit-Swift/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.questa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -544,6 +551,7 @@
 				);
 				INFOPLIST_FILE = "CEMKit-SwiftTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.questa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CEMKit-Swift.app/CEMKit-Swift";
 			};
@@ -559,6 +567,7 @@
 				);
 				INFOPLIST_FILE = "CEMKit-SwiftTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.questa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CEMKit-Swift.app/CEMKit-Swift";
 			};

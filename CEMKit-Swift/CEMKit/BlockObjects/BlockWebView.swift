@@ -21,7 +21,7 @@ class BlockWebView: UIWebView, UIWebViewDelegate {
         delegate = self
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -36,8 +36,8 @@ class BlockWebView: UIWebView, UIWebViewDelegate {
     
     func webView(
         webView: UIWebView,
-        didFailLoadWithError error: NSError) {
-            didFailLoad? (webView.request!, error)
+        didFailLoadWithError error: NSError?) {
+            didFailLoad? (webView.request!, error!)
     }
     
     func webView(

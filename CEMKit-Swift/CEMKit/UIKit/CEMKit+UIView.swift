@@ -350,7 +350,7 @@ extension UIView {
                 delay: 0,
                 usingSpringWithDamping: 1,
                 initialSpringVelocity: 0,
-                options: nil,
+                options: [],
                 animations: animations,
                 completion: completion)
     }
