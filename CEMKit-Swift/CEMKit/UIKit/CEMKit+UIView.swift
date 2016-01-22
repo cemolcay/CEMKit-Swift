@@ -235,11 +235,13 @@ extension UIView {
         radius: CGFloat,
         color: UIColor,
         opacity: Float,
-        cornerRadius: CGFloat? = nil) {
+        cornerRadius: CGFloat? = nil,
+        shouldRasterize: Bool){
             self.layer.shadowOffset = offset
             self.layer.shadowRadius = radius
             self.layer.shadowOpacity = opacity
             self.layer.shadowColor = color.CGColor
+            self.layer.shouldRasterize = shouldRasterize
             
             if let r = cornerRadius {
                 self.layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: r).CGPath
