@@ -224,7 +224,8 @@ Adding shadow
         radius: CGFloat,
         color: UIColor,
         opacity: Float,
-        cornerRadius: CGFloat? = nil)    
+        cornerRadius: CGFloat? = nil,
+        shouldRasterize: Bool)    
 ```
 
 Adding borders
