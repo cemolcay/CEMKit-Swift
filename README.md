@@ -53,7 +53,7 @@ UIKit & Foundation toolbelt for quick prototyping and rapid development.
 #### Manual
 Copy & Paste CEMKit.swift into your project
 
-#### Cocoapods
+#### CocoaPods
 
 	pod "CEMKit-Swift", "~> 0.1.5"
 
